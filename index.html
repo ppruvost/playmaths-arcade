@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayMaths Arcade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="retro.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
+  <p class="subtitle">Top 10 des meilleurs scores</p>
+
+  <div class="leaderboard">
+    <table>
+      <thead>
+        <tr>
+          <th>Rang</th>
+          <th>Prénom</th>
+          <th>Date</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="scoreTable"></tbody>
+    </table>
+  </div>
+
+  <div class="menu-links">
+    <a href="quiz.html">▶ Lancer le Quiz</a>
+  </div>
+
+</div>
+
+<script src="scores.js"></script>
+<script src="leaderboard.js"></script>
+
+</body>
+</html>
