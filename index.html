@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,14 +9,21 @@
 </head>
 <body>
 
-<audio autoplay loop>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
   <source src="retro.mp3" type="audio/mpeg">
+  Votre navigateur ne supporte pas l'audio.
 </audio>
 
 <div class="container">
 
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
+
+  <!-- Bouton pour activer le son -->
+  <button id="startMusic" class="music-btn">
+    🔊 Activer la musique rétro
+  </button>
 
   <div class="leaderboard">
     <table>
@@ -40,5 +48,21 @@
 <script src="scores.js"></script>
 <script src="leaderboard.js"></script>
 
+<script>
+  const music = document.getElementById("bgMusic");
+  const startBtn = document.getElementById("startMusic");
+
+  startBtn.addEventListener("click", () => {
+    music.play()
+      .then(() => {
+        startBtn.style.display = "none";
+      })
+      .catch(error => {
+        console.log("Lecture audio bloquée :", error);
+      });
+  });
+</script>
+
 </body>
 </html>
+```
