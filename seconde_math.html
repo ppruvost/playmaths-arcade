@@ -22,6 +22,7 @@
 
     /* IFRAME */
     .frame-container {
+      width: 100%;
       max-width: 1100px;
       margin: 20px auto;
       height: calc(100vh - 260px);
@@ -90,11 +91,16 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      body { padding: 10px; }
+      body { padding: 5px; }
 
-      .frame-container {
-        height: 300px;
-      }
+        .frame-container {
+            width: 100vw;
+            height: 60vh;
+            margin: 0;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+          }
 
       table {
         min-width: 600px;
