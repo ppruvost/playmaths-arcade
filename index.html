@@ -4,14 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayMaths Arcade</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    /* AUDIO BUTTON */
+    .music-btn {
+      display: none;
+      margin: 10px auto;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* LAYOUT */
+    .main {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* MENU */
+    .menu {
+      flex: 1;
+      min-width: 260px;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu li {
+      margin: 8px 0;
+    }
+
+    .menu a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
+    /* TABLE */
+    .leaderboard {
+      flex: 2;
+      min-width: 300px;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #334155;
+    }
+
+    /* ENCOURAGEMENT */
+    .encouragement {
+      margin-top: 30px;
+      background: #ffffff;
+      color: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      line-height: 1.6;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <!-- AUDIO -->
 <audio id="bgMusic" loop>
   <source src="retro.mp3" type="audio/mpeg">
-  Votre navigateur ne supporte pas l'audio.
 </audio>
 
 <div class="container">
@@ -19,27 +140,69 @@
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <!-- Bouton (caché par défaut) -->
-  <button id="startMusic" class="music-btn" style="display:none;">
+  <button id="startMusic" class="music-btn">
     🔊 Activer la musique rétro
   </button>
 
-  <div class="leaderboard">
-    <table>
-      <thead>
-        <tr>
-          <th>Rang</th>
-          <th>Prénom</th>
-          <th>Date</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody id="scoreTable"></tbody>
-    </table>
+  <div class="main">
+
+    <!-- MENU -->
+    <div class="menu">
+
+      <div class="section">
+        <div class="title">• Seconde BAC Pro</div>
+        <ul>
+          <li>🔎 <a href="seconde_math.html">Mathématiques</a></li>
+          <li>🔎 <a href="seconde_sciences.html">Sciences</a></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="title">• Première BAC Pro</div>
+        <ul>
+          <li>🔎 <a href="premiere_math.html">Mathématiques</a></li>
+          <li>🔎 <a href="premiere_sciences.html">Sciences</a></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="title">• Terminale BAC Pro</div>
+        <ul>
+          <li>🔎 <a href="terminale_math.html">Mathématiques</a></li>
+          <li>🔎 <a href="terminale_sciences.html">Sciences</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SCORE -->
+    <div class="leaderboard">
+      <table>
+        <thead>
+          <tr>
+            <th>Rang</th>
+            <th>Prénom</th>
+            <th>Date</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="scoreTable"></tbody>
+      </table>
+    </div>
+
   </div>
 
-  <div class="menu-links">
-    <a href="quiz.html">▶ Lancer le Quiz</a>
+  <!-- ENCOURAGEMENT -->
+  <div class="encouragement">
+    <h2>Encouragement et progression</h2>
+
+    <p>
+      Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.
+    </p>
+
+    <p>
+      Si ton objectif est d’améliorer ton taux de bonnes réponses, lis attentivement les solutions proposées après chaque réponse.
+    </p>
   </div>
 
 </div>
@@ -51,19 +214,16 @@
   const music = document.getElementById("bgMusic");
   const startBtn = document.getElementById("startMusic");
 
-  // Tentative d'autoplay au chargement
   window.addEventListener("load", () => {
     music.play()
       .then(() => {
         console.log("Musique lancée automatiquement");
       })
       .catch(() => {
-        console.log("Autoplay bloqué → affichage du bouton");
-        startBtn.style.display = "inline-block";
+        startBtn.style.display = "block";
       });
   });
 
-  // Lecture manuelle si autoplay bloqué
   startBtn.addEventListener("click", () => {
     music.play();
     startBtn.style.display = "none";
