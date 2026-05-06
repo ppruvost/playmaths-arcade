@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,8 +19,8 @@
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <!-- Bouton pour activer le son -->
-  <button id="startMusic" class="music-btn">
+  <!-- Bouton (caché par défaut) -->
+  <button id="startMusic" class="music-btn" style="display:none;">
     🔊 Activer la musique rétro
   </button>
 
@@ -52,17 +51,24 @@
   const music = document.getElementById("bgMusic");
   const startBtn = document.getElementById("startMusic");
 
-  startBtn.addEventListener("click", () => {
+  // Tentative d'autoplay au chargement
+  window.addEventListener("load", () => {
     music.play()
       .then(() => {
-        startBtn.style.display = "none";
+        console.log("Musique lancée automatiquement");
       })
-      .catch(error => {
-        console.log("Lecture audio bloquée :", error);
+      .catch(() => {
+        console.log("Autoplay bloqué → affichage du bouton");
+        startBtn.style.display = "inline-block";
       });
+  });
+
+  // Lecture manuelle si autoplay bloqué
+  startBtn.addEventListener("click", () => {
+    music.play();
+    startBtn.style.display = "none";
   });
 </script>
 
 </body>
 </html>
-```
