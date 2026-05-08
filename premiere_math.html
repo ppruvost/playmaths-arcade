@@ -2,227 +2,94 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maths - 1ere Pro</title>
 
   <!-- CSS externe -->
   <link rel="stylesheet" href="arcade.css">
 </head>
-
 <body>
 
-<h1>🎮 MATHS - 1ERE PRO 🎮</h1>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <h1>🎮 MATHS - 1ERE PRO 🎮</h1>
 
-<!-- IFRAME -->
-<div class="frame-container">
-  <iframe id="contentFrame" src=""></iframe>
-</div>
+    <!-- Bouton menu hamburger -->
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+      ☰
+    </button>
+  </header>
 
-<!-- TABLE -->
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Accès</th>
-        <th>Niveau</th>
-        <th>Capacité</th>
-      </tr>
-    </thead>
-    <tbody>
+  <!-- IFRAME plein écran -->
+  <div class="frame-container">
+    <iframe
+      id="contentFrame"
+      src="https://ppruvost.github.io/automat03/"
+      title="Automatisme_01">
+    </iframe>
+  </div>
 
-      <tr onclick="loadPage('<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maths - 2nde Pro</title>
+  <!-- MENU LATÉRAL -->
+  <div class="side-menu" id="sideMenu">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-    }
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Accès</th>
+          <th>Niveau</th>
+          <th>Capacité</th>
+        </tr>
+      </thead>
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-    }
+      <tbody>
 
-    /* IFRAME */
-    .frame-container {
-      max-width: 1100px;
-      margin: 20px auto;
-      height: 500px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #38bdf8;
-      box-shadow: 0 0 20px rgba(56,189,248,0.3);
-      background: black;
-    }
+        <tr onclick="loadPage('https://ppruvost.github.io/automat03/)">
+          <td>Automatisme_01</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Calcul de la probabilité</span></td>
+        </tr>
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+        <tr onclick="loadPage('https://ppruvost.github.io/automat02/')">
+          <td>Mécanique : Automatisme_02</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Décimaux et pourcentages</span></td>
+        </tr>
 
-    /* TABLE */
-    .table-container {
-      max-width: 1100px;
-      margin: auto;
-      background: #1e293b;
-      border-radius: 12px;
-      overflow-x: auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    }
+        <tr onclick="loadPage('https://ppruvost.github.io/quiz04/')">
+          <td>Thermique : Quiz_04</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap2">Echanges d'énergie sous forme thermique</span></td>
+        </tr>
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th, td {
-      padding: 12px;
-      text-align: left;
-    }
-
-    th {
-      background: #334155;
-      color: #38bdf8;
-    }
-
-    tr {
-      transition: 0.2s;
-    }
-
-    tr:hover {
-      background: #334155;
-      cursor: pointer;
-      transform: scale(1.01);
-    }
-
-    /* TAGS */
-    .tag {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
-    }
-
-    .niveau { background: #475569; color: white; }
-    .cap1 { background: #0ea5e9; }
-    .cap2 { background: #22c55e; }
-    .cap3 { background: #ef4444; }
-    .cap4 { background: #eab308; color: black; }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      body { padding: 10px; }
-
-      .frame-container {
-        height: 300px;
-      }
-
-      table {
-        min-width: 600px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<h1>🎮 MATHS - 2NDE PRO 🎮</h1>
-
-<!-- IFRAME -->
-<div class="frame-container">
-  <iframe id="contentFrame" src=""></iframe>
-</div>
-
-<!-- TABLE -->
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Accès</th>
-        <th>Niveau</th>
-        <th>Capacité</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr onclick="loadPage('https://ppruvost.github.io/automat03/')">
-        <td>Automatisme_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Calcul de la probabilité d'un événement dans le cas d'une situation aléatoire simple</span></td>
-      </tr>
-
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths04/')">
-        <td>PlaysMaths_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap2">reconnaissance du cube, du pavé droit, de la pyramide, du cylindre droit, du cône et de la boule</span></td>
-      </tr>
-
-      
-
-    </tbody>
-  </table>
-</div>
-
-<script>
-  function loadPage(url) {
-    document.getElementById("contentFrame").src = url;
-  }
-</script>
-
-</body>
-</html>')">
-        <td>Automatisme_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Pourcentages</span></td>
-      </tr>
-
-      <tr onclick="loadPage('https://ppruvost.github.io/automat02/')">
-        <td>Automatisme_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap2">Exprimer %</span></td>
-      </tr>
-
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths03/')">
-        <td>PlayMaths_03</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap3">Fonctions</span></td>
-      </tr>
-
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths04/')">
-        <td>PlayMaths_04</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap4">Solides</span></td>
-      </tr>
-
+        <tr onclick="loadPage('https://ppruvost.github.io/playmaths03/')">
+          <td>Thermique : PlayPhys_03</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap3">Fonctions</span></td>
+        </tr>
+		
+        <tr onclick="loadPage('https://ppruvost.github.io/playmaths04/')">
+          <td>Thermique : PlayPhys_04</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap3">Solides</span></td>
+        </tr>	
+		
       <tr onclick="loadPage('https://ppruvost.github.io/playmaths05/')">
-        <td>PlayMaths_05</td>
+        <td>Optique : PlayPhys_05</td>
         <td>▶ Ouvrir</td>
         <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Notation scientifique</span></td>
-      </tr>
+        <td><span class="tag cap3">Notation scientifique</span></td>
+      </tr> 
 
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+
+  </div>
 
   <!-- JS externe -->
   <script src="arcade.js"></script>
