@@ -1,70 +1,122 @@
-/* RESET */
+/* arcade.css */
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
+html,
 body {
-  margin: 0;
-  padding: 20px;
+  width: 100%;
+  height: 100%;
   font-family: Arial, sans-serif;
   background: #0f172a;
   color: white;
+  overflow: hidden;
 }
 
-/* TITRE */
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+/* =========================
+   HEADER
+========================= */
+
+.top-bar {
+  height: 70px;
+  background: #08152f;
+  border-bottom: 2px solid #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1000;
+}
+
+.top-bar h1 {
+  font-size: 28px;
   letter-spacing: 2px;
+  text-align: center;
+  padding: 0 70px;
 }
 
-/* IFRAME */
+/* =========================
+   MENU HAMBURGER
+========================= */
+
+.menu-toggle {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.08);
+}
+
+/* =========================
+   IFRAME PLEIN ÉCRAN
+========================= */
+
 .frame-container {
   width: 100%;
-  max-width: 1100px;
-  margin: 20px auto;
-  height: calc(100vh - 260px);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid #38bdf8;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  height: calc(100vh - 70px);
   background: black;
 }
 
-iframe {
+#contentFrame {
   width: 100%;
   height: 100%;
   border: none;
   display: block;
+  background: white;
 }
 
-/* TABLE */
-.table-container {
-  width: 100%;
-  max-width: 1100px;
-  margin: auto;
+/* =========================
+   MENU LATÉRAL
+========================= */
+
+.side-menu {
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  width: 430px;
+  height: calc(100vh - 70px);
   background: #1e293b;
-  border-radius: 12px;
-  overflow-x: auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  box-shadow: -8px 0 25px rgba(0, 0, 0, 0.45);
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 999;
 }
+
+.side-menu.open {
+  right: 0;
+}
+
+/* =========================
+   TABLEAU
+========================= */
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 700px;
 }
 
 th,
 td {
-  padding: 12px;
+  padding: 14px;
   text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 th {
   background: #334155;
   color: #38bdf8;
+  font-size: 15px;
 }
 
 tr {
@@ -74,15 +126,18 @@ tr {
 tr:hover {
   background: #334155;
   cursor: pointer;
-  transform: scale(1.01);
 }
 
-/* TAGS */
+/* =========================
+   TAGS
+========================= */
+
 .tag {
   display: inline-block;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .niveau {
@@ -92,14 +147,17 @@ tr:hover {
 
 .cap1 {
   background: #0ea5e9;
+  color: white;
 }
 
 .cap2 {
   background: #22c55e;
+  color: white;
 }
 
 .cap3 {
   background: #ef4444;
+  color: white;
 }
 
 .cap4 {
@@ -107,33 +165,46 @@ tr:hover {
   color: black;
 }
 
-/* RESPONSIVE MOBILE */
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+
 @media (max-width: 768px) {
-  body {
-    padding: 0;
+  .top-bar {
+    height: 64px;
   }
 
-  h1 {
+  .top-bar h1 {
     font-size: 20px;
-    padding: 15px 10px;
-    margin: 0;
+    padding: 0 60px 0 12px;
+    letter-spacing: 1px;
+  }
+
+  .menu-toggle {
+    right: 14px;
+    top: 10px;
+    font-size: 30px;
   }
 
   .frame-container {
-    width: 100vw;
-    height: 60vh;
-    margin: 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    height: calc(100vh - 64px);
   }
 
-  .table-container {
+  .side-menu {
+    top: 64px;
     width: 100%;
-    border-radius: 0;
+    height: calc(100vh - 64px);
+    right: -100%;
   }
 
-  table {
-    min-width: 600px;
+  th,
+  td {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 5px 8px;
   }
 }
