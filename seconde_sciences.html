@@ -2,78 +2,90 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Maths - 2nde Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sciences - 2nde Pro</title>
 
   <!-- CSS externe -->
   <link rel="stylesheet" href="arcade.css">
 </head>
-
 <body>
 
-<h1>🎮 Sciences - 2NDE PRO 🎮</h1>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <h1>🎮 SCIENCES - 2NDE PRO 🎮</h1>
 
-<!-- IFRAME -->
-<div class="frame-container">
-  <iframe id="contentFrame" src=""></iframe>
-</div>
+    <!-- Bouton menu hamburger -->
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+      ☰
+    </button>
+  </header>
 
-<!-- TABLE -->
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Accès</th>
-        <th>Niveau</th>
-        <th>Capacité</th>
-      </tr>
-    </thead>
-    <tbody>
+  <!-- IFRAME plein écran -->
+  <div class="frame-container">
+    <iframe
+      id="contentFrame"
+      src="https://ppruvost.github.io/quiz01/"
+      title="Mouvement en rotation">
+    </iframe>
+  </div>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/meca02/')">
-        <td>Mécanique : Simulateur Meca_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Caractériser le mouvement en rotation, notions de fréquence de rotation et de période</span></td>
-      </tr>
+  <!-- MENU LATÉRAL -->
+  <div class="side-menu" id="sideMenu">
 
-      <tr onclick="loadPage('https://ppruvost.github.io/quiz01/')">
-        <td>Mécanique : Quiz_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap2">Caractériser le mouvement en rotation, notions de fréquence de rotation et de période</span></td>
-      </tr>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Accès</th>
+          <th>Niveau</th>
+          <th>Capacité</th>
+        </tr>
+      </thead>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/quiz02/')">
-        <td>Mécanique : Quiz_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap3">Caractériser le mouvement rectiligne uniforme et varié</span></td>
-      </tr>
+      <tbody>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/quiz04/')">
-        <td>Thermique : Quiz_04</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap4">Caractériser les échanges d'énergie sous forme thermique</span></td>
-      </tr>
+        <tr onclick="loadPage('https://ppruvost.github.io/meca02/'Simulateur Meca_rot)">
+          <td>Simulateur Meca_rot</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Mouvement en rotation</span></td>
+        </tr>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths01/')">
-        <td>Thermique : PlayPhys_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Caractériser les échanges d'énergie sous forme thermique</span></td>
-      </tr>
+        <tr onclick="loadPage('https://ppruvost.github.io/quiz01/Mécanique : Quiz_01')">
+          <td>Mécanique : Quiz_01</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap2">Mouvement en rotation</span></td>
+        </tr>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths06/')">
-        <td>Electricité : PlayPhys_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Lire et représenter un schéma électrique</span></td>
-      </tr>      
+        <tr onclick="loadPage('https://ppruvost.github.io/quiz02/Mécanique : Quiz_02')">
+          <td>Mécanique : Quiz_02</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap3">Mouvement rectiligne uniforme et varié</span></td>
+        </tr>
 
+        <tr onclick="loadPage('https://ppruvost.github.io/quiz04/')">
+          <td>Thermique : Quiz_04</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap4">Echanges d'énergie sous forme thermique</span></td>
+        </tr>
+
+        <tr onclick="loadPage('https://ppruvost.github.io/playmaths01/')">
+          <td>Thermique : PlayPhys_01</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Echanges d'énergie sous forme thermique</span></td>
+        </tr>
+		
+        <tr onclick="loadPage('https://ppruvost.github.io/playmaths06/')">
+          <td>Thermique : PlayPhys_02</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Lire et représenter un schéma électrique</span></td>
+        </tr>	
+		
       <tr onclick="loadPage('https://ppruvost.github.io/playmaths09/')">
         <td>Optique : PlayPhys_03</td>
         <td>▶ Ouvrir</td>
@@ -81,11 +93,10 @@
         <td><span class="tag cap1">Connaître les lois de la réflexion et de réfraction</span></td>
       </tr> 
 
-      
+      </tbody>
+    </table>
 
-    </tbody>
-  </table>
-</div>
+  </div>
 
   <!-- JS externe -->
   <script src="arcade.js"></script>
