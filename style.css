@@ -1,59 +1,33 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: black;
-  color: #00ffcc;
-  text-align: center;
+  scroll-behavior: smooth;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px;
+/* effet léger sur le chargement iframe */
+.frame-container {
+  animation: fadeIn 0.35s ease;
 }
 
-h1 {
-  font-size: 48px;
-  text-shadow: 0 0 15px #00ffcc;
+@keyframes fadeIn {
+  from {
+    opacity: 0.92;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.subtitle {
-  font-size: 24px;
-  margin-bottom: 30px;
+/* scrollbar moderne menu */
+.side-menu::-webkit-scrollbar {
+  width: 8px;
 }
 
-.leaderboard {
-  background: #111;
-  border: 3px solid #00ffcc;
-  border-radius: 12px;
-  padding: 20px;
+.side-menu::-webkit-scrollbar-track {
+  background: #172033;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 15px;
-  border-bottom: 1px solid #333;
-  font-size: 20px;
-}
-
-th {
-  color: #ffd700;
-}
-
-.menu-links {
-  margin-top: 40px;
-}
-
-.menu-links a {
-  text-decoration: none;
-  color: white;
-  background: #ff0066;
-  padding: 15px 30px;
+.side-menu::-webkit-scrollbar-thumb {
+  background: #38bdf8;
   border-radius: 10px;
-  font-size: 22px;
 }
