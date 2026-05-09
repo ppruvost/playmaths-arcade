@@ -7,9 +7,11 @@ exports.handler = async (event) => {
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
     const OWNER = "ppruvost";
     const REPO = "playmaths-arcade";
-    const PATH = "scores.json";
+    const PATH = "scores.js";
 
-    // 1. Lire le fichier GitHub actuel
+    // =========================
+    // 1. Lire le fichier GitHub
+    // =========================
     const fileRes = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
       {
@@ -24,27 +26,40 @@ exports.handler = async (event) => {
 
     const content = Buffer.from(fileData.content, "base64").toString("utf-8");
 
-    let scores = [];
+    // =========================
+    // 2. Extraire le tableau JS
+    // =========================
+    const start = content.indexOf("[");
+    const end = content.lastIndexOf("]");
+
+    let topScores = [];
 
     try {
-      scores = JSON.parse(content);
+      topScores = eval(content.slice(start, end + 1));
     } catch (e) {
-      scores = [];
+      topScores = [];
     }
 
-    // 2. Ajouter nouveau score
-    scores.push({
-      date: new Date().toISOString(),      
-      prenom: body.prenom,      
-      points_play_maths: body.points_play_maths,      
+    // =========================
+    // 3. Ajouter le nouveau score
+    // =========================
+    topScores.push({
+      prenom: body.prenom,
+      date: new Date().toLocaleDateString("fr-FR"),
+      score: body.points_play_maths,
     });
 
-    // 3. Réencoder en base64
-    const updated = Buffer.from(
-      JSON.stringify(scores, null, 2)
-    ).toString("base64");
+    // =========================
+    // 4. Reconstruire le fichier JS
+    // =========================
+    const newFile =
+`const topScores = ${JSON.stringify(topScores, null, 2)};`;
 
-    // 4. Réécrire sur GitHub
+    const updatedContent = Buffer.from(newFile).toString("base64");
+
+    // =========================
+    // 5. Écrire sur GitHub
+    // =========================
     await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
       {
@@ -55,7 +70,7 @@ exports.handler = async (event) => {
         },
         body: JSON.stringify({
           message: "Ajout score PlayMaths",
-          content: updated,
+          content: updatedContent,
           sha: fileData.sha,
         }),
       }
