@@ -1,26 +1,51 @@
 const fetch = require("node-fetch");
+
+exports.handler = async (event) => {
+  try {
+    const body = JSON.parse(event.body);
+
+    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+    const OWNER = "ppruvost";
+    const REPO = "playmaths-arcade";
+    const PATH = "scores.json";
+
+    // 1. Lire le fichier GitHub actuel
+    const fileRes = await fetch(
+      `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
+      {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github+json",
+        },
+      }
+    );
+
+    const fileData = await fileRes.json();
+
+    const content = Buffer.from(fileData.content, "base64").toString("utf-8");
+
+    let scores = [];
+
+    try {
+      scores = JSON.parse(content);
+    } catch (e) {
+      scores = [];
     }
 
-    // =============================
-    // Ajouter la nouvelle ligne
-    // =============================
+    // 2. Ajouter nouveau score
     scores.push({
       date: new Date().toISOString(),      
       prenom: body.prenom,      
       points_play_maths: body.points_play_maths,      
     });
 
-    // =============================
-    // Réencoder le JSON
-    // =============================
-    const updatedContent = Buffer.from(
+    // 3. Réencoder en base64
+    const updated = Buffer.from(
       JSON.stringify(scores, null, 2)
     ).toString("base64");
 
-    // =============================
-    // Réécriture GitHub
-    // =============================
-    const updateFile = await fetch(
+    // 4. Réécrire sur GitHub
+    await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
       {
         method: "PUT",
@@ -29,29 +54,22 @@ const fetch = require("node-fetch");
           Accept: "application/vnd.github+json",
         },
         body: JSON.stringify({
-          message: "Ajout automatique score PlayMaths",
-          content: updatedContent,
+          message: "Ajout score PlayMaths",
+          content: updated,
           sha: fileData.sha,
-          branch: BRANCH,
         }),
       }
     );
 
-    const result = await updateFile.json();
-
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        success: true,
-        github: result,
-      }),
+      body: JSON.stringify({ success: true }),
     };
+
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: err.message,
-      }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 };
