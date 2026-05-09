@@ -27,7 +27,7 @@ exports.handler = async (event) => {
     const content = Buffer.from(fileData.content, "base64").toString("utf-8");
 
     // =========================
-    // 2. Extraire le tableau JS
+    // 2. Extraire tableau JS
     // =========================
     const start = content.indexOf("[");
     const end = content.lastIndexOf("]");
@@ -41,7 +41,7 @@ exports.handler = async (event) => {
     }
 
     // =========================
-    // 3. Ajouter le nouveau score
+    // 3. Ajouter nouveau score
     // =========================
     topScores.push({
       prenom: body.prenom,
@@ -50,7 +50,17 @@ exports.handler = async (event) => {
     });
 
     // =========================
-    // 4. Reconstruire le fichier JS
+    // 4. TRI DÉCROISSANT
+    // =========================
+    topScores.sort((a, b) => b.score - a.score);
+
+    // =========================
+    // 5. GARDER TOP 10
+    // =========================
+    topScores = topScores.slice(0, 10);
+
+    // =========================
+    // 6. Reconstruire fichier JS
     // =========================
     const newFile =
 `const topScores = ${JSON.stringify(topScores, null, 2)};`;
@@ -58,7 +68,7 @@ exports.handler = async (event) => {
     const updatedContent = Buffer.from(newFile).toString("base64");
 
     // =========================
-    // 5. Écrire sur GitHub
+    // 7. Écriture GitHub
     // =========================
     await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
@@ -69,7 +79,7 @@ exports.handler = async (event) => {
           Accept: "application/vnd.github+json",
         },
         body: JSON.stringify({
-          message: "Ajout score PlayMaths",
+          message: "Update TOP 10 PlayMaths",
           content: updatedContent,
           sha: fileData.sha,
         }),
