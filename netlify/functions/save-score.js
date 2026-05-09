@@ -5,14 +5,9 @@ const fetch = require("node-fetch");
     // Ajouter la nouvelle ligne
     // =============================
     scores.push({
-      date: new Date().toISOString(),
-      nom: body.nom,
-      prenom: body.prenom,
-      score: body.score,
-      total: body.total,
-      note20: body.note20,
-      points_play_maths: body.points_play_maths,
-      details: body.details,
+      date: new Date().toISOString(),      
+      prenom: body.prenom,      
+      points_play_maths: body.points_play_maths,      
     });
 
     // =============================
