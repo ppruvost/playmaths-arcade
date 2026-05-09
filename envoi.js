@@ -65,3 +65,29 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
       );
     });
 }
+
+// =============================
+// Enregistrement GitHub
+// =============================
+fetch("/.netlify/functions/save-score", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    nom: user.nom || "",
+    prenom: user.prenom || "",
+    score,
+    total,
+    note20,
+    points_play_maths: playMathsPoints,
+    details: recap,
+  }),
+})
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("Résultat sauvegardé GitHub :", data);
+  })
+  .catch((err) => {
+    console.error("Erreur sauvegarde GitHub :", err);
+  });
