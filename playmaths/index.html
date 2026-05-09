@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Play Maths</title>
+
+  <!-- CSS principal (inchangé) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Confettis -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+</head>
+
+<body>
+
+<main class="page">
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <h1>Application au contexte professionnel — Quiz</h1>
+
+    <!-- FORMULAIRE UTILISATEUR (IDENTIQUE À L’ANCIEN PROJET) -->
+    <div class="user-info" id="userForm">
+      <input id="nom" type="text" placeholder="Nom" />
+      <input id="prenom" type="text" placeholder="Prénom" />
+      <button id="startQuiz" class="start">🎮 Commencer le quiz</button>
+    </div>
+  </header>
+
+  <!-- ================= ZONE QUIZ ================= -->
+  <section class="kahoot-container">
+
+    <!-- TIMER -->
+    <div class="timer-and-count">
+      <svg width="80" height="80" viewBox="0 0 80 80" class="timer-svg">
+        <circle id="timer-circle" cx="40" cy="40" r="35"></circle>
+      </svg>
+      <div id="timerNumber" class="timer-number">30</div>
+    </div>
+
+    <!-- QUESTION -->
+    <div id="questionBox" class="question-box">
+      Appuyez sur « Commencer le quiz » pour lancer.
+    </div>
+
+    <!-- ✅ GRAPHIQUE (AJOUT INVISIBLE PAR DÉFAUT) -->
+    <div id="graphique-container" class="graphique-container"></div>
+
+    <!-- RÉPONSES -->
+    <div id="answerGrid" class="answer-grid"></div>
+
+    <!-- EXPLICATION -->
+    <div id="explanationBox" class="explanation" style="display:none;"></div>
+
+    <!-- SCORE -->
+    <div id="scoreBox" class="score-box"></div>
+
+  </section>
+
+  <!-- ================= SONS ================= -->
+  <audio id="bgMusic" src="musique.mp3" preload="auto" loop></audio>
+  <audio id="victorySound" src="jingle.wav" preload="auto"></audio>
+
+</main>
+
+<!-- ================= SCRIPTS ================= -->
+
+<!-- QUESTIONS (DOIT ÊTRE AVANT quiz.js) -->
+<script src="questions.js" defer></script>
+
+<!-- LOGIQUE DU QUIZ -->
+<script src="quiz.js" defer></script>
+
+<!-- ENVOI DES RÉSULTATS -->
+<script src="envoi.js" defer></script>
+
+</body>
+</html>
