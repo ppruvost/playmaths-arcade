@@ -2,75 +2,65 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maths - Terminale Pro</title>
+
   <!-- CSS externe -->
   <link rel="stylesheet" href="arcade.css">
 </head>
-
 <body>
 
-<h1>🎮 MATHS - TERMINALE PRO 🎮</h1>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <h1>🎮 MATHS - TERMINALE PRO 🎮</h1>
 
-<!-- IFRAME -->
-<div class="frame-container">
-  <iframe id="contentFrame" src=""></iframe>
-</div>
+    <!-- Bouton menu hamburger -->
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+      ☰
+    </button>
+  </header>
 
-<!-- TABLE -->
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Accès</th>
-        <th>Niveau</th>
-        <th>Capacité</th>
-      </tr>
-    </thead>
-    <tbody>
+  <!-- IFRAME plein écran -->
+  <div class="frame-container">
+    <iframe
+      id="contentFrame"
+      src="https://ppruvost.github.io/automat04/"
+      title="Développement fonction réduite">
+    </iframe>
+  </div>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/automat04/')">
-        <td>Automatisme_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Développement de (x+a)(x+b) où a et b sont des entiers donnés</span></td>
-      </tr>
+  <!-- MENU LATÉRAL -->
+  <div class="side-menu" id="sideMenu">
 
-      <tr onclick="loadPage('https://ppruvost.github.io/automat05/')">
-        <td>Automatisme_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap2">Utilisation des formules et des règles de dérivation pour déterminer la dérivée d'une fonction polynôme de degré supérieur ou égal à 2</span></td>
-      </tr>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Accès</th>
+          <th>Niveau</th>
+          <th>Capacité</th>
+        </tr>
+      </thead>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths07/')">
-        <td>PlayMaths_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap3">Utilisation des formules et des règles de dérivation pour déterminer la dérivée d'une fonction polynôme de degré supérieur ou égal à 2</span></td>
-      </tr>
+      <tbody>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/playmaths08/')">
-        <td>PlayMaths_02</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap4">Visualisation à partir de la représentation graphique donnée d'une fonction polynôme f de degré 2 du nombre possible de solution</span></td>
-      </tr>
+        <tr onclick="loadPage('https://ppruvost.github.io/automat04/')">
+          <td>Automatisme_01</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 01</span></td>
+          <td><span class="tag cap1">Développement fonction réduite</span></td>
+        </tr>
 
-      <tr onclick="loadPage('https://ppruvost.github.io/quiz03/')">
-        <td>Quiz_01</td>
-        <td>▶ Ouvrir</td>
-        <td><span class="tag niveau">Niveau 01</span></td>
-        <td><span class="tag cap1">Fonctions polynômes de degré 3</span></td>
-      </tr>
+        <tr onclick="loadPage('https://ppruvost.github.io/exAO_02/)">
+          <td>ExAO_02</td>
+          <td>▶ Ouvrir</td>
+          <td><span class="tag niveau">Niveau 02</span></td>
+          <td><span class="tag cap2">ExAO Etude du mouvement</span></td>
+        </tr>
 
-    </tbody>
-  </table>
-</div>
+ 
 
-<!-- JS externe -->
-  <script src="arcade.js"></script>
+      </tbody>
+    </table>
 
-</body>
-</html>
+  </div>
