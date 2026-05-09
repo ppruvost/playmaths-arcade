@@ -75,13 +75,8 @@ fetch("/.netlify/functions/save-score", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    nom: user.nom || "",
     prenom: user.prenom || "",
-    score,
-    total,
-    note20,
-    points_play_maths: playMathsPoints,
-    details: recap,
+    points_play_maths: playMathsPoints,    
   }),
 })
   .then((res) => res.json())
