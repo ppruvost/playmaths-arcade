@@ -15,6 +15,8 @@
 // =============================
 // ENVOI DES RÉSULTATS
 // =============================
+// sendResults(user, score, total, note20, playMathsPoints, questions)
+// =============================
 
 function sendResults(user, score, total, note20, playMathsPoints, questions) {
 
@@ -24,9 +26,10 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
   }
 
   // =============================
-  // Construction du récap
+  // Construction du récapitulatif
   // =============================
   let recap = "";
+
   questions.forEach((q, i) => {
     recap += `Q${i + 1}: ${q.question}\n`;
     recap += `Réponse élève : ${q.userAnswer || "Aucune"}\n`;
@@ -34,37 +37,41 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
   });
 
   // =============================
-  // Paramètres envoyés à EmailJS
+  // Paramètres EmailJS
   // =============================
   const emailParams = {
     nom: user.nom || "",
     prenom: user.prenom || "",
-    score: score,                     // brut
-    total: total,                     // nombre de questions
-    note20: note20,                   // *** CHIFFRE, pas "x / y" ***
+    score: score,
+    total: total,
+    note20: note20,
     points_play_maths: playMathsPoints,
     details: recap,
     email: "lyceepro.mermoz@gmail.com"
   };
 
   // =============================
-  // Envoi EmailJS
+  // 1. Envoi EmailJS
   // =============================
   emailjs
-    .send("service_cgh817y", "template_ly7s41e", emailParams)
+    .send(
+      "service_cgh817y",
+      "template_ly7s41e",
+      emailParams
+    )
     .then(() => {
-      alert("✅ Résultats envoyés automatiquement à votre professeur. Merci !");
+      console.log("Email envoyé avec succès");
     })
     .catch((err) => {
-      console.error("Erreur envoi EmailJS :", err);
+      console.error("Erreur EmailJS :", err);
       alert(
-        "❌ Erreur lors de l'envoi : " +
-          (err?.text ? err.text : JSON.stringify(err))
+        "❌ Erreur lors de l'envoi de l'email : " +
+        (err?.text ? err.text : JSON.stringify(err))
       );
     });
 
   // =============================
-  // Enregistrement GitHub
+  // 2. Enregistrement GitHub
   // =============================
   fetch("/.netlify/functions/save-score", {
     method: "POST",
@@ -73,14 +80,26 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
     },
     body: JSON.stringify({
       prenom: user.prenom || "",
-      points_play_maths: playMathsPoints,    
+      score: playMathsPoints
     }),
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Résultat sauvegardé GitHub :", data);
+      console.log("Score sauvegardé GitHub :", data);
+
+      // =============================
+      // Forcer le refresh du leaderboard
+      // (utile avec iframe)
+      // =============================
+      window.postMessage("refreshLeaderboard", "*");
+
+      alert("✅ Résultats envoyés et classement mis à jour !");
     })
     .catch((err) => {
       console.error("Erreur sauvegarde GitHub :", err);
+      alert(
+        "❌ Erreur lors de la sauvegarde du score : " +
+        JSON.stringify(err)
+      );
     });
 }
