@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>La Ligne</title>
+<title>La Linea - Animation</title>
 <style>
     body {
         margin: 0;
         overflow: hidden;
-        background: #fff;
+        background: transparent;
     }
     canvas {
         display: block;
-        background: #fff;
+        background: transparent;
     }
     .hint {
         position: absolute;
@@ -26,7 +26,7 @@
 </head>
 <body>
 <canvas id="c"></canvas>
-<div class="hint">Clique sur le cube "clic"</div>
+<div class="hint" style="color:white;">Clique sur le cube "clic" pour lancer la musique</div>
 <script>
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -59,26 +59,29 @@ function drawLine(x1,y1,x2,y2){
 }
 
 function drawCharacter(x,y){
-    ctx.strokeStyle="#000";
-    ctx.lineWidth=2;
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
 
-    // head
+    // personnage allumette sur la ligne (style simple blanc)
+
+    // tête
     ctx.beginPath();
-    ctx.arc(x,y-20,10,0,Math.PI*2);
+    ctx.arc(x, y - 20, 10, 0, Math.PI * 2);
     ctx.stroke();
 
-    // body
-    drawLine(x,y-10,x,y+20);
+    // corps
+    drawLine(x, y - 10, x, y + 20);
 
-    // arms
-    let arm = Math.sin(phase)*10;
-    drawLine(x,y,x-15,y+arm);
-    drawLine(x,y,x+15,y-arm);
+    // bras animés
+    let armOffset = Math.sin(phase) * 10;
+    drawLine(x, y, x - 15, y + armOffset);
+    drawLine(x, y, x + 15, y - armOffset);
 
-    // legs
-    let leg = Math.cos(phase)*10;
-    drawLine(x,y+20,x-10,y+40+leg);
-    drawLine(x,y+20,x+10,y+40-leg);
+    // jambes animées
+    let legOffset = Math.cos(phase) * 10;
+    drawLine(x, y + 20, x - 12, y + 42 + legOffset);
+    drawLine(x, y + 20, x + 12, y + 42 - legOffset);
 }
 
 function drawGround(){
@@ -93,7 +96,7 @@ function drawCube(c){
     const x = c.x;
     const y0 = c.y;
 
-    ctx.strokeStyle="#000";
+    ctx.strokeStyle="#ffffff";
 
     // front face
     ctx.strokeRect(x - s/2, y0 - s/2, s, s);
@@ -109,6 +112,7 @@ function drawCube(c){
 
     // text
     ctx.font = "16px sans-serif";
+    ctx.fillStyle = "#ffffff";
     ctx.fillText("clic", x - 15, y0);
 }
 
@@ -152,10 +156,19 @@ canvas.addEventListener("click", (e)=>{
         my > c.y - c.size/2 && my < c.y + c.size/2
     ){
         cube.active = false;
+        // remplace le bouton musique : démarrage audio
+        const music = window.parent.document.getElementById("bgMusic") || document.getElementById("bgMusic");
+        const startBtn = window.parent.document.getElementById("startMusic") || document.getElementById("startMusic");
+        if (music) {
+            music.play().catch(()=>{});
+        }
+        if (startBtn) {
+            startBtn.style.display = "none";
+        }
     }
 });
 
-ctx.strokeStyle="#000";
+ctx.strokeStyle="#ffffff";
 animate();
 </script>
 </body>
