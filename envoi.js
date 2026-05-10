@@ -73,7 +73,7 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
   // =============================
   // 2. Enregistrement GitHub
   // =============================
-  fetch("/.netlify/functions/save-score", {
+  fetch("https://maths-sciences.netlify.app/.netlify/functions/save-score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
