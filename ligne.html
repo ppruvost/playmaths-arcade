@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Ligne</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: #fff;
+    }
+    canvas {
+        display: block;
+        background: #fff;
+    }
+    .hint {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-family: sans-serif;
+        font-size: 12px;
+        opacity: 0.6;
+    }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="hint">Clique sur le cube "clic"</div>
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+let y = canvas.height * 0.6;
+let x = 50;
+let dir = 1;
+let speed = 2;
+let phase = 0;
+
+const cube = {
+    x: window.innerWidth / 2,
+    y: y - 40,
+    size: 60,
+    active: true
+};
+
+function drawLine(x1,y1,x2,y2){
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x2,y2);
+    ctx.stroke();
+}
+
+function drawCharacter(x,y){
+    ctx.strokeStyle="#000";
+    ctx.lineWidth=2;
+
+    // head
+    ctx.beginPath();
+    ctx.arc(x,y-20,10,0,Math.PI*2);
+    ctx.stroke();
+
+    // body
+    drawLine(x,y-10,x,y+20);
+
+    // arms
+    let arm = Math.sin(phase)*10;
+    drawLine(x,y,x-15,y+arm);
+    drawLine(x,y,x+15,y-arm);
+
+    // legs
+    let leg = Math.cos(phase)*10;
+    drawLine(x,y+20,x-10,y+40+leg);
+    drawLine(x,y+20,x+10,y+40-leg);
+}
+
+function drawGround(){
+    ctx.beginPath();
+    ctx.moveTo(0,y+50);
+    ctx.lineTo(canvas.width,y+50);
+    ctx.stroke();
+}
+
+function drawCube(c){
+    const s = c.size;
+    const x = c.x;
+    const y0 = c.y;
+
+    ctx.strokeStyle="#000";
+
+    // front face
+    ctx.strokeRect(x - s/2, y0 - s/2, s, s);
+
+    // top face
+    drawLine(x - s/2, y0 - s/2, x - s/2 + 15, y0 - s/2 - 15);
+    drawLine(x + s/2, y0 - s/2, x + s/2 + 15, y0 - s/2 - 15);
+    drawLine(x - s/2 + 15, y0 - s/2 - 15, x + s/2 + 15, y0 - s/2 - 15);
+
+    // side face
+    drawLine(x + s/2, y0 + s/2, x + s/2 + 15, y0 + s/2 - 15);
+    drawLine(x + s/2 + 15, y0 + s/2 - 15, x + s/2 + 15, y0 - s/2 - 15);
+
+    // text
+    ctx.font = "16px sans-serif";
+    ctx.fillText("clic", x - 15, y0);
+}
+
+function collision(px){
+    if(!cube.active) return false;
+    return px > cube.x - cube.size/2 - 20 && px < cube.x + cube.size/2 + 20;
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    drawGround();
+
+    if(cube.active) drawCube(cube);
+
+    if(!collision(x)){
+        x += speed * dir;
+    } else {
+        dir *= -1;
+    }
+
+    drawCharacter(x,y);
+
+    phase += 0.1;
+
+    if(x < 50 || x > canvas.width - 50){
+        dir *= -1;
+    }
+
+    requestAnimationFrame(animate);
+}
+
+canvas.addEventListener("click", (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    const c = cube;
+    if(
+        mx > c.x - c.size/2 && mx < c.x + c.size/2 &&
+        my > c.y - c.size/2 && my < c.y + c.size/2
+    ){
+        cube.active = false;
+    }
+});
+
+ctx.strokeStyle="#000";
+animate();
+</script>
+</body>
+</html>
