@@ -2,16 +2,39 @@ const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
   try {
-    const body = JSON.parse(event.body);
+
+    // =============================
+    // 1. Vérification HTTP (CRITIQUE)
+    // =============================
+    if (event.httpMethod !== "POST") {
+      return {
+        statusCode: 405,
+        body: JSON.stringify({ error: "Method Not Allowed" }),
+      };
+    }
+
+    // =============================
+    // 2. Parsing sécurisé du body
+    // =============================
+    let body;
+
+    try {
+      body = JSON.parse(event.body);
+    } catch (e) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Invalid JSON" }),
+      };
+    }
 
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
     const OWNER = "ppruvost";
     const REPO = "playmaths-arcade";
     const PATH = "scores.js";
 
-    // =========================
-    // 1. Lire le fichier GitHub
-    // =========================
+    // =============================
+    // 3. Lecture fichier GitHub
+    // =============================
     const fileRes = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
       {
@@ -24,11 +47,18 @@ exports.handler = async (event) => {
 
     const fileData = await fileRes.json();
 
+    if (!fileData.content) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Impossible de lire scores.js" }),
+      };
+    }
+
     const content = Buffer.from(fileData.content, "base64").toString("utf-8");
 
-    // =========================
-    // 2. Extraire tableau JS
-    // =========================
+    // =============================
+    // 4. Extraction tableau JS
+    // =============================
     const start = content.indexOf("[");
     const end = content.lastIndexOf("]");
 
@@ -40,37 +70,36 @@ exports.handler = async (event) => {
       topScores = [];
     }
 
-    // =========================
-    // 3. Ajouter nouveau score
-    // =========================
+    // =============================
+    // 5. Ajout nouveau score
+    // =============================
     topScores.push({
-      prenom: body.prenom,
+      prenom: body.prenom || "Inconnu",
       date: new Date().toLocaleDateString("fr-FR"),
-      score: body.points_play_maths,
+      score: body.score || body.points_play_maths || 0,
     });
 
-    // =========================
-    // 4. TRI DÉCROISSANT
-    // =========================
+    // =============================
+    // 6. TRI décroissant
+    // =============================
     topScores.sort((a, b) => b.score - a.score);
 
-    // =========================
-    // 5. GARDER TOP 10
-    // =========================
+    // =============================
+    // 7. TOP 10 uniquement
+    // =============================
     topScores = topScores.slice(0, 10);
 
-    // =========================
-    // 6. Reconstruire fichier JS
-    // =========================
-    const newFile =
-`const topScores = ${JSON.stringify(topScores, null, 2)};`;
+    // =============================
+    // 8. Reconstruction fichier JS
+    // =============================
+    const newFile = `const topScores = ${JSON.stringify(topScores, null, 2)};`;
 
     const updatedContent = Buffer.from(newFile).toString("base64");
 
-    // =========================
-    // 7. Écriture GitHub
-    // =========================
-    await fetch(
+    // =============================
+    // 9. Écriture GitHub
+    // =============================
+    const updateRes = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
       {
         method: "PUT",
@@ -86,15 +115,22 @@ exports.handler = async (event) => {
       }
     );
 
+    const updateData = await updateRes.json();
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({
+        success: true,
+        commit: updateData.commit?.sha || null,
+      }),
     };
 
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({
+        error: err.message,
+      }),
     };
   }
 };
