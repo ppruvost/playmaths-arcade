@@ -1,5 +1,3 @@
-// envoi.js - envoi EmailJS des résultats + récapitulatif
-
 // =============================
 // Initialisation EmailJS
 // =============================
@@ -17,7 +15,7 @@
 // =============================
 // ENVOI DES RÉSULTATS
 // =============================
-// sendResults(user, score, total, note20, playMathsPoints, questions)
+
 function sendResults(user, score, total, note20, playMathsPoints, questions) {
 
   if (!window.emailjs) {
@@ -64,25 +62,25 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
           (err?.text ? err.text : JSON.stringify(err))
       );
     });
-}
 
-// =============================
-// Enregistrement GitHub
-// =============================
-fetch("/.netlify/functions/save-score", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    prenom: user.prenom || "",
-    points_play_maths: playMathsPoints,    
-  }),
-})
-  .then((res) => res.json())
-  .then((data) => {
-    console.log("Résultat sauvegardé GitHub :", data);
+  // =============================
+  // Enregistrement GitHub
+  // =============================
+  fetch("/.netlify/functions/save-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prenom: user.prenom || "",
+      points_play_maths: playMathsPoints,    
+    }),
   })
-  .catch((err) => {
-    console.error("Erreur sauvegarde GitHub :", err);
-  });
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Résultat sauvegardé GitHub :", data);
+    })
+    .catch((err) => {
+      console.error("Erreur sauvegarde GitHub :", err);
+    });
+}
