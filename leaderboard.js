@@ -1,6 +1,11 @@
-const table = document.getElementById("scoreTable");
+function renderLeaderboard() {
+  const table = document.getElementById("scoreTable");
 
-if (table) {
+  if (!table) return;
+
+  // Vide le tableau avant de le reconstruire
+  table.innerHTML = "";
+
   topScores.forEach((joueur, index) => {
     const row = `
       <tr>
@@ -13,3 +18,6 @@ if (table) {
     table.innerHTML += row;
   });
 }
+
+// Lance l’affichage au chargement
+renderLeaderboard();
