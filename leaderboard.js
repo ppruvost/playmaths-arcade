@@ -19,5 +19,7 @@ function renderLeaderboard() {
   });
 }
 
-// Lance l’affichage au chargement
-renderLeaderboard();
+fetch("scores.js?cache=" + Date.now())
+  .then(res => res.text())
+  .then(eval)
+  .then(() => renderLeaderboard());
