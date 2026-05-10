@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>La Ligne</title>
+<title>La Linea - Animation</title>
 <style>
     body {
         margin: 0;
@@ -59,26 +59,55 @@ function drawLine(x1,y1,x2,y2){
 }
 
 function drawCharacter(x,y){
-    ctx.strokeStyle="#000";
-    ctx.lineWidth=2;
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
-    // head
+    // Style inspiré de La Linea : personnage en trait continu
     ctx.beginPath();
-    ctx.arc(x,y-20,10,0,Math.PI*2);
+
+    // départ depuis la ligne du sol
+    ctx.moveTo(x - 35, y + 50);
+
+    // jambe arrière
+    ctx.lineTo(x - 10, y + 50);
+    ctx.lineTo(x - 5, y + 20);
+
+    // ventre / torse
+    ctx.lineTo(x + 5, y - 10);
+
+    // bras avant pointé
+    ctx.lineTo(x + 28, y - 5);
+    ctx.lineTo(x + 38, y - 15);
+
+    // remontée vers tête
+    ctx.lineTo(x + 18, y - 28);
+    ctx.quadraticCurveTo(x + 30, y - 55, x + 5, y - 65);
+
+    // sommet de tête typique
+    ctx.quadraticCurveTo(x - 15, y - 70, x - 10, y - 45);
+
+    // nuque
+    ctx.lineTo(x - 15, y - 20);
+
+    // dos
+    ctx.lineTo(x - 18, y + 10);
+
+    // jambe avant
+    ctx.lineTo(x - 15, y + 50);
+
+    // retour sur la ligne
+    ctx.lineTo(x + 35, y + 50);
+
     ctx.stroke();
 
-    // body
-    drawLine(x,y-10,x,y+20);
-
-    // arms
-    let arm = Math.sin(phase)*10;
-    drawLine(x,y,x-15,y+arm);
-    drawLine(x,y,x+15,y-arm);
-
-    // legs
-    let leg = Math.cos(phase)*10;
-    drawLine(x,y+20,x-10,y+40+leg);
-    drawLine(x,y+20,x+10,y+40-leg);
+    // petit nez / bouche caricatural
+    ctx.beginPath();
+    ctx.moveTo(x + 8, y - 40);
+    ctx.lineTo(x + 16, y - 36);
+    ctx.lineTo(x + 10, y - 32);
+    ctx.stroke();
 }
 
 function drawGround(){
