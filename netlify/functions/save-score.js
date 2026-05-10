@@ -1,26 +1,41 @@
+const fetch = require("node-fetch");
+
+// =============================
+// HEADERS CORS (IMPORTANT)
+// =============================
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const fetch = require("node-fetch");
-
 exports.handler = async (event) => {
   try {
 
     // =============================
-    // 1. Vérification HTTP (CRITIQUE)
+    // 1. Gestion preflight CORS
+    // =============================
+    if (event.httpMethod === "OPTIONS") {
+      return {
+        statusCode: 200,
+        headers,
+        body: "ok",
+      };
+    }
+
+    // =============================
+    // 2. Autoriser uniquement POST
     // =============================
     if (event.httpMethod !== "POST") {
       return {
         statusCode: 405,
+        headers,
         body: JSON.stringify({ error: "Method Not Allowed" }),
       };
     }
 
     // =============================
-    // 2. Parsing sécurisé du body
+    // 3. Parsing sécurisé du body
     // =============================
     let body;
 
@@ -29,6 +44,7 @@ exports.handler = async (event) => {
     } catch (e) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: "Invalid JSON" }),
       };
     }
@@ -39,7 +55,7 @@ exports.handler = async (event) => {
     const PATH = "scores.js";
 
     // =============================
-    // 3. Lecture fichier GitHub
+    // 4. Lecture GitHub
     // =============================
     const fileRes = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
@@ -56,6 +72,7 @@ exports.handler = async (event) => {
     if (!fileData.content) {
       return {
         statusCode: 500,
+        headers,
         body: JSON.stringify({ error: "Impossible de lire scores.js" }),
       };
     }
@@ -63,7 +80,7 @@ exports.handler = async (event) => {
     const content = Buffer.from(fileData.content, "base64").toString("utf-8");
 
     // =============================
-    // 4. Extraction tableau JS
+    // 5. Extraction tableau JS
     // =============================
     const start = content.indexOf("[");
     const end = content.lastIndexOf("]");
@@ -77,7 +94,7 @@ exports.handler = async (event) => {
     }
 
     // =============================
-    // 5. Ajout nouveau score
+    // 6. Ajout score
     // =============================
     topScores.push({
       prenom: body.prenom || "Inconnu",
@@ -86,24 +103,24 @@ exports.handler = async (event) => {
     });
 
     // =============================
-    // 6. TRI décroissant
+    // 7. TRI décroissant
     // =============================
     topScores.sort((a, b) => b.score - a.score);
 
     // =============================
-    // 7. TOP 10 uniquement
+    // 8. TOP 10 uniquement
     // =============================
     topScores = topScores.slice(0, 10);
 
     // =============================
-    // 8. Reconstruction fichier JS
+    // 9. Reconstruction fichier JS
     // =============================
     const newFile = `const topScores = ${JSON.stringify(topScores, null, 2)};`;
 
     const updatedContent = Buffer.from(newFile).toString("base64");
 
     // =============================
-    // 9. Écriture GitHub
+    // 10. Écriture GitHub
     // =============================
     const updateRes = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
@@ -125,6 +142,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({
         success: true,
         commit: updateData.commit?.sha || null,
@@ -134,6 +152,7 @@ exports.handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({
         error: err.message,
       }),
