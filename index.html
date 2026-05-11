@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayMaths Arcade</title>
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -34,10 +30,7 @@
       opacity: 0.8;
     }
 
-    /* =========================
-       ZONE PACMAN
-    ========================== */
-
+    /* PACMAN ZONE */
     .pacman-zone {
       margin: 20px 0 35px;
       display: flex;
@@ -52,10 +45,8 @@
       border: 6px solid #00d8ff;
       background: #000;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 10px;
     }
-
-    /* POINTS */
 
     .dots {
       position: absolute;
@@ -70,150 +61,110 @@
     .dot {
       width: 10px;
       height: 10px;
-      background: #fff;
+      background: #ffe600;
       border-radius: 50%;
       flex: 0 0 auto;
-      transition: opacity 0.15s;
+      transition: opacity 0.2s ease;
     }
 
     .dot.hidden {
       opacity: 0;
     }
 
-    /* =========================
-       PACMAN
-    ========================== */
-
+    /* PACMAN */
     .pacman {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 48px;
+      height: 48px;
       top: 50%;
       left: 30px;
       transform: translateY(-50%);
-      z-index: 5;
+      z-index: 3;
+      animation: mouth 0.35s infinite alternate;
     }
 
-    /* disque jaune */
-
-    .pacman::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+    .pacman-body {
+      width: 100%;
+      height: 100%;
+      background: #ffe600;
       border-radius: 50%;
-      background: #ffd800;
+      clip-path: polygon(100% 50%, 0 0, 0 100%);
     }
-
-    /* bouche noire animée */
-
-    .mouth {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: #000;
-      clip-path: polygon(100% 50%, 50% 0%, 50% 100%);
-      transform-origin: center;
-      animation: mouthAnim 0.22s infinite alternate;
-    }
-
-    /* oeil */
 
     .pacman-eye {
       position: absolute;
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       background: #000;
       border-radius: 50%;
-      top: 14px;
-      left: 29px;
-      z-index: 10;
+      top: 12px;
+      left: 26px;
+      z-index: 4;
     }
 
-    @keyframes mouthAnim {
+    @keyframes mouth {
       from {
-        transform: rotate(10deg);
+        transform: translateY(-50%) rotate(0deg);
       }
       to {
-        transform: rotate(42deg);
+        transform: translateY(-50%) rotate(8deg);
       }
     }
 
-    /* =========================
-       FANTÔME
-    ========================== */
-
+    /* GHOST */
     .ghost {
       position: absolute;
-      width: 52px;
-      height: 58px;
+      width: 44px;
+      height: 48px;
       top: 50%;
       left: 0;
       transform: translateY(-50%);
-      z-index: 4;
-      transition: background 0.3s linear;
+      z-index: 2;
+      background: turquoise;
+      border-radius: 22px 22px 0 0;
     }
 
-    /* corps */
-
-    .ghost-body {
-      position: absolute;
-      inset: 0;
-      background: red;
-      border-radius: 28px 28px 0 0;
-      overflow: hidden;
-    }
-
-    /* base ondulée façon Pacman */
-
-    .ghost-body::after {
+    .ghost::after {
       content: "";
       position: absolute;
+      bottom: -6px;
       left: 0;
-      bottom: -1px;
       width: 100%;
-      height: 16px;
-      background:
-        radial-gradient(circle at 8px 0px, transparent 8px, #000 8.5px),
-        radial-gradient(circle at 26px 0px, transparent 8px, #000 8.5px),
-        radial-gradient(circle at 44px 0px, transparent 8px, #000 8.5px);
-      background-size: 18px 16px;
-      background-repeat: repeat-x;
+      height: 12px;
+      background: repeating-radial-gradient(
+        circle at 6px 0,
+        transparent 0 5px,
+        currentColor 5px 6px
+      );
+      color: inherit;
     }
-
-    /* yeux */
 
     .ghost-eyes {
       position: absolute;
-      top: 16px;
-      left: 10px;
+      top: 14px;
+      left: 9px;
       display: flex;
-      gap: 8px;
-      z-index: 5;
+      gap: 10px;
     }
 
     .eye {
-      position: relative;
-      width: 12px;
-      height: 16px;
+      width: 8px;
+      height: 10px;
       background: white;
       border-radius: 50%;
+      animation: blink 2s infinite;
     }
 
-    .eye::after {
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: #1d4ed8;
-      border-radius: 50%;
-      bottom: 2px;
-      right: 2px;
+    @keyframes blink {
+      0%, 85%, 100% {
+        height: 10px;
+      }
+      90% {
+        height: 2px;
+      }
     }
 
-    /* =========================
-       LAYOUT
-    ========================== */
-
+    /* LAYOUT */
     .main {
       display: flex;
       gap: 20px;
@@ -280,7 +231,6 @@
     }
   </style>
 </head>
-
 <body>
 
 <audio id="bgMusic" loop>
@@ -288,60 +238,57 @@
 </audio>
 
 <div class="container">
-
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <!-- PACMAN -->
   <div class="pacman-zone">
-
     <div class="track" id="track">
-
       <div class="dots" id="dots"></div>
 
-      <!-- PACMAN -->
       <div id="pacman" class="pacman">
-        <div class="mouth"></div>
+        <div class="pacman-body"></div>
         <div class="pacman-eye"></div>
       </div>
 
-      <!-- FANTÔME -->
       <div id="ghost" class="ghost">
-
-        <div class="ghost-body"></div>
-
         <div class="ghost-eyes">
           <div class="eye"></div>
           <div class="eye"></div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
-  <!-- CONTENU -->
   <div class="main">
-
     <div class="menu">
-
       <div class="section">
         <div class="title">• Seconde BAC Pro</div>
-
         <ul>
           <li>🔎 <a href="seconde_math.html">Mathématiques</a></li>
           <li>🔎 <a href="seconde_sciences.html">Sciences</a></li>
         </ul>
-
       </div>
 
+      <div class="section">
+        <div class="title">• Première BAC Pro</div>
+        <ul>
+          <li>🔎 <a href="premiere_math.html">Mathématiques</a></li>
+          <li>🔎 <a href="premiere_sciences.html">Sciences</a></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="title">• Terminale BAC Pro</div>
+        <ul>
+          <li>🔎 <a href="terminale_math.html">Mathématiques</a></li>
+          <li>🔎 <a href="terminale_sciences.html">Sciences</a></li>
+        </ul>
+      </div>
+      
     </div>
 
     <div class="leaderboard">
-
       <table>
-
         <thead>
           <tr>
             <th>Rang</th>
@@ -350,91 +297,49 @@
             <th>Score</th>
           </tr>
         </thead>
-
         <tbody id="scoreTable"></tbody>
-
       </table>
-
     </div>
-
   </div>
 
   <div class="encouragement">
-
     <h2>Encouragement et progression</h2>
-
-    <p>
-      Prends le temps d’avancer à ton rythme :
-      chaque essai est une occasion de progresser.
-    </p>
-
-    <p>
-      Lis attentivement les solutions proposées après chaque réponse
-      et recommence pour progresser.
-    </p>
-
+    <p>Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.</p>
+    <p>Relis attentivement les solutions proposées après chaque question et recommence pour progresser.</p>
   </div>
-
 </div>
 
 <script>
 const music = document.getElementById("bgMusic");
-
 const pacman = document.getElementById("pacman");
 const ghost = document.getElementById("ghost");
-
 const dotsContainer = document.getElementById("dots");
 const track = document.getElementById("track");
 
 let pacmanX = 30;
-
-const colors = [
-  "#ff0000",
-  "#ff69ff",
-  "#00a2ff",
-  "#ff8800"
-];
-
+const colors = ["turquoise", "red", "gray", "violet"];
 let colorIndex = 0;
 let dots = [];
 
-/* =========================
-   CREATION DES POINTS
-========================= */
-
 function createDots() {
-
   dotsContainer.innerHTML = "";
   dots = [];
 
   const totalDots = Math.floor(track.offsetWidth / 34);
 
   for (let i = 0; i < totalDots; i++) {
-
     const dot = document.createElement("div");
     dot.className = "dot";
-
     dotsContainer.appendChild(dot);
-
     dots.push(dot);
   }
 }
 
-/* =========================
-   PACMAN MANGE LES POINTS
-========================= */
-
 function eatDots() {
-
   dots.forEach((dot, index) => {
-
     const dotX = 20 + index * 32;
 
-    if (
-      Math.abs((pacmanX + 28) - dotX) < 14 &&
-      !dot.classList.contains("hidden")
-    ) {
-
+    if (Math.abs((pacmanX + 20) - dotX) < 14 && !dot.classList.contains("hidden")) {
       dot.classList.add("hidden");
 
       setTimeout(() => {
@@ -444,64 +349,38 @@ function eatDots() {
   });
 }
 
-/* =========================
-   COULEUR DU FANTOME
-========================= */
-
 function animateGhostColor() {
-
-  const body = ghost.querySelector(".ghost-body");
-
   setInterval(() => {
-
     colorIndex = (colorIndex + 1) % colors.length;
-
-    body.style.background = colors[colorIndex];
-
+    ghost.style.background = colors[colorIndex];
   }, 700);
 }
 
-/* =========================
-   DEPLACEMENT
-========================= */
-
 function moveCharacters() {
-
   setInterval(() => {
-
     pacmanX += 2;
 
-    if (pacmanX > track.offsetWidth - 70) {
+    if (pacmanX > track.offsetWidth - 60) {
       pacmanX = 30;
     }
 
-    const ghostX = Math.max(0, pacmanX - 100);
+    const ghostX = Math.max(0, pacmanX - 90);
 
     pacman.style.left = pacmanX + "px";
     ghost.style.left = ghostX + "px";
 
     eatDots();
-
-  }, 25);
+  }, 30);
 }
 
-/* =========================
-   INIT
-========================= */
-
 window.addEventListener("load", () => {
-
   music.play().catch(() => {});
-
   createDots();
-
   animateGhostColor();
-
   moveCharacters();
 });
 
 window.addEventListener("resize", createDots);
-
 </script>
 
 </body>
