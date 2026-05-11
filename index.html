@@ -64,31 +64,104 @@
       background: #ffe600;
       border-radius: 50%;
       flex: 0 0 auto;
+      transition: opacity 0.2s ease;
     }
 
+    .dot.hidden {
+      opacity: 0;
+    }
+
+    /* PACMAN */
     .pacman {
       position: absolute;
-      width: 46px;
-      height: 46px;
-      background: #ffe600;
-      border-radius: 50%;
+      width: 48px;
+      height: 48px;
       top: 50%;
       left: 30px;
       transform: translateY(-50%);
       z-index: 3;
-      clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 35% 50%);
+      animation: mouth 0.35s infinite alternate;
     }
 
+    .pacman-body {
+      width: 100%;
+      height: 100%;
+      background: #ffe600;
+      border-radius: 50%;
+      clip-path: polygon(100% 50%, 0 0, 0 100%);
+    }
+
+    .pacman-eye {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #000;
+      border-radius: 50%;
+      top: 12px;
+      left: 26px;
+      z-index: 4;
+    }
+
+    @keyframes mouth {
+      from {
+        transform: translateY(-50%) rotate(0deg);
+      }
+      to {
+        transform: translateY(-50%) rotate(8deg);
+      }
+    }
+
+    /* GHOST */
     .ghost {
       position: absolute;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 48px;
       top: 50%;
       left: 0;
       transform: translateY(-50%);
       z-index: 2;
-      border-radius: 20px 20px 8px 8px;
       background: turquoise;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .ghost::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 12px;
+      background: repeating-radial-gradient(
+        circle at 6px 0,
+        transparent 0 5px,
+        currentColor 5px 6px
+      );
+      color: inherit;
+    }
+
+    .ghost-eyes {
+      position: absolute;
+      top: 14px;
+      left: 9px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .eye {
+      width: 8px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 85%, 100% {
+        height: 10px;
+      }
+      90% {
+        height: 2px;
+      }
     }
 
     /* LAYOUT */
@@ -98,7 +171,6 @@
       flex-wrap: wrap;
     }
 
-    /* MENU */
     .menu {
       flex: 1;
       min-width: 260px;
@@ -126,11 +198,6 @@
       text-decoration: none;
     }
 
-    .menu a:hover {
-      text-decoration: underline;
-    }
-
-    /* TABLE */
     .leaderboard {
       flex: 2;
       min-width: 300px;
@@ -155,58 +222,45 @@
       background: #334155;
     }
 
-    /* ENCOURAGEMENT */
     .encouragement {
       margin-top: 30px;
       background: #1e293b;
-      color: white;
       padding: 20px;
       border-radius: 12px;
       line-height: 1.6;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .main {
-        flex-direction: column;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      .track {
-        height: 90px;
-      }
     }
   </style>
 </head>
 <body>
 
-<!-- AUDIO -->
 <audio id="bgMusic" loop>
   <source src="retro.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <!-- ANIMATION PACMAN -->
   <div class="pacman-zone">
     <div class="track" id="track">
       <div class="dots" id="dots"></div>
-      <div id="pacman" class="pacman"></div>
-      <div id="ghost" class="ghost"></div>
+
+      <div id="pacman" class="pacman">
+        <div class="pacman-body"></div>
+        <div class="pacman-eye"></div>
+      </div>
+
+      <div id="ghost" class="ghost">
+        <div class="ghost-eyes">
+          <div class="eye"></div>
+          <div class="eye"></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="main">
-
-    <!-- MENU -->
     <div class="menu">
-
       <div class="section">
         <div class="title">• Seconde BAC Pro</div>
         <ul>
@@ -214,26 +268,8 @@
           <li>🔎 <a href="seconde_sciences.html">Sciences</a></li>
         </ul>
       </div>
-
-      <div class="section">
-        <div class="title">• Première BAC Pro</div>
-        <ul>
-          <li>🔎 <a href="premiere_math.html">Mathématiques</a></li>
-          <li>🔎 <a href="premiere_sciences.html">Sciences</a></li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <div class="title">• Terminale BAC Pro</div>
-        <ul>
-          <li>🔎 <a href="terminale_math.html">Mathématiques</a></li>
-          <li>🔎 <a href="terminale_sciences.html">Sciences</a></li>
-        </ul>
-      </div>
-
     </div>
 
-    <!-- SCORE -->
     <div class="leaderboard">
       <table>
         <thead>
@@ -247,89 +283,87 @@
         <tbody id="scoreTable"></tbody>
       </table>
     </div>
-
   </div>
 
-  <!-- ENCOURAGEMENT -->
   <div class="encouragement">
     <h2>Encouragement et progression</h2>
-
-    <p>
-      Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.
-    </p>
-
-    <p>
-      Si ton objectif est d’améliorer ton taux de bonnes réponses, lis attentivement les solutions proposées après chaque réponse et recommence.
-    </p>
+    <p>Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.</p>
+    <p>Lis attentivement les solutions proposées après chaque réponse et recommence pour progresser.</p>
   </div>
-
 </div>
 
-<script src="scores.js"></script>
-<script src="leaderboard.js"></script>
-
 <script>
-  const music = document.getElementById("bgMusic");
-  const pacman = document.getElementById("pacman");
-  const ghost = document.getElementById("ghost");
-  const dotsContainer = document.getElementById("dots");
-  const track = document.getElementById("track");
+const music = document.getElementById("bgMusic");
+const pacman = document.getElementById("pacman");
+const ghost = document.getElementById("ghost");
+const dotsContainer = document.getElementById("dots");
+const track = document.getElementById("track");
 
-  let pacmanX = 30;
-  const colors = ["turquoise", "red", "gray", "violet"];
-  let colorIndex = 0;
+let pacmanX = 30;
+const colors = ["turquoise", "red", "gray", "violet"];
+let colorIndex = 0;
+let dots = [];
 
-  function createDots() {
-    dotsContainer.innerHTML = "";
-    const totalDots = Math.floor(track.offsetWidth / 34);
+function createDots() {
+  dotsContainer.innerHTML = "";
+  dots = [];
 
-    for (let i = 0; i < totalDots; i++) {
-      const dot = document.createElement("div");
-      dot.className = "dot";
-      dotsContainer.appendChild(dot);
+  const totalDots = Math.floor(track.offsetWidth / 34);
+
+  for (let i = 0; i < totalDots; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dotsContainer.appendChild(dot);
+    dots.push(dot);
+  }
+}
+
+function eatDots() {
+  dots.forEach((dot, index) => {
+    const dotX = 20 + index * 32;
+
+    if (Math.abs((pacmanX + 20) - dotX) < 14 && !dot.classList.contains("hidden")) {
+      dot.classList.add("hidden");
+
+      setTimeout(() => {
+        dot.classList.remove("hidden");
+      }, 4000);
     }
-  }
-
-  function regenerateDots() {
-    setInterval(() => {
-      createDots();
-    }, 4000);
-  }
-
-  function animateGhostColor() {
-    setInterval(() => {
-      colorIndex = (colorIndex + 1) % colors.length;
-      ghost.style.background = colors[colorIndex];
-    }, 700);
-  }
-
-  function moveCharacters() {
-    setInterval(() => {
-      pacmanX += 2;
-
-      if (pacmanX > track.offsetWidth - 60) {
-        pacmanX = 30;
-      }
-
-      const ghostX = Math.max(0, pacmanX - 90);
-
-      pacman.style.left = pacmanX + "px";
-      ghost.style.left = ghostX + "px";
-    }, 30);
-  }
-
-  window.addEventListener("load", () => {
-    music.play().catch(() => {
-      console.log("Lecture automatique bloquée par le navigateur.");
-    });
-
-    createDots();
-    regenerateDots();
-    animateGhostColor();
-    moveCharacters();
   });
+}
 
-  window.addEventListener("resize", createDots);
+function animateGhostColor() {
+  setInterval(() => {
+    colorIndex = (colorIndex + 1) % colors.length;
+    ghost.style.background = colors[colorIndex];
+  }, 700);
+}
+
+function moveCharacters() {
+  setInterval(() => {
+    pacmanX += 2;
+
+    if (pacmanX > track.offsetWidth - 60) {
+      pacmanX = 30;
+    }
+
+    const ghostX = Math.max(0, pacmanX - 90);
+
+    pacman.style.left = pacmanX + "px";
+    ghost.style.left = ghostX + "px";
+
+    eatDots();
+  }, 30);
+}
+
+window.addEventListener("load", () => {
+  music.play().catch(() => {});
+  createDots();
+  animateGhostColor();
+  moveCharacters();
+});
+
+window.addEventListener("resize", createDots);
 </script>
 
 </body>
