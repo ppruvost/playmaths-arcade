@@ -1,35 +1,32 @@
 body {
-  scroll-behavior: smooth;
 }
 
-/* effet léger sur le chargement iframe */
-.frame-container {
-  animation: fadeIn 0.35s ease;
+.menu a:hover {
+  text-decoration: underline;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0.92;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
 }
 
-/* scrollbar moderne menu */
-.side-menu::-webkit-scrollbar {
-  width: 8px;
+th,
+td {
+  padding: 10px;
+  text-align: center;
 }
 
-.side-menu::-webkit-scrollbar-track {
-  background: #172033;
+th {
+  background: #334155;
 }
 
-.side-menu::-webkit-scrollbar-thumb {
-  background: #38bdf8;
-  border-radius: 10px;
+.encouragement {
+  margin-top: 30px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  line-height: 1.6;
 }
 
 /* LA LIGNE */
@@ -47,4 +44,14 @@ body {
   border: none;
   background: transparent;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
 }
