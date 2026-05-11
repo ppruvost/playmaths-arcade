@@ -5,120 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayMaths Arcade</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      text-align: center;
-      margin-bottom: 30px;
-      opacity: 0.8;
-    }
-
-    /* LAYOUT */
-    .main {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    /* MENU */
-    .menu {
-      flex: 1;
-      min-width: 260px;
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-    }
-
-    .title {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .menu ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .menu li {
-      margin: 8px 0;
-    }
-
-    .menu a {
-      color: #38bdf8;
-      text-decoration: none;
-    }
-
-    .menu a:hover {
-      text-decoration: underline;
-    }
-
-    /* TABLE */
-    .leaderboard {
-      flex: 2;
-      min-width: 300px;
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      color: white;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background: #334155;
-    }
-
-    /* ENCOURAGEMENT */
-    .encouragement {
-      margin-top: 30px;
-      background: #1e293b;
-      color: white;
-      padding: 20px;
-      border-radius: 12px;
-      line-height: 1.6;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .main {
-        flex-direction: column;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- AUDIO -->
 <audio id="bgMusic" loop>
   <source src="retro.mp3" type="audio/mpeg">
 </audio>
@@ -128,9 +18,14 @@
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <button id="startMusic" class="music-btn">
-    🔊 Activer la musique rétro
-  </button>
+  <!-- PACMAN ENTRE LE TITRE ET LES TABLEAUX -->
+  <div class="pacman-zone">
+    <div class="track"></div>
+    <div class="dots" id="dots"></div>
+    <div class="ghost" id="ghost"></div>
+    <div class="pacman" id="pacman"></div>
+    <div class="click-cube" id="clickCube">CLIC</div>
+  </div>
 
   <div class="main">
 
@@ -163,7 +58,7 @@
 
     </div>
 
-    <!-- SCORE -->
+    <!-- TABLEAU DES SCORES -->
     <div class="leaderboard">
       <table>
         <thead>
@@ -175,57 +70,4 @@
           </tr>
         </thead>
         <tbody id="scoreTable"></tbody>
-      </table>
-    </div>
-
-  </div>
-
-  <!-- ENCOURAGEMENT -->
-  <div class="encouragement">
-    <h2>Encouragement et progression</h2>
-
-    <p>
-      Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.
-    </p>
-
-    <p>
-      Si ton objectif est d’améliorer ton taux de bonnes réponses, lis attentivement les solutions proposées après chaque réponse et recommence.
-    </p>
-  </div>
-
-  <!-- LA LINEA -->
-  <div class="linea-container">
-    <iframe 
-      src="ligne.html"
-      title="La Ligne"
-      frameborder="0">
-    </iframe>
-  </div>
-
-</div>
-
-<script src="scores.js"></script>
-<script src="leaderboard.js"></script>
-
-<script>
-  const music = document.getElementById("bgMusic");
-  const startBtn = document.getElementById("startMusic");
-
-  window.addEventListener("load", () => {
-    music.play()
-      .then(() => {
-        console.log("Musique lancée automatiquement");
-      })
-      .catch(() => {
-        startBtn.style.display = "block";
-      });
-  });
-
-  startBtn.addEventListener("click", () => {
-    music.play();
-    startBtn.style.display = "none";
-  });
-</script>
-
-</body>
 </html>
