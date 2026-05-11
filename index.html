@@ -26,20 +26,69 @@
 
     .subtitle {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       opacity: 0.8;
     }
 
-    /* AUDIO BUTTON */
-    .music-btn {
-      display: none;
-      margin: 10px auto;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #22c55e;
-      color: white;
-      cursor: pointer;
+    /* PACMAN ZONE */
+    .pacman-zone {
+      margin: 20px 0 35px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .track {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: 110px;
+      border: 6px solid #00d8ff;
+      background: #000;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .dots {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #ffe600;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .pacman {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      background: #ffe600;
+      border-radius: 50%;
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+      z-index: 3;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 35% 50%);
+    }
+
+    .ghost {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 2;
+      border-radius: 20px 20px 8px 8px;
+      background: turquoise;
     }
 
     /* LAYOUT */
@@ -125,6 +174,10 @@
       h1 {
         font-size: 24px;
       }
+
+      .track {
+        height: 90px;
+      }
     }
   </style>
 </head>
@@ -140,9 +193,14 @@
   <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
   <p class="subtitle">Top 10 des meilleurs scores</p>
 
-  <button id="startMusic" class="music-btn">
-    🔊 Activer la musique rétro
-  </button>
+  <!-- ANIMATION PACMAN -->
+  <div class="pacman-zone">
+    <div class="track" id="track">
+      <div class="dots" id="dots"></div>
+      <div id="pacman" class="pacman"></div>
+      <div id="ghost" class="ghost"></div>
+    </div>
+  </div>
 
   <div class="main">
 
@@ -212,22 +270,66 @@
 
 <script>
   const music = document.getElementById("bgMusic");
-  const startBtn = document.getElementById("startMusic");
+  const pacman = document.getElementById("pacman");
+  const ghost = document.getElementById("ghost");
+  const dotsContainer = document.getElementById("dots");
+  const track = document.getElementById("track");
+
+  let pacmanX = 30;
+  const colors = ["turquoise", "red", "gray", "violet"];
+  let colorIndex = 0;
+
+  function createDots() {
+    dotsContainer.innerHTML = "";
+    const totalDots = Math.floor(track.offsetWidth / 34);
+
+    for (let i = 0; i < totalDots; i++) {
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function regenerateDots() {
+    setInterval(() => {
+      createDots();
+    }, 4000);
+  }
+
+  function animateGhostColor() {
+    setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      ghost.style.background = colors[colorIndex];
+    }, 700);
+  }
+
+  function moveCharacters() {
+    setInterval(() => {
+      pacmanX += 2;
+
+      if (pacmanX > track.offsetWidth - 60) {
+        pacmanX = 30;
+      }
+
+      const ghostX = Math.max(0, pacmanX - 90);
+
+      pacman.style.left = pacmanX + "px";
+      ghost.style.left = ghostX + "px";
+    }, 30);
+  }
 
   window.addEventListener("load", () => {
-    music.play()
-      .then(() => {
-        console.log("Musique lancée automatiquement");
-      })
-      .catch(() => {
-        startBtn.style.display = "block";
-      });
+    music.play().catch(() => {
+      console.log("Lecture automatique bloquée par le navigateur.");
+    });
+
+    createDots();
+    regenerateDots();
+    animateGhostColor();
+    moveCharacters();
   });
 
-  startBtn.addEventListener("click", () => {
-    music.play();
-    startBtn.style.display = "none";
-  });
+  window.addEventListener("resize", createDots);
 </script>
 
 </body>
