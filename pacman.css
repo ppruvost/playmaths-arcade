@@ -1,56 +1,43 @@
 body {
   margin: 0;
   background: #000;
-  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 /* =========================
-   ZONE DE JEU
+   TRACK
 ========================= */
-
-.game-wrapper {
-  width: 95%;
-  max-width: 1400px;
-}
 
 .track {
   position: relative;
-  height: 120px;
-  border: 6px solid #00d8ff;
-  background: #000;
+  width: 900px;
+  height: 200px;
+  background: #111;
   overflow: hidden;
-  border-radius: 10px;
+  border: 2px solid #333;
 }
 
 /* =========================
-   POINTS JAUNES
+   DOTS
 ========================= */
 
 .dots {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 0 20px;
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
-  background: #ffe600;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
   border-radius: 50%;
-  flex: 0 0 auto;
-  transition: opacity 0.2s ease;
-}
-
-.dot.hidden {
-  opacity: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* =========================
@@ -64,189 +51,48 @@ body {
   top: 50%;
   left: 30px;
   transform: translateY(-50%);
-  z-index: 5;
   border-radius: 50%;
   background: #ffe600;
   overflow: hidden;
 }
 
-/* bouche (secteur noir) */
 .mouth {
   position: absolute;
   inset: 0;
-  z-index: 2;
-}
-
-.mouth::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
   background: #000;
-
-  /* secteur de bouche propre */
-  clip-path: polygon(
-    50% 50%,
-    100% 25%,
-    100% 75%
-  );
-
-  transform-origin: 50% 50%;
-  animation: pacmanMouth 0.25s infinite alternate ease-in-out;
+  clip-path: polygon(50% 50%, 100% 20%, 100% 80%);
+  animation: chomp 0.25s infinite alternate;
 }
 
-/* animation ouverture/fermeture */
-@keyframes pacmanMouth {
-  from {
-    transform: rotate(0deg) scaleY(1);
-  }
-  to {
-    transform: rotate(35deg) scaleY(1);
-  }
-}
-
-/* oeil */
-.pacman-eye {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #000;
-  border-radius: 50%;
-  top: 16px;
-  left: 38px;
-  z-index: 10;
+@keyframes chomp {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(35deg); }
 }
 
 /* =========================
-   FANTÔME
+   GHOST
 ========================= */
+
 .ghost {
   position: absolute;
-  width: 56px;
-  height: 62px;
+  width: 60px;
+  height: 60px;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  z-index: 4;
-}
-
-/* corps principal */
-
-.ghost-body {
-  position: absolute;
-  inset: 0;
-  background: #ff0000; /* couleur variable JS */
-  border-radius: 28px 28px 0 0;
-  overflow: hidden;
-}
-
-/* bas ondulé style arcade */
-
-.ghost-body::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 18px;
-
-  background:
-    radial-gradient(circle at 9px 0px, transparent 8px, #000 8.5px),
-    radial-gradient(circle at 28px 0px, transparent 8px, #000 8.5px),
-    radial-gradient(circle at 47px 0px, transparent 8px, #000 8.5px);
-
-  background-size: 19px 18px;
-  background-repeat: repeat-x;
-}
-
-/* yeux */
-
-.ghost-eyes {
-  position: absolute;
-  top: 15px;
-  left: 9px;
-  display: flex;
-  gap: 8px;
-  z-index: 5;
-}
-
-.eye {
-  position: relative;
-  width: 14px;
-  height: 18px;
-  background: white;
-  border-radius: 50%;
-}
-
-.eye::after {
-  content: "";
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #1d4ed8;
-  border-radius: 50%;
-  bottom: 3px;
-  right: 2px;
+  background: red;
+  border-radius: 50% 50% 0 0;
 }
 
 /* =========================
-   CUBE 3D CLIQUABLE
+   BUTTON
 ========================= */
 
-.music-cube {
+.click-box {
   position: absolute;
-  top: 50%;
-  left: 72%;
-  transform: translate(-50%, -50%);
-  width: 90px;
-  height: 90px;
-  perspective: 800px;
+  top: 10px;
+  left: 10px;
   z-index: 10;
+  padding: 8px 12px;
   cursor: pointer;
-}
-
-.cube {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  animation: rotateCube 6s linear infinite;
-}
-
-.face {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  background: rgba(0, 216, 255, 0.85);
-  border: 2px solid #00d8ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffe600;
-  font-weight: bold;
-  font-size: 14px;
-  text-align: center;
-  box-shadow: 0 0 12px #00d8ff;
-}
-
-/* positions des faces */
-
-.front  { transform: translateZ(45px); }
-.back   { transform: rotateY(180deg) translateZ(45px); }
-.right  { transform: rotateY(90deg) translateZ(45px); }
-.left   { transform: rotateY(-90deg) translateZ(45px); }
-.top    { transform: rotateX(90deg) translateZ(45px); }
-.bottom { transform: rotateX(-90deg) translateZ(45px); }
-
-@keyframes rotateCube {
-  from {
-    transform: rotateX(-20deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(-20deg) rotateY(360deg);
-  }
-}
-
-.hidden {
-  display: none;
 }
