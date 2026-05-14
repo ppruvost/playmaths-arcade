@@ -12,23 +12,30 @@ let running = false;
 const speed = 2;
 
 /* =========================
-   MUSIC
+   START GAME
 ========================= */
 
 function startGame() {
   if (running) return;
+
   running = true;
 
-  music.play().catch(() => {});
+  if (music) {
+    music.play().catch(() => {});
+  }
 
-  clickBox.style.display = "none";
+  if (clickBox) {
+    clickBox.style.display = "none";
+  }
 }
 
 /* =========================
-   DOTS
+   CREATE DOTS
 ========================= */
 
 function createDots() {
+  if (!dotsContainer || !track) return;
+
   dotsContainer.innerHTML = "";
 
   const spacing = 30;
@@ -37,19 +44,19 @@ function createDots() {
   for (let i = 0; i < count; i++) {
     const dot = document.createElement("div");
     dot.className = "dot";
-    dot.style.left = i * spacing + "px";
+    dot.style.left = `${i * spacing}px`;
     dotsContainer.appendChild(dot);
   }
 }
 
 /* =========================
-   COLLISION DOTS
+   EAT DOTS
 ========================= */
 
 function eatDots() {
   const dots = document.querySelectorAll(".dot");
 
-  dots.forEach(dot => {
+  dots.forEach((dot) => {
     const dotX = dot.offsetLeft;
 
     if (Math.abs(dotX - pacmanX) < 20) {
@@ -59,20 +66,22 @@ function eatDots() {
 }
 
 /* =========================
-   LOOP
+   GAME LOOP
 ========================= */
 
 function loop() {
-  if (running) {
+  if (running && pacman && ghost && track) {
     pacmanX += speed;
     ghostX = pacmanX - 100;
 
     const maxX = track.offsetWidth - 70;
 
-    if (pacmanX > maxX) pacmanX = 30;
+    if (pacmanX > maxX) {
+      pacmanX = 30;
+    }
 
-    pacman.style.left = pacmanX + "px";
-    ghost.style.left = ghostX + "px";
+    pacman.style.left = `${pacmanX}px`;
+    ghost.style.left = `${ghostX}px`;
 
     eatDots();
   }
@@ -84,7 +93,9 @@ function loop() {
    INIT
 ========================= */
 
-clickBox.addEventListener("click", startGame);
+if (clickBox) {
+  clickBox.addEventListener("click", startGame);
+}
 
 window.addEventListener("resize", createDots);
 
