@@ -63,6 +63,17 @@ body {
   initial-value: 0deg;
 }
 
+.eye {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  top: 18px;
+  left: 22px;
+  z-index: 2;
+}
+
 .mouth {
   position: absolute;
   inset: 0;
