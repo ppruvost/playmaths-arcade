@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pacman</title>
-  <link rel="stylesheet" href="pacman.css" />
+
+  <link rel="stylesheet" href="pacman.css">
 </head>
 <body>
 
@@ -13,20 +14,26 @@
 
       <div class="dots" id="dots"></div>
 
+      <!-- PACMAN -->
       <div id="pacman" class="pacman">
-        <div class="eye"></div>
         <div class="mouth"></div>
+        <div class="eye"></div>
       </div>
 
+      <!-- GHOST -->
       <div id="ghost" class="ghost"></div>
 
-      <button id="clickBox" class="click-box">Start</button>
+      <!-- START -->
+      <button id="clickBox" class="click-box">
+        START
+      </button>
 
     </div>
   </div>
 
+  <!-- AUDIO -->
   <audio id="bgMusic" loop>
-    <source src="retro.mp3" type="audio/mpeg" />
+    <source src="retro.mp3" type="audio/mpeg">
   </audio>
 
   <script src="pacman.js"></script>
