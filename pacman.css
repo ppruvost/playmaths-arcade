@@ -81,6 +81,7 @@ body {
 
   /* base Pacman */
   background: conic-gradient(
+    from 0.25turn,
     #000 0deg var(--angle),
     #ffe600 var(--angle) 360deg
   );
