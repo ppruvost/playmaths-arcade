@@ -1,7 +1,11 @@
+/* =========================
+   BASE
+========================= */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: black;
+  background: #000;
   color: #00ffcc;
   text-align: center;
 }
@@ -15,6 +19,7 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 40px;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -59,7 +64,6 @@ h2 {
 
 /* =========================
    MENU + LEADERBOARD
-   même style visuel
 ========================= */
 
 .menu-box,
@@ -99,7 +103,7 @@ h2 {
 }
 
 .section a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   transition: 0.2s;
 }
@@ -139,27 +143,11 @@ th {
   border: 3px solid #00ffcc;
   border-radius: 12px;
   padding: 25px;
+  box-sizing: border-box;
 }
 
 .encouragement p {
   font-size: 18px;
   line-height: 1.6;
   margin: 10px 0;
-}
-
-/* =========================
-   ANCIEN MENU (conservé si utilisé ailleurs)
-========================= */
-
-.menu-links {
-  margin-top: 40px;
-}
-
-.menu-links a {
-  text-decoration: none;
-  color: white;
-  background: #ff0066;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 22px;
 }
