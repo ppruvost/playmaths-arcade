@@ -7,20 +7,26 @@
   <link rel="stylesheet" href="pacman.css" />
 </head>
 <body>
+
   <div class="game-wrapper">
     <div class="track" id="track">
+
       <div class="dots" id="dots"></div>
 
-      <div id="pacman" class="pacman"></div>
+      <div id="pacman" class="pacman">
+        <div class="mouth"></div>
+      </div>
+
       <div id="ghost" class="ghost"></div>
 
-      <button id="clickBox" class="click-box">clic-dessus</button>
-    </div>
+      <button id="clickBox" class="click-box">Start</button>
 
-    <audio id="bgMusic" loop>
-      <source src="retro.mp3" type="audio/mpeg" />
-    </audio>
+    </div>
   </div>
+
+  <audio id="bgMusic" loop>
+    <source src="retro.mp3" type="audio/mpeg" />
+  </audio>
 
   <script src="pacman.js"></script>
 </body>
