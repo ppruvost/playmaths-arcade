@@ -59,93 +59,62 @@ body {
 
 .pacman {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   top: 50%;
   left: 30px;
   transform: translateY(-50%);
   z-index: 5;
-}
-
-/* disque jaune */
-
-.pacman::before {
-  content: "";
-  position: absolute;
-  inset: 0;
   border-radius: 50%;
   background: #ffe600;
-  z-index: 1;
+  overflow: hidden;
 }
 
-/* bouche animée */
-
+/* bouche (secteur noir) */
 .mouth {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 2;
 }
 
-.mouth::before,
-.mouth::after {
+.mouth::before {
   content: "";
   position: absolute;
-  right: -2px;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   background: #000;
-  transform-origin: left center;
+
+  /* secteur de bouche propre */
+  clip-path: polygon(
+    50% 50%,
+    100% 25%,
+    100% 75%
+  );
+
+  transform-origin: 50% 50%;
+  animation: pacmanMouth 0.25s infinite alternate ease-in-out;
 }
 
-/* partie haute */
-
-.mouth::before {
-  top: 0;
-  clip-path: polygon(100% 0, 0 100%, 100% 100%);
-  animation: mouthTop 0.22s infinite alternate;
-}
-
-/* partie basse */
-
-.mouth::after {
-  bottom: 0;
-  clip-path: polygon(100% 100%, 0 0, 100% 0);
-  animation: mouthBottom 0.22s infinite alternate;
+/* animation ouverture/fermeture */
+@keyframes pacmanMouth {
+  from {
+    transform: rotate(0deg) scaleY(1);
+  }
+  to {
+    transform: rotate(35deg) scaleY(1);
+  }
 }
 
 /* oeil */
-
 .pacman-eye {
   position: absolute;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   background: #000;
   border-radius: 50%;
-  top: 14px;
-  left: 30px;
+  top: 16px;
+  left: 38px;
   z-index: 10;
-}
-
-@keyframes mouthTop {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-28deg);
-  }
-}
-
-@keyframes mouthBottom {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(28deg);
-  }
 }
 
 /* =========================
