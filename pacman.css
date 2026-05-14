@@ -151,29 +151,27 @@ body {
 /* =========================
    FANTÔME
 ========================= */
-
 .ghost {
   position: absolute;
-  width: 52px;
-  height: 58px;
+  width: 56px;
+  height: 62px;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
   z-index: 4;
-  transition: background 0.3s linear;
 }
 
-/* corps */
+/* corps principal */
 
 .ghost-body {
   position: absolute;
   inset: 0;
-  background: turquoise;
+  background: #ff0000; /* couleur variable JS */
   border-radius: 28px 28px 0 0;
   overflow: hidden;
 }
 
-/* base ondulée */
+/* bas ondulé style arcade */
 
 .ghost-body::after {
   content: "";
@@ -181,12 +179,14 @@ body {
   left: 0;
   bottom: -1px;
   width: 100%;
-  height: 16px;
+  height: 18px;
+
   background:
-    radial-gradient(circle at 8px 0px, transparent 8px, #000 8.5px),
-    radial-gradient(circle at 26px 0px, transparent 8px, #000 8.5px),
-    radial-gradient(circle at 44px 0px, transparent 8px, #000 8.5px);
-  background-size: 18px 16px;
+    radial-gradient(circle at 9px 0px, transparent 8px, #000 8.5px),
+    radial-gradient(circle at 28px 0px, transparent 8px, #000 8.5px),
+    radial-gradient(circle at 47px 0px, transparent 8px, #000 8.5px);
+
+  background-size: 19px 18px;
   background-repeat: repeat-x;
 }
 
@@ -194,8 +194,8 @@ body {
 
 .ghost-eyes {
   position: absolute;
-  top: 16px;
-  left: 10px;
+  top: 15px;
+  left: 9px;
   display: flex;
   gap: 8px;
   z-index: 5;
@@ -203,55 +203,79 @@ body {
 
 .eye {
   position: relative;
-  width: 12px;
-  height: 16px;
+  width: 14px;
+  height: 18px;
   background: white;
   border-radius: 50%;
-  animation: blink 2s infinite;
 }
 
 .eye::after {
   content: "";
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: #1d4ed8;
   border-radius: 50%;
-  bottom: 2px;
+  bottom: 3px;
   right: 2px;
 }
 
-@keyframes blink {
-  0%, 85%, 100% {
-    height: 16px;
-  }
-
-  90% {
-    height: 2px;
-  }
-}
-
 /* =========================
-   CASE CLIC
+   CUBE 3D CLIQUABLE
 ========================= */
 
-.click-box {
+.music-cube {
   position: absolute;
   top: 50%;
   left: 72%;
   transform: translate(-50%, -50%);
-  z-index: 6;
-  background: #111;
-  color: #ffe600;
-  border: 2px solid #00d8ff;
-  padding: 12px 20px;
-  font-weight: bold;
+  width: 90px;
+  height: 90px;
+  perspective: 800px;
+  z-index: 10;
   cursor: pointer;
-  border-radius: 8px;
 }
 
-.click-box:hover {
-  background: #1d1d1d;
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotateCube 6s linear infinite;
+}
+
+.face {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: rgba(0, 216, 255, 0.85);
+  border: 2px solid #00d8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffe600;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 0 12px #00d8ff;
+}
+
+/* positions des faces */
+
+.front  { transform: translateZ(45px); }
+.back   { transform: rotateY(180deg) translateZ(45px); }
+.right  { transform: rotateY(90deg) translateZ(45px); }
+.left   { transform: rotateY(-90deg) translateZ(45px); }
+.top    { transform: rotateX(90deg) translateZ(45px); }
+.bottom { transform: rotateX(-90deg) translateZ(45px); }
+
+@keyframes rotateCube {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
 }
 
 .hidden {
