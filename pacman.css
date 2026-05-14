@@ -60,7 +60,7 @@ body {
 @property --angle {
   syntax: "<angle>";
   inherits: false;
-  initial-value: 50deg;
+  initial-value: 0deg;
 }
 
 .eye {
@@ -82,13 +82,13 @@ body {
     #000 50deg var(--angle),
     transparent var(--angle) 360deg
   );
-  transform: rotate(25deg);
+  transform: rotate(-45deg);
   animation: chomp 0.2s infinite alternate ease-in-out;
 }
 
 @keyframes chomp {
-  from { --angle: 50deg; }
-  to   { --angle: 100deg; }
+  from { --angle: 0deg; }
+  to   { --angle: 50deg; }
 }
 
 /* =========================
