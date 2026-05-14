@@ -71,6 +71,7 @@ body {
     #000 0deg var(--angle),
     transparent var(--angle) 360deg
   );
+  transform: rotate(-25deg);
   animation: chomp 0.2s infinite alternate ease-in-out;
 }
 
