@@ -6,6 +6,10 @@ body {
   text-align: center;
 }
 
+/* =========================
+   CONTAINER
+========================= */
+
 .container {
   width: 90%;
   max-width: 1200px;
@@ -13,9 +17,14 @@ body {
   padding: 40px;
 }
 
+/* =========================
+   TITRES
+========================= */
+
 h1 {
   font-size: 48px;
   text-shadow: 0 0 15px #00ffcc;
+  margin-bottom: 10px;
 }
 
 .subtitle {
@@ -23,27 +32,124 @@ h1 {
   margin-bottom: 30px;
 }
 
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+/* =========================
+   PACMAN ZONE
+========================= */
+
+.pacman-zone {
+  margin-bottom: 40px;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.main {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+/* =========================
+   MENU + LEADERBOARD
+   même style visuel
+========================= */
+
+.menu-box,
 .leaderboard {
+  flex: 1;
   background: #111;
   border: 3px solid #00ffcc;
   border-radius: 12px;
   padding: 20px;
+  box-sizing: border-box;
+  text-align: left;
 }
+
+/* =========================
+   MENU
+========================= */
+
+.section {
+  margin-bottom: 25px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffd700;
+}
+
+.section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.section li {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.section a {
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.section a:hover {
+  color: #ffd700;
+}
+
+/* =========================
+   TABLEAU CLASSEMENT
+========================= */
 
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   padding: 15px;
   border-bottom: 1px solid #333;
-  font-size: 20px;
+  font-size: 18px;
+  text-align: center;
 }
 
 th {
   color: #ffd700;
 }
+
+/* =========================
+   ENCOURAGEMENT
+========================= */
+
+.encouragement {
+  margin-top: 40px;
+  background: #111;
+  border: 3px solid #00ffcc;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.encouragement p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+/* =========================
+   ANCIEN MENU (conservé si utilisé ailleurs)
+========================= */
 
 .menu-links {
   margin-top: 40px;
