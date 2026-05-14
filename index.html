@@ -89,79 +89,9 @@
   </div>
 </div>
 
-<script>
-const music = document.getElementById("bgMusic");
-const pacman = document.getElementById("pacman");
-const ghost = document.getElementById("ghost");
-const dotsContainer = document.getElementById("dots");
-const track = document.getElementById("track");
-
-let pacmanX = 30;
-const colors = ["turquoise", "red", "gray", "violet"];
-let colorIndex = 0;
-let dots = [];
-
-function createDots() {
-  dotsContainer.innerHTML = "";
-  dots = [];
-
-  const totalDots = Math.floor(track.offsetWidth / 34);
-
-  for (let i = 0; i < totalDots; i++) {
-    const dot = document.createElement("div");
-    dot.className = "dot";
-    dotsContainer.appendChild(dot);
-    dots.push(dot);
-  }
-}
-
-function eatDots() {
-  dots.forEach((dot, index) => {
-    const dotX = 20 + index * 32;
-
-    if (Math.abs((pacmanX + 20) - dotX) < 14 && !dot.classList.contains("hidden")) {
-      dot.classList.add("hidden");
-
-      setTimeout(() => {
-        dot.classList.remove("hidden");
-      }, 4000);
-    }
-  });
-}
-
-function animateGhostColor() {
-  setInterval(() => {
-    colorIndex = (colorIndex + 1) % colors.length;
-    ghost.style.background = colors[colorIndex];
-  }, 700);
-}
-
-function moveCharacters() {
-  setInterval(() => {
-    pacmanX += 2;
-
-    if (pacmanX > track.offsetWidth - 60) {
-      pacmanX = 30;
-    }
-
-    const ghostX = Math.max(0, pacmanX - 90);
-
-    pacman.style.left = pacmanX + "px";
-    ghost.style.left = ghostX + "px";
-
-    eatDots();
-  }, 30);
-}
-
-window.addEventListener("load", () => {
-  music.play().catch(() => {});
-  createDots();
-  animateGhostColor();
-  moveCharacters();
-});
-
-window.addEventListener("resize", createDots);
-</script>
+<script src="begin.js"></script>
+<script src="scores.js"></script>
+<script src="leaderboard.js"></script>
 
 </body>
 </html>
