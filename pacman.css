@@ -60,7 +60,7 @@ body {
 @property --angle {
   syntax: "<angle>";
   inherits: false;
-  initial-value: 0deg;
+  initial-value: 50deg;
 }
 
 .eye {
@@ -79,7 +79,7 @@ body {
   inset: 0;
   border-radius: 50%;
   background: conic-gradient(
-    #000 0deg var(--angle),
+    #000 50deg var(--angle),
     transparent var(--angle) 360deg
   );
   transform: rotate(-25deg);
@@ -87,8 +87,8 @@ body {
 }
 
 @keyframes chomp {
-  from { --angle: 0deg; }
-  to   { --angle: 50deg; }
+  from { --angle: 50deg; }
+  to   { --angle: 100deg; }
 }
 
 /* =========================
