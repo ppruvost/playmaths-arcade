@@ -1,7 +1,7 @@
 const pacman = document.getElementById("pacman");
 const ghost = document.getElementById("ghost");
 const clickBox = document.getElementById("clickBox");
-const music = document.getElementById("bgMusic");
+const bgMusicPacman = document.getElementById("bgMusic");
 const dotsContainer = document.getElementById("dots");
 const track = document.getElementById("track");
 
@@ -20,9 +20,9 @@ function startGame() {
 
   running = true;
 
-  if (music) {
-    music.play().catch(() => {});
-  }
+   if (bgMusicPacman) {
+     bgMusicPacman.play().catch(() => {});
+}
 
   if (clickBox) {
     clickBox.style.display = "none";
