@@ -5,93 +5,135 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayMaths Arcade</title>
 
-  <!-- STYLE GENERAL DU SITE -->
+  <!-- STYLE GENERAL -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- STYLE UNIQUEMENT POUR PACMAN -->
+  <!-- STYLE PACMAN -->
   <link rel="stylesheet" href="pacman.css">
 </head>
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="retro.mp3" type="audio/mpeg">
-</audio>
+  <!-- AUDIO -->
+  <audio id="bgMusic" loop>
+    <source src="retro.mp3" type="audio/mpeg">
+  </audio>
 
-<div class="container">
-  <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
-  <p class="subtitle">Top 10 des meilleurs scores</p>
+  <div class="container">
 
-  <div class="pacman-zone">
-    <div class="track" id="track">
-      <div class="dots" id="dots"></div>
+    <!-- TITRE -->
+    <h1>🎮 PLAYMATHS ARCADE 🎮</h1>
+    <p class="subtitle">Top 10 des meilleurs scores</p>
 
-      <div id="pacman" class="pacman">
-        <div class="pacman-body"></div>
-        <div class="pacman-eye"></div>
-      </div>
+    <!-- =========================
+         ZONE PACMAN
+    ========================== -->
 
-      <div id="ghost" class="ghost">
-        <div class="ghost-eyes">
-          <div class="eye"></div>
+    <div class="pacman-zone">
+      <div class="track" id="track">
+
+        <div class="dots" id="dots"></div>
+
+        <!-- PACMAN -->
+        <div id="pacman" class="pacman">
+          <div class="mouth"></div>
           <div class="eye"></div>
         </div>
+
+        <!-- GHOST -->
+        <div id="ghost" class="ghost">
+          <div class="ghost-eyes">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+        </div>
+
+        <!-- BOUTON START -->
+        <button id="clickBox" class="click-box">
+          START
+        </button>
+
       </div>
     </div>
-  </div>
 
-  <div class="main">
-    <div class="menu">
-      <div class="section">
-        <div class="title">• Seconde BAC Pro</div>
-        <ul>
-          <li>🔎 <a href="seconde_math.html">Mathématiques</a></li>
-          <li>🔎 <a href="seconde_sciences.html">Sciences</a></li>
-        </ul>
+    <!-- =========================
+         CONTENU PRINCIPAL
+    ========================== -->
+
+    <div class="main">
+
+      <!-- MENU (même cartouche que classement) -->
+      <div class="menu-box">
+        <h2>Programme</h2>
+
+        <div class="section">
+          <div class="title">• Seconde BAC Pro</div>
+          <ul>
+            <li>🔎 <a href="seconde_math.html">Mathématiques</a></li>
+            <li>🔎 <a href="seconde_sciences.html">Sciences</a></li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="title">• Première BAC Pro</div>
+          <ul>
+            <li>🔎 <a href="premiere_math.html">Mathématiques</a></li>
+            <li>🔎 <a href="premiere_sciences.html">Sciences</a></li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="title">• Terminale BAC Pro</div>
+          <ul>
+            <li>🔎 <a href="terminale_math.html">Mathématiques</a></li>
+            <li>🔎 <a href="terminale_sciences.html">Sciences</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section">
-        <div class="title">• Première BAC Pro</div>
-        <ul>
-          <li>🔎 <a href="premiere_math.html">Mathématiques</a></li>
-          <li>🔎 <a href="premiere_sciences.html">Sciences</a></li>
-        </ul>
+      <!-- CLASSEMENT -->
+      <div class="leaderboard">
+        <h2>Classement</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Rang</th>
+              <th>Prénom</th>
+              <th>Date</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="scoreTable"></tbody>
+        </table>
       </div>
 
-      <div class="section">
-        <div class="title">• Terminale BAC Pro</div>
-        <ul>
-          <li>🔎 <a href="terminale_math.html">Mathématiques</a></li>
-          <li>🔎 <a href="terminale_sciences.html">Sciences</a></li>
-        </ul>
-      </div>
-      
     </div>
 
-    <div class="leaderboard">
-      <table>
-        <thead>
-          <tr>
-            <th>Rang</th>
-            <th>Prénom</th>
-            <th>Date</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody id="scoreTable"></tbody>
-      </table>
+    <!-- =========================
+         ENCOURAGEMENT
+    ========================== -->
+
+    <div class="encouragement">
+      <h2>Encouragement et progression</h2>
+
+      <p>
+        Prends le temps d’avancer à ton rythme :
+        chaque essai est une occasion de progresser.
+      </p>
+
+      <p>
+        Relis attentivement les solutions proposées
+        après chaque question et recommence pour progresser.
+      </p>
     </div>
+
   </div>
 
-  <div class="encouragement">
-    <h2>Encouragement et progression</h2>
-    <p>Prends le temps d’avancer à ton rythme : chaque essai est une occasion de progresser.</p>
-    <p>Relis attentivement les solutions proposées après chaque question et recommence pour progresser.</p>
-  </div>
-</div>
-
-<script src="begin.js"></script>
-<script src="scores.js"></script>
-<script src="leaderboard.js"></script>
+  <!-- JS -->
+  <script src="begin.js"></script>
+  <script src="scores.js"></script>
+  <script src="leaderboard.js"></script>
+  <script src="pacman.js"></script>
 
 </body>
 </html>
