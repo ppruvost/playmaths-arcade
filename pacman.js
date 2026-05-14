@@ -1,56 +1,28 @@
 const pacman = document.getElementById("pacman");
 const ghost = document.getElementById("ghost");
 const clickBox = document.getElementById("clickBox");
-const cube = document.getElementById("musicCube");
 const music = document.getElementById("bgMusic");
 const dotsContainer = document.getElementById("dots");
 const track = document.getElementById("track");
 
 let pacmanX = 30;
-let pausedAtClick = false;
-let clickTriggered = false;
-let musicStarted = false;
+let ghostX = 0;
+let running = false;
 
-const stopPosition = track.offsetWidth * 0.68;
-const colors = ["turquoise", "red", "gray", "violet"];
-let colorIndex = 0;
+const speed = 2;
 
 /* =========================
-   MUSIQUE (centralisé)
+   MUSIC
 ========================= */
 
-function startMusic() {
-  if (musicStarted) return;
+function startGame() {
+  if (running) return;
+  running = true;
 
-  musicStarted = true;
+  music.play().catch(() => {});
 
-  music.play().catch(() => {
-    console.log("Lecture audio bloquée par le navigateur.");
-  });
-
-  // disparition des éléments de lancement
-  if (cube) cube.classList.add("hidden");
-  if (clickBox) clickBox.classList.add("hidden");
+  clickBox.style.display = "none";
 }
-
-/* =========================
-   CUBE CLICK
-========================= */
-
-if (cube) {
-  cube.addEventListener("click", startMusic);
-}
-
-/* =========================
-   CLICK BOX
-========================= */
-
-clickBox.addEventListener("click", () => {
-  clickTriggered = true;
-  pausedAtClick = false;
-
-  startMusic();
-});
 
 /* =========================
    DOTS
@@ -59,61 +31,62 @@ clickBox.addEventListener("click", () => {
 function createDots() {
   dotsContainer.innerHTML = "";
 
-  const totalDots = Math.floor(track.offsetWidth / 34);
+  const spacing = 30;
+  const count = Math.floor(track.offsetWidth / spacing);
 
-  for (let i = 0; i < totalDots; i++) {
+  for (let i = 0; i < count; i++) {
     const dot = document.createElement("div");
     dot.className = "dot";
+    dot.style.left = i * spacing + "px";
     dotsContainer.appendChild(dot);
   }
 }
 
-function regenerateDots() {
-  setInterval(() => {
-    createDots();
-  }, 4000);
-}
-
 /* =========================
-   GHOST COLOR
+   COLLISION DOTS
 ========================= */
 
-function animateGhostColor() {
-  setInterval(() => {
-    colorIndex = (colorIndex + 1) % colors.length;
-    ghost.style.background = colors[colorIndex];
-  }, 700);
-}
+function eatDots() {
+  const dots = document.querySelectorAll(".dot");
 
-/* =========================
-   MOVEMENT
-========================= */
+  dots.forEach(dot => {
+    const dotX = dot.offsetLeft;
 
-function moveCharacters() {
-  setInterval(() => {
-    if (!pausedAtClick) {
-      pacmanX += 2;
-
-      if (!clickTriggered && pacmanX >= stopPosition) {
-        pacmanX = stopPosition;
-        pausedAtClick = true;
-      }
+    if (Math.abs(dotX - pacmanX) < 20) {
+      dot.remove();
     }
+  });
+}
 
-    const ghostX = Math.max(0, pacmanX - 90);
+/* =========================
+   LOOP
+========================= */
+
+function loop() {
+  if (running) {
+    pacmanX += speed;
+    ghostX = pacmanX - 100;
+
+    const maxX = track.offsetWidth - 70;
+
+    if (pacmanX > maxX) pacmanX = 30;
 
     pacman.style.left = pacmanX + "px";
     ghost.style.left = ghostX + "px";
-  }, 30);
+
+    eatDots();
+  }
+
+  requestAnimationFrame(loop);
 }
 
 /* =========================
    INIT
 ========================= */
 
+clickBox.addEventListener("click", startGame);
+
 window.addEventListener("resize", createDots);
 
 createDots();
-regenerateDots();
-animateGhostColor();
-moveCharacters();
+loop();
