@@ -8,7 +8,7 @@ const gameOver = document.getElementById("gameOver");
 let smileyX = 30;
 let running = false;
 let currentTarget = 0;
-let items = []; // cache DOM (IMPORTANT)
+let items = []; // cache DOM
 
 /*
 SCÉNARIO
@@ -25,6 +25,15 @@ const sequence = [
   "🥕",
   "💩"
 ];
+
+/*
+NOUVEAU :
+gestion aller-retour à mi-chemin
+*/
+
+let didHalfTurn = false;   // évite de refaire plusieurs fois l'aller-retour
+let isReturning = false;   // phase retour vers la gauche
+let halfPoint = 0;         // position du demi-tour
 
 /*
 START
@@ -62,7 +71,6 @@ function createItems() {
     itemsContainer.appendChild(item);
   });
 
-  // cache DOM pour perf
   items = Array.from(document.querySelectorAll(".item"));
 }
 
@@ -89,30 +97,68 @@ function updateSmiley(item) {
 }
 
 /*
-MOUVEMENT FLUIDE (LERP + NOISE)
+MOUVEMENT FLUIDE + ALLER/RETOUR À MI-CHEMIN
 */
 
 function moveSmiley() {
   if (!running) return;
-
   if (currentTarget >= items.length) return;
 
   const target = items[currentTarget];
-  const targetX = target.offsetLeft;
+  if (!target) return;
+
+  const finalTargetX = target.offsetLeft;
+
+  /*
+  ----------------------------------
+  DEMI-TOUR À MI-CHEMIN (une seule fois)
+  ----------------------------------
+  Exemple :
+  avance → demi-chemin → recule un peu → repart à droite
+  */
+
+  // déclenchement uniquement sur le 1er item
+  if (!didHalfTurn && currentTarget === 0) {
+    halfPoint = (smileyX + finalTargetX) / 2;
+
+    // quand on atteint la moitié → commencer retour
+    if (smileyX >= halfPoint) {
+      isReturning = true;
+      didHalfTurn = true;
+    }
+  }
+
+  let targetX;
+
+  if (isReturning) {
+    // recule de 80px avant de repartir
+    targetX = halfPoint - 80;
+
+    // quand retour terminé → repartir vers la droite
+    if (Math.abs(smileyX - targetX) < 10) {
+      isReturning = false;
+    }
+  } else {
+    // trajet normal vers la cible
+    targetX = finalTargetX;
+  }
 
   const dx = targetX - smileyX;
 
-  // 🔥 interpolation fluide
-  const easing = 0.08;
+  /*
+  interpolation fluide
+  */
 
-  // micro variation pour éviter rigidité
+  const easing = 0.08;
   const noise = (Math.random() - 0.5) * 0.6;
 
-  // mouvement progressif
   smileyX += dx * easing + noise;
 
-  // collision
-  if (Math.abs(dx) < 18) {
+  /*
+  collision uniquement si on est sur la vraie cible
+  */
+
+  if (!isReturning && Math.abs(finalTargetX - smileyX) < 18) {
     const emoji = target.innerText;
 
     updateSmiley(emoji);
@@ -128,11 +174,17 @@ function moveSmiley() {
     }
   }
 
-  // limites
+  /*
+  limites
+  */
+
   const maxX = track.offsetWidth - 80;
   smileyX = Math.max(20, Math.min(smileyX, maxX));
 
-  // rendu GPU (ULTRA IMPORTANT)
+  /*
+  rendu GPU
+  */
+
   smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
 }
 
@@ -150,7 +202,6 @@ INIT
 */
 
 clickBox.addEventListener("click", startGame);
-
 window.addEventListener("resize", createItems);
 
 createItems();
