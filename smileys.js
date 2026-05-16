@@ -18,8 +18,7 @@ const sequence = [
   "🍌",
   "🍆",
   "🍐",
-  "🥬",
-  "🥔",
+  "🥬",  
   "🍎",
   "🍄",
   "🧅",
@@ -82,11 +81,11 @@ function updateSmiley(item) {
     smiley.innerText = "😍";
   }
 
-  if (item === "🥬" || item === "🍆"|| item === "🥕") {
+  if (item === "🥬" || item === "🥕") {
     smiley.innerText = "😐";
   }
 
-  if (item === "🥔" || item === "🧅") {
+  if (item === "🧅" || item === "🍆") {
     smiley.innerText = "😣";
   }
 
