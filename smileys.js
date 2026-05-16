@@ -16,11 +16,11 @@ ordre des rencontres
 
 const sequence = [
   "🍌",
-  "🍎",
+  "🍆",
   "🍐",
   "🥬",
   "🥕",
-  "🍆",
+  "🍎",
   "🥔",
   "🧅",
   "🍄",
@@ -82,13 +82,17 @@ function updateSmiley(item) {
     smiley.innerText = "😍";
   }
 
-  if (item === "🥬") {
+  if (item === "🥬" || item === "🍆"|| item === "🥕") {
     smiley.innerText = "😐";
   }
 
-  if (item === "🥔") {
+  if (item === "🥔" || item === "🧅") {
     smiley.innerText = "😣";
   }
+
+   if (item === "🍄") {
+    smiley.innerText = "😵";
+  } 
 
   if (item === "💩") {
     smiley.innerText = "😵";
