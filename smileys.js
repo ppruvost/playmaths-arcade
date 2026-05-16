@@ -6,14 +6,12 @@ const track = document.getElementById("track");
 const gameOver = document.getElementById("gameOver");
 
 let smileyX = 30;
-let direction = 1;
 let running = false;
-let currentIndex = 0;
-
-const speed = 2;
+let currentTarget = 0;
 
 /*
 SCÉNARIO
+ordre des rencontres
 */
 
 const sequence = [
@@ -54,13 +52,16 @@ CRÉER LES OBJETS
 function createItems() {
   itemsContainer.innerHTML = "";
 
-  const spacing = 90;
+  const spacing = 95;
 
   sequence.forEach((emoji, index) => {
     const item = document.createElement("div");
     item.className = "item";
     item.innerText = emoji;
-    item.style.left = `${150 + index * spacing}px`;
+
+    /* objets répartis sur toute la ligne */
+    item.style.left = `${140 + index * spacing}px`;
+
     item.dataset.index = index;
     itemsContainer.appendChild(item);
   });
@@ -75,7 +76,7 @@ function updateSmiley(item) {
 
   setTimeout(() => {
     smiley.classList.remove("eating");
-  }, 180);
+  }, 220);
 
   if (item === "🍌" || item === "🍎" || item === "🍐") {
     smiley.innerText = "😍";
@@ -95,55 +96,82 @@ function updateSmiley(item) {
 }
 
 /*
-MANGER
+DÉPLACEMENT ALÉATOIRE
+Le smiley hésite avant d'aller
+vers l'objet suivant
 */
 
-function eatItems() {
+function moveSmiley() {
+  if (!running) return;
+
   const items = document.querySelectorAll(".item");
 
-  items.forEach((item) => {
-    const itemX = item.offsetLeft;
+  if (currentTarget >= items.length) return;
 
-    if (Math.abs(itemX - smileyX) < 25) {
-      const emoji = item.innerText;
+  const target = items[currentTarget];
+  const targetX = target.offsetLeft;
 
-      updateSmiley(emoji);
+  /*
+  comportement semi-aléatoire :
+  parfois avance,
+  parfois recule légèrement
+  */
 
-      item.remove();
+  let randomMove = Math.random();
 
-      if (emoji === "💩" && currentIndex >= 8) {
-        setTimeout(() => {
-          running = false;
-          gameOver.style.display = "flex";
-        }, 1500);
-      }
-
-      currentIndex++;
+  if (Math.abs(smileyX - targetX) > 40) {
+    if (randomMove < 0.75) {
+      /* avance vers l'objectif */
+      smileyX += (targetX > smileyX ? 2 : -2);
+    } else {
+      /* petit retour aléatoire */
+      smileyX += (Math.random() < 0.5 ? -8 : 8);
     }
-  });
+  }
+
+  /*
+  mange l'objet si proche
+  */
+
+  if (Math.abs(smileyX - targetX) < 25) {
+    const emoji = target.innerText;
+
+    updateSmiley(emoji);
+
+    target.remove();
+    currentTarget++;
+
+    /*
+    GAME OVER final
+    */
+
+    if (emoji === "💩" && currentTarget >= sequence.length) {
+      setTimeout(() => {
+        running = false;
+        gameOver.style.display = "flex";
+      }, 1500);
+    }
+  }
+
+  /*
+  limites de la piste
+  */
+
+  const maxX = track.offsetWidth - 80;
+
+  if (smileyX < 20) smileyX = 20;
+  if (smileyX > maxX) smileyX = maxX;
+
+  smiley.style.left = `${smileyX}px`;
 }
 
 /*
-BOUCLE
+BOUCLE PRINCIPALE
 */
 
 function loop() {
   if (running) {
-    smileyX += speed * direction;
-
-    const maxX = track.offsetWidth - 80;
-
-    if (smileyX >= maxX) {
-      direction = -1;
-    }
-
-    if (smileyX <= 30) {
-      direction = 1;
-    }
-
-    smiley.style.left = `${smileyX}px`;
-
-    eatItems();
+    moveSmiley();
   }
 
   requestAnimationFrame(loop);
