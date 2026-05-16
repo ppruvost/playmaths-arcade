@@ -8,17 +8,17 @@ const gameOver = document.getElementById("gameOver");
 let smileyX = 30;
 let running = false;
 let currentTarget = 0;
+let items = []; // cache DOM (IMPORTANT)
 
 /*
 SCÉNARIO
-ordre des rencontres
 */
 
 const sequence = [
   "🍌",
   "🍆",
   "🍐",
-  "🥬",  
+  "🥬",
   "🍎",
   "🍄",
   "🧅",
@@ -45,7 +45,7 @@ function startGame() {
 }
 
 /*
-CRÉER LES OBJETS
+CRÉATION DES ITEMS
 */
 
 function createItems() {
@@ -57,17 +57,17 @@ function createItems() {
     const item = document.createElement("div");
     item.className = "item";
     item.innerText = emoji;
-
-    /* objets répartis sur toute la ligne */
     item.style.left = `${140 + index * spacing}px`;
 
-    item.dataset.index = index;
     itemsContainer.appendChild(item);
   });
+
+  // cache DOM pour perf
+  items = Array.from(document.querySelectorAll(".item"));
 }
 
 /*
-CHANGER LE SMILEY
+SMILEY STATE
 */
 
 function updateSmiley(item) {
@@ -75,64 +75,44 @@ function updateSmiley(item) {
 
   setTimeout(() => {
     smiley.classList.remove("eating");
-  }, 220);
+  }, 180);
 
   if (item === "🍌" || item === "🍎" || item === "🍐") {
     smiley.innerText = "😍";
-  }
-
-  if (item === "🥬" || item === "🥕") {
+  } else if (item === "🥬" || item === "🥕") {
     smiley.innerText = "😐";
-  }
-
-  if (item === "🧅" || item === "🍆") {
+  } else if (item === "🧅" || item === "🍆") {
     smiley.innerText = "😣";
-  }
-
-  if (item === "🍄" || item === "💩") {
+  } else if (item === "🍄" || item === "💩") {
     smiley.innerText = "😵";
   }
 }
 
 /*
-DÉPLACEMENT ALÉATOIRE
-Le smiley hésite avant d'aller
-vers l'objet suivant
+MOUVEMENT FLUIDE (LERP + NOISE)
 */
 
 function moveSmiley() {
   if (!running) return;
-
-  const items = document.querySelectorAll(".item");
 
   if (currentTarget >= items.length) return;
 
   const target = items[currentTarget];
   const targetX = target.offsetLeft;
 
-  /*
-  comportement semi-aléatoire :
-  parfois avance,
-  parfois recule légèrement
-  */
+  const dx = targetX - smileyX;
 
-  let randomMove = Math.random();
+  // 🔥 interpolation fluide
+  const easing = 0.08;
 
-  if (Math.abs(smileyX - targetX) > 40) {
-    if (randomMove < 0.75) {
-      /* avance vers l'objectif */
-      smileyX += (targetX > smileyX ? 2 : -2);
-    } else {
-      /* petit retour aléatoire */
-      smileyX += (Math.random() < 0.5 ? -8 : 8);
-    }
-  }
+  // micro variation pour éviter rigidité
+  const noise = (Math.random() - 0.5) * 0.6;
 
-  /*
-  mange l'objet si proche
-  */
+  // mouvement progressif
+  smileyX += dx * easing + noise;
 
-  if (Math.abs(smileyX - targetX) < 25) {
+  // collision
+  if (Math.abs(dx) < 18) {
     const emoji = target.innerText;
 
     updateSmiley(emoji);
@@ -140,39 +120,28 @@ function moveSmiley() {
     target.remove();
     currentTarget++;
 
-    /*
-    GAME OVER final
-    */
-
     if (emoji === "💩" && currentTarget >= sequence.length) {
       setTimeout(() => {
         running = false;
         gameOver.style.display = "flex";
-      }, 1500);
+      }, 1200);
     }
   }
 
-  /*
-  limites de la piste
-  */
-
+  // limites
   const maxX = track.offsetWidth - 80;
+  smileyX = Math.max(20, Math.min(smileyX, maxX));
 
-  if (smileyX < 20) smileyX = 20;
-  if (smileyX > maxX) smileyX = maxX;
-
-  smiley.style.left = `${smileyX}px`;
+  // rendu GPU (ULTRA IMPORTANT)
+  smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
 }
 
 /*
-BOUCLE PRINCIPALE
+LOOP
 */
 
 function loop() {
-  if (running) {
-    moveSmiley();
-  }
-
+  moveSmiley();
   requestAnimationFrame(loop);
 }
 
