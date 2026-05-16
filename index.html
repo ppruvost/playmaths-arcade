@@ -8,8 +8,8 @@
   <!-- STYLE GENERAL -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- STYLE PACMAN -->
-  <link rel="stylesheet" href="pacman.css">
+  <!-- STYLE SMILEYS -->
+  <link rel="stylesheet" href="smileys.css">
 </head>
 <body>
 
@@ -25,32 +25,30 @@
     <p class="subtitle">Top 10 des meilleurs scores</p>
 
     <!-- =========================
-         ZONE PACMAN
+         ZONE SMILEYS
     ========================== -->
 
-    <div class="pacman-zone">
+    <div class="smiley-zone">
       <div class="track" id="track">
 
-        <div class="dots" id="dots"></div>
+        <!-- objets à manger -->
+        <div class="items" id="items"></div>
 
-        <!-- PACMAN -->
-        <div id="pacman" class="pacman">
-          <div class="mouth"></div>
-          <div class="eye"></div>
-        </div>
-
-        <!-- GHOST -->
-        <div id="ghost" class="ghost">
-          <div class="ghost-eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-          </div>
+        <!-- SMILEY PRINCIPAL -->
+        <div id="smiley" class="smiley">
+          😊
         </div>
 
         <!-- BOUTON START -->
         <button id="clickBox" class="click-box">
           START
         </button>
+
+        <!-- MESSAGE FINAL -->
+        <div id="gameOver" class="game-over">
+          <h1>GAME OVER</h1>
+          <h2>Pense à commencer les Playmaths !</h2>
+        </div>
 
       </div>
     </div>
@@ -123,7 +121,7 @@
 
       <p>
         Relis attentivement les solutions proposées
-        après chaque question et recommence pour progresser.
+        après chaque question et recommence.
       </p>
     </div>
 
@@ -132,7 +130,7 @@
   <!-- JS -->
   <script src="scores.js"></script>
   <script src="leaderboard.js"></script>
-  <script src="pacman.js"></script>
+  <script src="smileys.js"></script>
 
 </body>
 </html>
