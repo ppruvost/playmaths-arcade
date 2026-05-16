@@ -151,3 +151,39 @@ th {
   line-height: 1.6;
   margin: 10px 0;
 }
+
+/* =========================
+   FLÈCHE CLIGNOTANTE MENU
+========================= */
+
+.arrow-down {
+  text-align: center;
+  font-size: 52px;
+  color: #00fff7;
+  margin-top: 25px;
+  text-shadow:
+    0 0 5px #00fff7,
+    0 0 10px #00fff7,
+    0 0 20px #00fff7,
+    0 0 35px #00fff7;
+  animation: floatBlink 1.8s infinite ease-in-out;
+  cursor: default;
+}
+
+/* Animation montée/descente + clignotement */
+@keyframes floatBlink {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+}
