@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smileys Game</title>
+  <link rel="stylesheet" href="smileys.css">
+</head>
+<body>
+
+  <div class="game-wrapper">
+    <div class="track" id="track">
+
+      <!-- objets à manger -->
+      <div class="items" id="items"></div>
+
+      <!-- smiley principal -->
+      <div id="smiley" class="smiley">
+        😊
+      </div>
+
+      <!-- bouton start -->
+      <button id="clickBox" class="click-box">
+        START
+      </button>
+
+      <!-- message final -->
+      <div id="gameOver" class="game-over">
+        <h1>GAME OVER</h1>
+        <h2>Pense à commencer les Playmaths !</h2>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- audio -->
+  <audio id="bgMusic" loop>
+    <source src="retro.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="smileys.js"></script>
+</body>
+</html>
