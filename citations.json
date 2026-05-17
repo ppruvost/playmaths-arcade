@@ -58,8 +58,7 @@
   {"auteur":"Antoine de Saint-Exupéry","citation":"Aimer, ce n’est pas se regarder l’un l’autre, c’est regarder ensemble dans la même direction."},
   {"auteur":"Antoine de Saint-Exupéry","citation":"Fais de ta vie un rêve, et d’un rêve, une réalité."},
   {"auteur":"Antoine de Saint-Exupéry","citation":"La grandeur d’un métier est d’unir les hommes."},
-  {"auteur":"Antoine de Saint-Exupéry","citation":"Chacun est responsable de tous."},
-  [
+  {"auteur":"Antoine de Saint-Exupéry","citation":"Chacun est responsable de tous."},  [
   {"auteur":"Maria Montessori","citation":"L’enfant n’est pas un vase que l’on remplit, mais une source que l’on laisse jaillir."},
   {"auteur":"Maria Montessori","citation":"Aide-moi à faire seul."},
   {"auteur":"Maria Montessori","citation":"L’éducation doit promouvoir à la fois le développement de l’individualité et celui de la société."},
@@ -216,6 +215,4 @@
   {"auteur":"Aristote","citation":"L’éducation de l’esprit sans celle du cœur n’est pas une éducation."},
   {"auteur":"Aristote","citation":"Nous sommes ce que nous faisons de manière répétée."},
   {"auteur":"Aristote","citation":"Former l’intelligence et le caractère est la vraie mission éducative."}
-]
-
 ]
