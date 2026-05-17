@@ -4,146 +4,64 @@
 
 const questions = [
   {
-    question: "Une fonction f(x) = -4x + 20 modélise une quantité de stock. Cette fonction est :",
-    options: ["croissante", "constante", "décroissante", "linéaire"],
-    bonne_reponse: "décroissante",
-    explication: "Le coefficient directeur est négatif, donc la fonction est décroissante."
+    question: "Un triangle a pour côtés 3 cm, 4 cm et 5 cm. Ce triangle est :",
+    options: ["rectangle", "équilatéral", "isocèle", "quelconque"],
+    bonne_reponse: "rectangle",
+    explication: "3² + 4² = 9 + 16 = 25 = 5², donc le triangle est rectangle (théorème de Pythagore)."
   },
   {
-    question: "Le coût C (en €) d’une fabrication est donné par C = 100 + 5x. Que représente 100 ?",
-    options: ["le coût variable", "le coût par unité", "le coût fixe", "le bénéfice"],
-    bonne_reponse: "le coût fixe",
-    explication: "Le terme constant représente un coût indépendant du nombre de pièces."
+    question: "Dans un triangle rectangle, si les deux côtés de l’angle droit mesurent 6 cm et 8 cm, l’hypoténuse vaut :",
+    options: ["10 cm", "12 cm", "14 cm", "9 cm"],
+    bonne_reponse: "10 cm",
+    explication: "√(6² + 8²) = √(36 + 64) = √100 = 10 cm."
   },
   {
-    question: "Quel type de fonction est représenté sur le graphique ci-dessous ?",
-    graphique: "graphique1.png",
-    options: ["affine", "linéaire", "constante", "décroissante"],
-    bonne_reponse: "linéaire",
-    explication: "La droite passe par l’origine : c’est une fonction linéaire."
+    question: "Si AM/AB = AN/AC, alors on peut conclure que :",
+    options: ["(MN) est parallèle à (BC)", "le triangle est rectangle", "le cercle est tangent", "les angles sont égaux"],
+    bonne_reponse: "(MN) est parallèle à (BC)",
+    explication: "C’est l’application du théorème de Thalès dans le triangle."
   },
   {
-    question: "La fonction f(x) = -2x est :",
-    options: ["affine", "linéaire et décroissante", "constante", "croissante"],
-    bonne_reponse: "linéaire et décroissante",
-    explication: "Elle est de la forme ax avec a négatif."
+    question: "Le périmètre d’un cercle de diamètre 14 cm vaut :",
+    options: ["14π cm", "28π cm", "7π cm", "49π cm"],
+    bonne_reponse: "14π cm",
+    explication: "P = π × d = π × 14 = 14π cm."
   },
   {
-    question: "Une droite passe par l’origine du repère. La fonction associée est :",
-    options: ["affine", "linéaire", "constante", "quadratique"],
-    bonne_reponse: "linéaire",
-    explication: "Une fonction linéaire passe toujours par l’origine."
+    question: "La somme des angles d’un triangle vaut toujours :",
+    options: ["90°", "180°", "270°", "360°"],
+    bonne_reponse: "180°",
+    explication: "Dans tout triangle, la somme des angles est égale à 180°."
   },
   {
-    question: "La fonction représentée sur ce graphique est :",
-    graphique: "graphique2.png",
-    options: ["décroissante", "constante", "croissante", "négative"],
-    bonne_reponse: "croissante",
-    explication: "La droite monte de gauche à droite."
+    question: "L’aire d’un rectangle de longueur 9 m et largeur 4 m est :",
+    options: ["13 m²", "36 m²", "18 m²", "45 m²"],
+    bonne_reponse: "36 m²",
+    explication: "A = L × l = 9 × 4 = 36 m²."
   },
   {
-    question: "Que peut-on dire de la fonction représentée sur ce graphique ?",
-    graphique: "graphique3.png",
-    options: [
-      "Elle est croissante",
-      "Elle est constante",
-      "Elle est décroissante",
-      "Elle est linéaire"
-    ],
-    bonne_reponse: "Elle est décroissante",
-    explication: "La pente est négative : la fonction diminue quand x augmente."
+    question: "L’aire d’un triangle de base 12 m et hauteur 5 m vaut :",
+    options: ["60 m²", "30 m²", "17 m²", "24 m²"],
+    bonne_reponse: "30 m²",
+    explication: "A = (base × hauteur)/2 = (12 × 5)/2 = 30 m²."
   },
   {
-    question: "La distance parcourue par un véhicule est donnée par d(x) = 60x. Si x augmente, la distance :",
-    options: ["reste constante", "diminue", "augmente", "devient négative"],
-    bonne_reponse: "augmente",
-    explication: "Le coefficient est positif, donc la fonction est croissante."
+    question: "L’aire d’un disque de rayon 3 m est :",
+    options: ["6π m²", "9π m²", "3π m²", "18π m²"],
+    bonne_reponse: "9π m²",
+    explication: "A = πr² = π × 3² = 9π m²."
   },
   {
-    question: "Sur un graphique, une droite monte de gauche à droite. La fonction associée est :",
-    options: ["décroissante", "croissante", "constante", "nulle"],
-    bonne_reponse: "croissante",
-    explication: "Quand la droite monte de gauche à droite, la fonction est croissante."
+    question: "Le volume d’un cube d’arête 4 m vaut :",
+    options: ["16 m³", "32 m³", "64 m³", "48 m³"],
+    bonne_reponse: "64 m³",
+    explication: "V = a³ = 4³ = 64 m³."
   },
   {
-    question: "Quelle est la valeur de la fonction lorsque x = 0 sur ce graphique ?",
-    graphique: "graphique2.png",
-    options: ["0", "2", "5", "10"],
-    bonne_reponse: "5",
-    explication: "La droite coupe l’axe des ordonnées en 5."
-  },
-	
-  {
-    question: "Quel graphique représente une fonction constante ?",
-    graphique: "graphique4.png",
-    options: [
-      "Une droite oblique",
-      "Une parabole",
-      "Une droite horizontale",
-      "Une courbe"
-    ],
-    bonne_reponse: "Une droite horizontale",
-    explication: "La valeur de la fonction ne change pas."
-  },
-  {
-    question: "Résoudre l’équation 2x + 4 = 10 donne :",
-    options: ["x = 2", "x = 3", "x = 4", "x = 5"],
-    bonne_reponse: "x = 3",
-    explication: "On soustrait 4 puis on divise par 2."
-  },
-  {
-    question: "Ce graphique peut modéliser :",
-    graphique: "graphique3.png",
-    options: [
-      "Un stock qui augmente",
-      "Un stock qui diminue",
-      "Un prix fixe",
-      "Une vitesse constante"
-    ],
-    bonne_reponse: "Un stock qui diminue",
-    explication: "La fonction décroît avec le temps."
-  },
-  {
-    question: "Une fonction f(x) = 2x + 5 est représentée par un graphique. Que représente le nombre 5 ?",
-    options: ["le coefficient directeur", "l’ordonnée à l’origine", "la pente", "l’abscisse"],
-    bonne_reponse: "l’ordonnée à l’origine",
-    explication: "L’ordonnée à l’origine est la valeur de la fonction pour x = 0."
-  },
-  {
-    question: "Résoudre l’équation 3x = 15 donne :",
-    options: ["x = 3", "x = 5", "x = 15", "x = 45"],
-    bonne_reponse: "x = 5",
-    explication: "On divise les deux membres par 3 : x = 15 ÷ 3."
-  },
-  {
-    question: "Résoudre l’inéquation x + 5 ≥ 12 donne :",
-    options: ["x ≤ 7", "x ≥ 7", "x = 7", "x ≤ 12"],
-    bonne_reponse: "x ≥ 7",
-    explication: "On soustrait 5 aux deux membres."
-  },
-  {
-    question: "Résoudre l’inéquation 4x < 20 donne :",
-    options: ["x < 4", "x > 4", "x < 5", "x > 5"],
-    bonne_reponse: "x < 5",
-    explication: "On divise les deux membres par 4."
-  },
-  {
-    question: "Une fonction f(x) = 7 est représentée graphiquement par :",
-    options: ["une droite oblique", "une parabole", "une droite horizontale", "une courbe"],
-    bonne_reponse: "une droite horizontale",
-    explication: "La fonction est constante : sa valeur ne dépend pas de x."
-  },
-  {
-    question: "La fonction f(x) = 0,5x + 2 est :",
-    options: ["décroissante", "constante", "croissante", "négative"],
-    bonne_reponse: "croissante",
-    explication: "Le coefficient directeur est positif."
-  },
-  {
-    question: "Si une fonction modélise un stock qui baisse chaque jour, elle est plutôt :",
-    options: ["croissante", "constante", "décroissante", "linéaire croissante"],
-    bonne_reponse: "décroissante",
-    explication: "La quantité diminue au fil du temps."
+    question: "Le volume d’un cylindre de rayon 2 m et hauteur 5 m est :",
+    options: ["10π m³", "20π m³", "40π m³", "25π m³"],
+    bonne_reponse: "20π m³",
+    explication: "V = πr²h = π × 2² × 5 = 20π m³."
   }
 ];
 
