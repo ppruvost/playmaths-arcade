@@ -26,7 +26,7 @@ const questions = [
   },
 
   {
-    question: "Sur la figure (graphique2.png), les droites (MN) et (BC) sont-elles parallèles ?",
+    question: "Sur la figure, les droites (MN) et (BC) sont-elles parallèles ?",
     graphique: "graphique2.png",
     options: ["Oui", "Non"],
     bonne_reponse: "Oui",
@@ -34,7 +34,7 @@ const questions = [
   },
 
   {
-    question: "Sur la figure (graphique3.png), calculer la longueur BC.",
+    question: "Sur la figure, calculer la longueur BC.",
     graphique: "graphique3.png",
     options: ["12 cm", "15 cm", "18 cm", "20 cm"],
     bonne_reponse: "18 cm",
@@ -58,22 +58,23 @@ const questions = [
 
   {
     question: "Quel est le volume d’un cylindre de rayon 3 cm et de hauteur 10 cm ? (π ≈ 3,14)",
+     graphique: "graphique5.png",
     options: ["28,26 cm³", "56,52 cm³", "84,78 cm³", "113,04 cm³"],
     bonne_reponse: "84,78 cm³",
     explication: "V = π × r² × h = 3,14 × 3² × 10 = 84,78 cm³."
   },
 
   {
-    question: "Sur la figure (graphique5.png), quel est le volume du pavé droit ?",
-    graphique: "graphique5.png",
+    question: "Sur la figure, quel est le volume du pavé droit ?",
+    graphique: "graphique6.png",
     options: ["24 cm³", "36 cm³", "48 cm³", "60 cm³"],
     bonne_reponse: "48 cm³",
     explication: "V = Longueur × largeur × hauteur = 6 × 4 × 2 = 48 cm³."
   },
 
   {
-    question: "Sur la figure (graphique6.png), quelle est la mesure de l’angle manquant ?",
-    graphique: "graphique6.png",
+    question: "Sur la figure, quelle est la mesure de l’angle manquant ?",
+    graphique: "graphique7.png",
     options: ["56°", "64°", "70°", "80°"],
     bonne_reponse: "64°",
     explication: "La somme des angles d’un triangle est 180° donc 180° − (56° + 60°) = 64°."
