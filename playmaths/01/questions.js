@@ -4,149 +4,81 @@
 
 const questions = [
   {
-    question: "Une fonction f(x) = -4x + 20 modélise une quantité de stock. Cette fonction est :",
-    options: ["croissante", "constante", "décroissante", "linéaire"],
-    bonne_reponse: "décroissante",
-    explication: "Le coefficient directeur est négatif, donc la fonction est décroissante."
+    question: "Dans un triangle rectangle, si les côtés de l’angle droit mesurent 3 cm et 4 cm, quelle est la longueur de l’hypoténuse ?",
+    options: ["5 cm", "6 cm", "7 cm", "8 cm"],
+    bonne_reponse: "5 cm",
+    explication: "D’après le théorème de Pythagore : c² = 3² + 4² = 25 donc c = 5 cm."
   },
+
   {
-    question: "Le coût C (en €) d’une fabrication est donné par C = 100 + 5x. Que représente 100 ?",
-    options: ["le coût variable", "le coût par unité", "le coût fixe", "le bénéfice"],
-    bonne_reponse: "le coût fixe",
-    explication: "Le terme constant représente un coût indépendant du nombre de pièces."
+    question: "Les longueurs 5 cm, 12 cm et 13 cm peuvent-elles former un triangle rectangle ?",
+    options: ["Oui", "Non"],
+    bonne_reponse: "Oui",
+    explication: "5² + 12² = 25 + 144 = 169 et 13² = 169, donc d’après la réciproque de Pythagore, le triangle est rectangle."
   },
+
   {
-    question: "Quel type de fonction est représenté sur le graphique ci-dessous ?",
+    question: "Parmi les représentations suivantes, quelle figure correspond à un triangle rectangle ?",
     graphique: "graphique1.png",
-    options: ["affine", "linéaire", "constante", "décroissante"],
-    bonne_reponse: "linéaire",
-    explication: "La droite passe par l’origine : c’est une fonction linéaire."
+    options: ["Figure A", "Figure B", "Figure C", "Figure D"],
+    bonne_reponse: "Figure C",
+    explication: "Dans la figure C, le triangle est rectangle car 6² + 8² = 10²."
   },
+
   {
-    question: "La fonction f(x) = -2x est :",
-    options: ["affine", "linéaire et décroissante", "constante", "croissante"],
-    bonne_reponse: "linéaire et décroissante",
-    explication: "Elle est de la forme ax avec a négatif."
-  },
-  {
-    question: "Une droite passe par l’origine du repère. La fonction associée est :",
-    options: ["affine", "linéaire", "constante", "quadratique"],
-    bonne_reponse: "linéaire",
-    explication: "Une fonction linéaire passe toujours par l’origine."
-  },
-  {
-    question: "La fonction représentée sur ce graphique est :",
+    question: "Sur la figure (graphique2.png), les droites (MN) et (BC) sont-elles parallèles ?",
     graphique: "graphique2.png",
-    options: ["décroissante", "constante", "croissante", "négative"],
-    bonne_reponse: "croissante",
-    explication: "La droite monte de gauche à droite."
+    options: ["Oui", "Non"],
+    bonne_reponse: "Oui",
+    explication: "AM/AB = 4/8 = 1/2 et AN/AC = 3/6 = 1/2 donc, d’après le théorème de Thalès, (MN) est parallèle à (BC)."
   },
+
   {
-    question: "Que peut-on dire de la fonction représentée sur ce graphique ?",
+    question: "Sur la figure (graphique3.png), calculer la longueur BC.",
     graphique: "graphique3.png",
-    options: [
-      "Elle est croissante",
-      "Elle est constante",
-      "Elle est décroissante",
-      "Elle est linéaire"
-    ],
-    bonne_reponse: "Elle est décroissante",
-    explication: "La pente est négative : la fonction diminue quand x augmente."
+    options: ["12 cm", "15 cm", "18 cm", "20 cm"],
+    bonne_reponse: "18 cm",
+    explication: "AB/AD = BC/DE donc BC = AB × DE / AD = 9 × 12 / 6 = 18 cm."
   },
+
   {
-    question: "La distance parcourue par un véhicule est donnée par d(x) = 60x. Si x augmente, la distance :",
-    options: ["reste constante", "diminue", "augmente", "devient négative"],
-    bonne_reponse: "augmente",
-    explication: "Le coefficient est positif, donc la fonction est croissante."
+    question: "Quel est le périmètre d’un cercle de rayon 7 cm ? (π ≈ 3,14)",
+    options: ["21,98 cm", "32,98 cm", "43,96 cm", "65,96 cm"],
+    bonne_reponse: "43,96 cm",
+    explication: "P = 2 × π × r = 2 × 3,14 × 7 = 43,96 cm."
   },
+
   {
-    question: "Sur un graphique, une droite monte de gauche à droite. La fonction associée est :",
-    options: ["décroissante", "croissante", "constante", "nulle"],
-    bonne_reponse: "croissante",
-    explication: "Quand la droite monte de gauche à droite, la fonction est croissante."
-  },
-  {
-    question: "Quelle est la valeur de la fonction lorsque x = 0 sur ce graphique ?",
-    graphique: "graphique2.png",
-    options: ["0", "2", "5", "10"],
-    bonne_reponse: "5",
-    explication: "La droite coupe l’axe des ordonnées en 5."
-  },
-	
-  {
-    question: "Quel graphique représente une fonction constante ?",
+    question: "Quelle figure a la plus grande aire ?",
     graphique: "graphique4.png",
-    options: [
-      "Une droite oblique",
-      "Une parabole",
-      "Une droite horizontale",
-      "Une courbe"
-    ],
-    bonne_reponse: "Une droite horizontale",
-    explication: "La valeur de la fonction ne change pas."
+    options: ["Carré", "Rectangle", "Triangle", "Disque"],
+    bonne_reponse: "Disque",
+    explication: "Aire carré = 16, rectangle = 15, triangle = 12, disque ≈ 50,24. Donc le disque."
   },
+
   {
-    question: "Résoudre l’équation 2x + 4 = 10 donne :",
-    options: ["x = 2", "x = 3", "x = 4", "x = 5"],
-    bonne_reponse: "x = 3",
-    explication: "On soustrait 4 puis on divise par 2."
+    question: "Quel est le volume d’un cylindre de rayon 3 cm et de hauteur 10 cm ? (π ≈ 3,14)",
+    options: ["28,26 cm³", "56,52 cm³", "84,78 cm³", "113,04 cm³"],
+    bonne_reponse: "84,78 cm³",
+    explication: "V = π × r² × h = 3,14 × 3² × 10 = 84,78 cm³."
   },
+
   {
-    question: "Ce graphique peut modéliser :",
-    graphique: "graphique3.png",
-    options: [
-      "Un stock qui augmente",
-      "Un stock qui diminue",
-      "Un prix fixe",
-      "Une vitesse constante"
-    ],
-    bonne_reponse: "Un stock qui diminue",
-    explication: "La fonction décroît avec le temps."
+    question: "Sur la figure (graphique5.png), quel est le volume du pavé droit ?",
+    graphique: "graphique5.png",
+    options: ["24 cm³", "36 cm³", "48 cm³", "60 cm³"],
+    bonne_reponse: "48 cm³",
+    explication: "V = Longueur × largeur × hauteur = 6 × 4 × 2 = 48 cm³."
   },
+
   {
-    question: "Une fonction f(x) = 2x + 5 est représentée par un graphique. Que représente le nombre 5 ?",
-    options: ["le coefficient directeur", "l’ordonnée à l’origine", "la pente", "l’abscisse"],
-    bonne_reponse: "l’ordonnée à l’origine",
-    explication: "L’ordonnée à l’origine est la valeur de la fonction pour x = 0."
-  },
-  {
-    question: "Résoudre l’équation 3x = 15 donne :",
-    options: ["x = 3", "x = 5", "x = 15", "x = 45"],
-    bonne_reponse: "x = 5",
-    explication: "On divise les deux membres par 3 : x = 15 ÷ 3."
-  },
-  {
-    question: "Résoudre l’inéquation x + 5 ≥ 12 donne :",
-    options: ["x ≤ 7", "x ≥ 7", "x = 7", "x ≤ 12"],
-    bonne_reponse: "x ≥ 7",
-    explication: "On soustrait 5 aux deux membres."
-  },
-  {
-    question: "Résoudre l’inéquation 4x < 20 donne :",
-    options: ["x < 4", "x > 4", "x < 5", "x > 5"],
-    bonne_reponse: "x < 5",
-    explication: "On divise les deux membres par 4."
-  },
-  {
-    question: "Une fonction f(x) = 7 est représentée graphiquement par :",
-    options: ["une droite oblique", "une parabole", "une droite horizontale", "une courbe"],
-    bonne_reponse: "une droite horizontale",
-    explication: "La fonction est constante : sa valeur ne dépend pas de x."
-  },
-  {
-    question: "La fonction f(x) = 0,5x + 2 est :",
-    options: ["décroissante", "constante", "croissante", "négative"],
-    bonne_reponse: "croissante",
-    explication: "Le coefficient directeur est positif."
-  },
-  {
-    question: "Si une fonction modélise un stock qui baisse chaque jour, elle est plutôt :",
-    options: ["croissante", "constante", "décroissante", "linéaire croissante"],
-    bonne_reponse: "décroissante",
-    explication: "La quantité diminue au fil du temps."
+    question: "Sur la figure (graphique6.png), quelle est la mesure de l’angle manquant ?",
+    graphique: "graphique6.png",
+    options: ["56°", "64°", "70°", "80°"],
+    bonne_reponse: "64°",
+    explication: "La somme des angles d’un triangle est 180° donc 180° − (56° + 60°) = 64°."
   }
 ];
-
 /* ============================================================
    ====================  FIN DES QUESTIONS  ==================
    ============================================================ */
