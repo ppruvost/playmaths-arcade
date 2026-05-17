@@ -206,3 +206,29 @@ window.addEventListener("resize", createItems);
 
 createItems();
 loop();
+
+/*
+citations.json
+*/
+
+async function chargerCitationAleatoire() {
+  try {
+    const response = await fetch("citations.json");
+    const citations = await response.json();
+
+    // choisir une citation aléatoire
+    const citationRandom =
+      citations[Math.floor(Math.random() * citations.length)];
+
+    // injection dans le h2
+    document.getElementById("citationFinale").innerHTML =
+      `"${citationRandom.citation}"<br><small>— ${citationRandom.auteur}</small>`;
+  } catch (error) {
+    console.error("Erreur chargement citations :", error);
+    document.getElementById("citationFinale").textContent =
+      "Pense à commencer les Playmaths !";
+  }
+}
+
+// lancer au chargement
+chargerCitationAleatoire();
