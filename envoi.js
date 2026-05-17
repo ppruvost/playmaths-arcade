@@ -4,7 +4,7 @@
 (function () {
   if (window.emailjs) {
     try {
-      emailjs.init("TJHX0tkW1CCz7lv7a"); // clé publique
+      emailjs.init("TJHX0tkW1CCz7lv7a");
     } catch (e) {
       console.warn("EmailJS init failed :", e);
     }
@@ -15,10 +15,7 @@
 // =============================
 // ENVOI DES RÉSULTATS
 // =============================
-// sendResults(user, score, total, note20, playMathsPoints, questions)
-// =============================
-
-function sendResults(user, score, total, note20, playMathsPoints, questions) {
+async function sendResults(user = {}, score = 0, total = 0, note20 = 0, playMathsPoints = 0, questions = []) {
 
   if (!window.emailjs) {
     console.warn("EmailJS non chargé !");
@@ -26,80 +23,101 @@ function sendResults(user, score, total, note20, playMathsPoints, questions) {
   }
 
   // =============================
-  // Construction du récapitulatif
+  // Construction du récapitulatif sécurisé
   // =============================
   let recap = "";
 
-  questions.forEach((q, i) => {
-    recap += `Q${i + 1}: ${q.question}\n`;
-    recap += `Réponse élève : ${q.userAnswer || "Aucune"}\n`;
-    recap += `Bonne réponse : ${q.bonne_reponse}\n\n`;
+  (questions || []).forEach((q, i) => {
+    recap += `Q${i + 1}: ${q?.question || ""}\n`;
+    recap += `Réponse élève : ${q?.userAnswer || "Aucune"}\n`;
+    recap += `Bonne réponse : ${q?.bonne_reponse || ""}\n\n`;
   });
 
   // =============================
   // Paramètres EmailJS
   // =============================
   const emailParams = {
-    nom: user.nom || "",
-    prenom: user.prenom || "",
-    score: score,
-    total: total,
-    note20: note20,
+    nom: user?.nom || "",
+    prenom: user?.prenom || "",
+    score,
+    total,
+    note20,
     points_play_maths: playMathsPoints,
     details: recap,
     email: "lyceepro.mermoz@gmail.com"
   };
 
   // =============================
-  // 1. Envoi EmailJS
+  // Promesse EmailJS
   // =============================
-  emailjs
-    .send(
-      "service_cgh817y",
-      "template_ly7s41e",
-      emailParams
-    )
-    .then(() => {
-      console.log("Email envoyé avec succès");
-    })
-    .catch((err) => {
-      console.error("Erreur EmailJS :", err);
-      alert(
-        "❌ Erreur lors de l'envoi de l'email : " +
-        (err?.text ? err.text : JSON.stringify(err))
-      );
-    });
+  const emailPromise = emailjs.send(
+    "service_cgh817y",
+    "template_ly7s41e",
+    emailParams
+  );
 
   // =============================
-  // 2. Enregistrement GitHub
+  // Promesse sauvegarde score
   // =============================
-  fetch("https://maths-sciences.netlify.app/.netlify/functions/save-score", {
+  const savePromise = fetch("https://maths-sciences.netlify.app/.netlify/functions/save-score", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      prenom: user.prenom || "",
+      prenom: user?.prenom || "",
       score: playMathsPoints
     }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Score sauvegardé GitHub :", data);
+  }).then(async (res) => {
+    const text = await res.text();
 
-      // =============================
-      // Forcer le refresh du leaderboard
-      // (utile avec iframe)
-      // =============================
+    if (!res.ok) {
+      throw new Error(text);
+    }
+
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
+  });
+
+  // =============================
+  // Exécution parallèle
+  // =============================
+  try {
+    const [emailRes, saveRes] = await Promise.allSettled([
+      emailPromise,
+      savePromise
+    ]);
+
+    // =============================
+    // Logs détaillés
+    // =============================
+    if (emailRes.status === "fulfilled") {
+      console.log("Email envoyé avec succès");
+    } else {
+      console.error("Erreur EmailJS :", emailRes.reason);
+    }
+
+    if (saveRes.status === "fulfilled") {
+      console.log("Score sauvegardé :", saveRes.value);
       window.postMessage("refreshLeaderboard", "*");
+    } else {
+      console.error("Erreur sauvegarde :", saveRes.reason);
+    }
 
+    // =============================
+    // Résultat utilisateur
+    // =============================
+    if (emailRes.status === "fulfilled" && saveRes.status === "fulfilled") {
       alert("✅ Résultats envoyés et classement mis à jour !");
-    })
-    .catch((err) => {
-      console.error("Erreur sauvegarde GitHub :", err);
-      alert(
-        "❌ Erreur lors de la sauvegarde du score : " +
-        JSON.stringify(err)
-      );
-    });
+    } else {
+      alert("⚠️ Résultats partiellement envoyés (voir console).");
+    }
+
+  } catch (err) {
+    console.error("Erreur globale :", err);
+    alert("❌ Erreur inattendue : " + (err?.message || String(err)));
+  }
 }
