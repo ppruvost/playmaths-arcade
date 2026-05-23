@@ -14,7 +14,7 @@ const questions = [
 
   {
     question: "Quelle couleur est absorbée par un filtre cyan ?",
-    graphique: "image2.png",
+    graphique: "image8.png",
     options: ["Rouge", "Bleu", "Vert", "Blanc"],
     bonne_reponse: "Rouge",
     explication: "Le filtre cyan laisse passer le bleu et le vert mais absorbe le rouge."
@@ -22,7 +22,7 @@ const questions = [
 
   {
     question: "Quel rayonnement possède une longueur d’onde supérieure à 780 nm ?",
-    graphique: "image3.png",
+    graphique: "image7.png",
     options: ["Ultraviolet", "Visible", "Infrarouge", "Gamma"],
     bonne_reponse: "Infrarouge",
     explication: "Les infrarouges possèdent des longueurs d’onde supérieures au visible."
