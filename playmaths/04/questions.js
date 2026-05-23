@@ -70,7 +70,7 @@ const questions = [
 
   {
     question: "Quel type de lumière est utilisé dans les télécommandes ?",
-    graphique: "image7.png",
+    graphique: "image12.png",
     options: ["UV", "Visible", "Infrarouge", "Laser vert"],
     bonne_reponse: "Infrarouge",
     explication: "Les télécommandes utilisent des LED infrarouges."
@@ -78,7 +78,7 @@ const questions = [
 
   {
     question: "Quel phénomène est testé par les planches d’Ishihara ?",
-    graphique: "image10.png",
+    graphique: "image13.png",
     options: ["Myopie", "Astigmatisme", "Daltonisme", "Hypermétropie"],
     bonne_reponse: "Daltonisme",
     explication: "Les planches d’Ishihara servent à détecter certaines formes de daltonisme."
