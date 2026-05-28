@@ -33,30 +33,57 @@ function renderLeaderboard(topScores = []) {
 // CHARGEMENT DES SCORES
 // =============================
 async function loadLeaderboard() {
+
   try {
-    const res = await fetch("scores.js?cache=" + Date.now());
+
+    const res = await fetch(
+
+      `${SUPABASE_URL}/rest/v1/scores?select=prenom,score,date_score&order=score.desc&limit=10`,
+
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`
+        }
+      }
+
+    );
 
     if (!res.ok) {
-      throw new Error("Erreur chargement scores : " + res.status);
+
+      throw new Error(
+        "Erreur Supabase : " + res.status
+      );
+
     }
 
-    const scriptText = await res.text();
+    const data = await res.json();
 
-    const module = {};
-    const exports = {};
+    const topScores = data.map(joueur => ({
 
-    // Exécution isolée du fichier
-    const fn = new Function("module", "exports", scriptText);
-    fn(module, exports);
+      prenom: joueur.prenom,
 
-    // récupération safe
-    const topScores = module.topScores || exports.topScores || [];
+      score: joueur.score,
+
+      date: new Date(
+        joueur.date_score
+      ).toLocaleDateString("fr-FR")
+
+    }));
 
     renderLeaderboard(topScores);
 
-  } catch (err) {
-    console.error("Erreur leaderboard :", err);
   }
+
+  catch(err){
+
+    console.error(
+      "Erreur leaderboard :",
+      err
+    );
+
+  }
+
 }
 
 
@@ -64,3 +91,61 @@ async function loadLeaderboard() {
 // INIT
 // =============================
 loadLeaderboard();
+
+// =============================
+// ENVOI DES SCORES
+// =============================
+async function envoyerScore(
+
+  prenom,
+
+  score
+
+){
+
+try{
+
+await fetch(
+
+`${SUPABASE_URL}/rest/v1/scores`,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+apikey:SUPABASE_KEY,
+
+Authorization:`Bearer ${SUPABASE_KEY}`
+
+},
+
+body: JSON.stringify({
+
+prenom: prenom,
+
+score: score
+
+})
+
+}
+
+);
+
+loadLeaderboard();
+
+}
+
+catch(err){
+
+console.error(
+"Erreur envoi score :",
+err
+);
+
+}
+
+}
