@@ -65,14 +65,11 @@ await res.text()
 
 }
 
-const data = await res.json();
-
 console.log(
-"Score ajouté :",
-data
+"Score ajouté avec succès"
 );
 
-return data;
+return true;
 
 }
 
