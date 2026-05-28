@@ -164,7 +164,9 @@ const savePromise = envoyerScore(
 
     if (saveRes.status === "fulfilled") {
       console.log("Score sauvegardé :", saveRes.value);
-      window.postMessage("refreshLeaderboard", "*");
+    if (typeof loadLeaderboard === "function") {
+      loadLeaderboard();
+    }
     } else {
       console.error("Erreur sauvegarde :", saveRes.reason);
     }
