@@ -11,6 +11,86 @@
   }
 })();
 
+// =============================
+// ENVOI SCORE SUPABASE
+// =============================
+async function envoyerScore(
+
+prenom,
+
+score
+
+){
+
+try{
+
+const res = await fetch(
+
+`${SUPABASE_URL}/rest/v1/scores`,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+apikey: SUPABASE_KEY,
+
+Authorization:
+`Bearer ${SUPABASE_KEY}`
+
+},
+
+body: JSON.stringify({
+
+prenom: prenom,
+
+score: score
+
+})
+
+}
+
+);
+
+if(!res.ok){
+
+throw new Error(
+
+await res.text()
+
+);
+
+}
+
+const data = await res.json();
+
+console.log(
+"Score ajouté :",
+data
+);
+
+return data;
+
+}
+
+catch(err){
+
+console.error(
+
+"Erreur Supabase :",
+
+err
+
+);
+
+throw err;
+
+}
+
+}
 
 // =============================
 // ENVOI DES RÉSULTATS
@@ -59,28 +139,13 @@ async function sendResults(user = {}, score = 0, total = 0, note20 = 0, playMath
   // =============================
   // Promesse sauvegarde score
   // =============================
-  const savePromise = fetch("https://maths-sciences.netlify.app/.netlify/functions/save-score", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prenom: user?.prenom || "",
-      score: playMathsPoints
-    }),
-  }).then(async (res) => {
-    const text = await res.text();
+const savePromise = envoyerScore(
 
-    if (!res.ok) {
-      throw new Error(text);
-    }
+  user?.prenom || "",
 
-    try {
-      return JSON.parse(text);
-    } catch {
-      return text;
-    }
-  });
+  playMathsPoints
+
+);
 
   // =============================
   // Exécution parallèle
