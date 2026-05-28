@@ -14,13 +14,15 @@
 // =============================
 // ENVOI SCORE SUPABASE
 // =============================
-async function envoyerScore(
+async function envoyerScore(prenom, score){
 
-prenom,
+if (!SUPABASE_URL || !SUPABASE_KEY) {
 
-score
+throw new Error(
+"Variables Supabase absentes"
+);
 
-){
+}
 
 try{
 
