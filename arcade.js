@@ -1,4 +1,3 @@
-```javascript
 function loadPage(url){
 
 const frame=document.getElementById(
