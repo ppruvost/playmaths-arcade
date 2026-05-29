@@ -1,0 +1,129 @@
+/* ===============================
+   STYLE GLOBAL DYS-FRIENDLY
+=============================== */
+body {
+  font-family: "Lexend", Verdana, Arial, sans-serif;
+  background: #f3f5ff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.container {
+  max-width: 750px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+h1 {
+  color: #1b2a78;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+h2 {
+  text-align: center;
+  color: #1b2a78;
+}
+
+/* ===============================
+   FORMULAIRE IDENTITÉ
+=============================== */
+#userForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+#userForm input {
+  padding: 12px;
+  border: 2px solid #c7d0ff;
+  border-radius: 10px;
+}
+
+/* ===============================
+   BOUTONS KAHOOT
+=============================== */
+
+.kahoot-btn {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 14px;
+    background: #eef1ff;
+    border: 3px solid transparent;
+    border-radius: 14px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.kahoot-btn:hover {
+    background: #d7ddff;
+}
+
+.kahoot-btn.selected {
+    background: #c5ccff;
+    border-color: #5c7dff;
+}
+
+/* BONNE réponse */
+.kahoot-btn.answer-correct,
+.kahoot-btn.answer-correct-auto {
+    background: #9af5a3 !important;
+    border-color: #2b8a3e !important;
+}
+
+/* MAUVAISE réponse */
+.kahoot-btn.answer-wrong {
+    background: #ffb3b3 !important;
+    border-color: #c62828 !important;
+}
+
+/* ===============================
+   BOUTON VALIDER
+=============================== */
+button.validate {
+    font-size: 1.4em;
+    padding: 18px;
+    border-radius: 14px;
+    background: #5c7dff;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button.validate:hover {
+    background: #455ecc;
+}
+
+/* ===============================
+   EXPLICATIONS & SCORE
+=============================== */
+#score {
+  font-size: 1.3em;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#explication {
+  margin-top: 15px;
+  padding: 14px;
+  background: #eef3ff;
+  border-left: 5px solid #1b2a78;
+  border-radius: 8px;
+}
+
+/* ===============================
+   UTILITAIRES
+=============================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
