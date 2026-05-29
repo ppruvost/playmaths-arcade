@@ -81,4 +81,3 @@ menu.classList.remove(
 }
 
 });
-```
