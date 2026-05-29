@@ -1,105 +1,169 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maths - 2nde Pro</title>
 
-  <!-- CSS externe -->
-  <link rel="stylesheet" href="arcade.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Maths - 2nde Pro</title>
+
+<link rel="stylesheet"
+href="arcade.css">
+
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header class="top-bar">
-    <h1>🎮 MATHS - 2NDE PRO 🎮</h1>
+<header class="top-bar">
 
-    <!-- Bouton menu hamburger -->
-    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu">
-      ☰
-    </button>
-  </header>
+<h1>🎮 MATHS - 2NDE PRO 🎮</h1>
 
-  <!-- IFRAME plein écran -->
-  <div class="frame-container">
-    <iframe
-      id="contentFrame"
-      src="https://ppruvost.github.io/automat01/"
-      title="Contenu interactif de mathématiques">
-    </iframe>
-  </div>
+<button class="menu-toggle"
+onclick="toggleMenu()">
 
-  <!-- MENU LATÉRAL -->
-  <div class="side-menu" id="sideMenu">
+☰
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Accès</th>
-          <th>Niveau</th>
-          <th>Capacité</th>
-        </tr>
-      </thead>
+</button>
 
-      <tbody>
+</header>
 
-        <tr onclick="loadPage('https://ppruvost.github.io/automat01/')">
-          <td>Automatisme_01</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 01</span></td>
-          <td><span class="tag cap1">Pourcentages</span></td>
-        </tr>
 
-        <tr onclick="loadPage('https://ppruvost.github.io/automat02/')">
-          <td>Automatisme_02</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 02</span></td>
-          <td><span class="tag cap2">Exprimer en %</span></td>
-        </tr>
+<!-- PAGE ACCUEIL -->
 
-        <tr onclick="loadPage('./playmaths/03/index.html')">
-          <td>PlayMaths_03</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 01</span></td>
-          <td><span class="tag cap3">Fonctions</span></td>
-        </tr>
+<div class="home-dashboard"
+id="homeDashboard">
 
-        <tr onclick="loadPage('https://ppruvost.github.io/playmaths04/')">
-          <td>PlayMaths_04</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 01</span></td>
-          <td><span class="tag cap4">Solides</span></td>
-        </tr>
 
-        <tr onclick="loadPage('https://ppruvost.github.io/playmaths05/')">
-          <td>PlayMaths_05</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 01</span></td>
-          <td><span class="tag cap1">Notation scientifique</span></td>
-        </tr>
-        
-        <tr onclick="loadPage('./playmaths/02/index.html')">
-          <td>PlayMaths_06</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 01</span></td>
-          <td><span class="tag cap2">Pythagore, Thalès, Surface, Volume</span></td>
-        </tr>
+<section class="arcade-column">
 
-        <tr onclick="loadPage('./playmaths/01/index.html')">
-          <td>PlayMaths_07</td>
-          <td>▶ Ouvrir</td>
-          <td><span class="tag niveau">Niveau 02</span></td>
-          <td><span class="tag cap3">Pythagore, Thalès, Surface, Volume</span></td>
-        </tr>
+<h2>⚡ Automatismes</h2>
 
-      </tbody>
-    </table>
+<div class="game-card"
+onclick="loadPage('https://ppruvost.github.io/automat01/')">
 
-  </div>
+<h3>Automatisme_01</h3>
 
-  <!-- JS externe -->
-  <script src="arcade.js"></script>
+<p>Pourcentages</p>
+
+<span class="tag niveau">
+
+Niveau 01
+
+</span>
+
+</div>
+
+
+<div class="game-card"
+onclick="loadPage('https://ppruvost.github.io/automat02/')">
+
+<h3>Automatisme_02</h3>
+
+<p>Exprimer en %</p>
+
+<span class="tag niveau">
+
+Niveau 02
+
+</span>
+
+</div>
+
+</section>
+
+
+
+<section class="arcade-column">
+
+<h2>🕹 PlayMaths</h2>
+
+
+<div class="game-card"
+onclick="loadPage('./playmaths/03/index.html')">
+
+<h3>PlayMaths_03</h3>
+
+<p>Fonctions</p>
+
+</div>
+
+
+<div class="game-card"
+onclick="loadPage('https://ppruvost.github.io/playmaths04/')">
+
+<h3>PlayMaths_04</h3>
+
+<p>Solides</p>
+
+</div>
+
+
+<div class="game-card"
+onclick="loadPage('https://ppruvost.github.io/playmaths05/')">
+
+<h3>PlayMaths_05</h3>
+
+<p>Notation scientifique</p>
+
+</div>
+
+
+<div class="game-card"
+onclick="loadPage('./playmaths/02/index.html')">
+
+<h3>PlayMaths_06</h3>
+
+<p>Pythagore • Thalès • Volumes</p>
+
+</div>
+
+
+<div class="game-card"
+onclick="loadPage('./playmaths/01/index.html')">
+
+<h3>PlayMaths_07</h3>
+
+<p>Niveau 02</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<div class="frame-container"
+id="frameContainer">
+
+<iframe
+id="contentFrame"
+src="">
+
+</iframe>
+
+</div>
+
+
+
+<div class="side-menu"
+id="sideMenu">
+
+<button class="home-btn"
+onclick="returnHome()">
+
+🏠 Retour accueil
+
+</button>
+
+</div>
+
+<script src="arcade.js"></script>
 
 </body>
+
 </html>
+```
