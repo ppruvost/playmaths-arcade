@@ -1,38 +1,85 @@
-/* arcade.js */
+```javascript
+function loadPage(url){
 
-function loadPage(url) {
-  const frame = document.getElementById("contentFrame");
-  const menu = document.getElementById("sideMenu");
+const frame=document.getElementById(
+"contentFrame"
+);
 
-  if (frame) {
-    frame.src = url;
-  }
+document.getElementById(
+"homeDashboard"
+).style.display="none";
 
-  /* fermeture automatique du menu après clic */
-  if (menu) {
-    menu.classList.remove("open");
-  }
+document.getElementById(
+"frameContainer"
+).style.display="block";
+
+frame.src=url;
+
+document.getElementById(
+"sideMenu"
+).classList.remove("open");
+
 }
 
-function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
 
-  if (menu) {
-    menu.classList.toggle("open");
-  }
+
+function returnHome(){
+
+document.getElementById(
+"frameContainer"
+).style.display="none";
+
+document.getElementById(
+"homeDashboard"
+).style.display="flex";
+
+document.getElementById(
+"contentFrame"
+).src="";
+
+document.getElementById(
+"sideMenu"
+).classList.remove("open");
+
 }
 
-/* fermeture du menu si clic en dehors */
-document.addEventListener("click", function (event) {
-  const menu = document.getElementById("sideMenu");
-  const button = document.querySelector(".menu-toggle");
 
-  if (!menu || !button) return;
 
-  const clickInsideMenu = menu.contains(event.target);
-  const clickOnButton = button.contains(event.target);
+function toggleMenu(){
 
-  if (!clickInsideMenu && !clickOnButton) {
-    menu.classList.remove("open");
-  }
+document.getElementById(
+"sideMenu"
+).classList.toggle("open");
+
+}
+
+
+
+document.addEventListener(
+"click",
+function(event){
+
+const menu=
+document.getElementById(
+"sideMenu"
+);
+
+const button=
+document.querySelector(
+".menu-toggle"
+);
+
+if(
+!menu.contains(event.target)
+&&
+!button.contains(event.target)
+){
+
+menu.classList.remove(
+"open"
+);
+
+}
+
 });
+```
