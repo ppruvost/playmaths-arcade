@@ -13,52 +13,17 @@
 
   <!-- EmailJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <style>
-    /* Ajout du style pour aligner horizontalement les champs */
-    #userForm {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    #userForm label {
-      font-family: 'Lexend', sans-serif;
-      margin-right: 5px;
-    }
-
-    #userForm input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: 'Lexend', sans-serif;
-    }
-
-    #startQuiz {
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Lexend', sans-serif;
-    }
-
-    #startQuiz:hover {
-      background-color: #45a049;
-    }
-  </style>
 </head>
 
 <body>
+
   <div class="container" id="container">
+
     <h1 data-title="Soulager sa mémoire par l'entraînement">Les pourcentages</h1>
 
     <p class="intro">Testez vos connaissances avec le quiz interactif !</p>
 
-    <!-- Formulaire identité -->
+    <!-- FORMULAIRE -->
     <div id="userForm">
       <div>
         <label for="nom">Nom :</label>
@@ -73,37 +38,33 @@
       <button class="button start" id="startQuiz">🎮 Commencer le quiz</button>
     </div>
 
-    <!-- SON PENDANT LE QUIZ -->
+    <!-- MUSIQUE -->
     <audio id="bgMusic" src="../musique.mp3" loop></audio>
 
-<!-- ZONE DU QUIZ -->
-<div id="quiz" class="hidden">
+    <!-- QUIZ -->
+    <div id="quiz" class="hidden">
 
-    <div id="questionBox" class="question-box"></div>
+      <div id="questionBox" class="question-box"></div>
 
-    <div id="answers"></div>
+      <div id="graphique-container"></div>
 
-    <div id="explication" class="explication"></div>
+      <div id="answerGrid"></div>
 
-    <p id="score" class="score"></p>
+      <div id="explanationBox" class="explication"></div>
 
-</div>
+      <div id="scoreBox" class="score"></div>
 
-  <!-- SON DE VICTOIRE -->
-  <audio id="victorySound" src="../jingle.wav" preload="auto"></audio>
+    </div>
 
-</div>
+    <!-- SON VICTOIRE -->
+    <audio id="victorySound" src="../jingle.wav" preload="auto"></audio>
 
-<!-- ================= SCRIPTS ================= -->
+  </div>
 
-<!-- QUESTIONS -->
-<script src="questions.js" defer></script>
+  <!-- SCRIPTS -->
+  <script src="questions.js" defer></script>
+  <script src="../../js/quiz.js" defer></script>
+  <script src="../../js/envoi.js" defer></script>
 
-<!-- LOGIQUE DU QUIZ -->
-<script src="../../js/quiz.js" defer></script>
-
-<!-- ENVOI DES RÉSULTATS -->
-<script src="../../js/envoi.js" defer></script>
-  
 </body>
 </html>
