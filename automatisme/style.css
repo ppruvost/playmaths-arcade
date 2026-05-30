@@ -1,6 +1,7 @@
 /* ===============================
    STYLE GLOBAL DYS-FRIENDLY
 =============================== */
+
 body {
   font-family: "Lexend", Verdana, Arial, sans-serif;
   background: #f3f5ff;
@@ -34,85 +35,92 @@ h2 {
 /* ===============================
    FORMULAIRE IDENTITÉ
 =============================== */
+
 #userForm {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+#userForm label {
+  font-family: 'Lexend', sans-serif;
+  margin-right: 5px;
 }
 
 #userForm input {
-  padding: 12px;
+  padding: 8px;
   border: 2px solid #c7d0ff;
   border-radius: 10px;
+  font-family: 'Lexend', sans-serif;
+}
+
+#startQuiz {
+  padding: 10px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#startQuiz:hover {
+  background-color: #45a049;
 }
 
 /* ===============================
-   BOUTONS KAHOOT
+   QUIZ STRUCTURE
 =============================== */
 
-.kahoot-btn {
-    width: 100%;
-    padding: 18px;
-    margin-bottom: 14px;
-    background: #eef1ff;
-    border: 3px solid transparent;
-    border-radius: 14px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.kahoot-btn:hover {
-    background: #d7ddff;
-}
-
-.kahoot-btn.selected {
-    background: #c5ccff;
-    border-color: #5c7dff;
-}
-
-/* BONNE réponse */
-.kahoot-btn.answer-correct,
-.kahoot-btn.answer-correct-auto {
-    background: #9af5a3 !important;
-    border-color: #2b8a3e !important;
-}
-
-/* MAUVAISE réponse */
-.kahoot-btn.answer-wrong {
-    background: #ffb3b3 !important;
-    border-color: #c62828 !important;
-}
-
-/* ===============================
-   BOUTON VALIDER
-=============================== */
-button.validate {
-    font-size: 1.4em;
-    padding: 18px;
-    border-radius: 14px;
-    background: #5c7dff;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-}
-
-button.validate:hover {
-    background: #455ecc;
-}
-
-/* ===============================
-   EXPLICATIONS & SCORE
-=============================== */
-#score {
+.question-box {
   font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 20px;
   text-align: center;
-  margin-top: 10px;
 }
 
-#explication {
+#graphique-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#answerGrid {
+  display: grid;
+  gap: 12px;
+}
+
+/* ===============================
+   RÉPONSES (KAHOOT STYLE)
+=============================== */
+
+.answer {
+  padding: 15px;
+  border-radius: 12px;
+  background: #eef1ff;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.answer:hover {
+  background: #d7ddff;
+}
+
+.answer.answer-correct {
+  background: #9af5a3 !important;
+}
+
+.answer.answer-wrong {
+  background: #ffb3b3 !important;
+}
+
+/* ===============================
+   EXPLICATION + SCORE
+=============================== */
+
+.explication {
   margin-top: 15px;
   padding: 14px;
   background: #eef3ff;
@@ -120,9 +128,39 @@ button.validate:hover {
   border-radius: 8px;
 }
 
+#scoreBox {
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* ===============================
-   UTILITAIRES
+   ANIMATION BONUS
 =============================== */
+
+.playmaths-bonus {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: #27ae60;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+/* ===============================
+   ANIMATION PAGE
+=============================== */
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
