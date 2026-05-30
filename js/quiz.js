@@ -127,7 +127,7 @@ function showQuestion() {
   });
 
   startTime = Date.now();
-  startTimer();
+  if (!window.NO_TIMER) {startTimer();}
 
   scoreBox.textContent =
     `Score : ${score} / ${shuffledQuestions.length} — Play Maths : ${playMathsPoints} pts`;
