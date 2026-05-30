@@ -44,6 +44,30 @@
     <!-- QUIZ -->
     <div id="quiz" class="hidden">
 
+      <!-- TIMER INVISIBLE MAIS OBLIGATOIRE POUR quiz.js -->
+      <div style="
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+      ">
+
+        <svg width="90" height="90">
+          <circle
+            id="timer-circle"
+            cx="45"
+            cy="45"
+            r="35">
+          </circle>
+        </svg>
+
+        <div id="timerNumber">30</div>
+
+      </div>
+
+      <!-- CONTENU QUIZ -->
       <div id="questionBox" class="question-box"></div>
 
       <div id="graphique-container"></div>
