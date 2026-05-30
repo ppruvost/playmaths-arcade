@@ -99,11 +99,9 @@ body{
 
   gap:25px;
 
-  padding:25px;
+  padding:25px;  
 
-  overflow-y:auto;
-
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
 /* colonnes */
@@ -120,13 +118,16 @@ body{
   padding:20px;
 
   box-shadow:0 0 20px rgba(56,189,248,.25);
-  
+
   display:flex;
   flex-direction:column;
-  
+
   height:100%;
- 
-  overflow:visible;
+  
+  overflow-y:auto;
+  overflow-x:hidden;
+  
+  min-height:0;
 }
 
 .arcade-column h2{
