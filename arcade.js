@@ -20,8 +20,6 @@ document.getElementById(
 
 }
 
-
-
 function returnHome(){
 
 document.getElementById(
@@ -42,8 +40,6 @@ document.getElementById(
 
 }
 
-
-
 function toggleMenu(){
 
 document.getElementById(
@@ -51,8 +47,6 @@ document.getElementById(
 ).classList.toggle("open");
 
 }
-
-
 
 document.addEventListener(
 "click",
