@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calcul d’une moyenne</title>
+
+  <!-- Police DYS-friendly -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+
+  <!-- Confettis -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container" id="container">
+
+    <h1 data-title="Soulager sa mémoire par l'entraînement">Les pourcentages</h1>
+
+    <p class="intro">Testez vos connaissances avec le quiz interactif !</p>
+
+    <!-- FORMULAIRE -->
+    <div id="userForm">
+      <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" placeholder="Entrez votre nom" required>
+      </div>
+
+      <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" placeholder="Entrez votre prénom" required>
+      </div>
+
+      <button class="button start" id="startQuiz">🎮 Commencer le quiz</button>
+    </div>
+
+    <!-- MUSIQUE -->
+    <audio id="bgMusic" src="../musique.mp3" loop></audio>
+
+    <!-- QUIZ -->
+    <div id="quiz" class="hidden">
+
+      <!-- TIMER INVISIBLE MAIS OBLIGATOIRE POUR quiz.js -->
+      <div style="
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+      ">
+
+        <svg width="90" height="90">
+          <circle id="timer-circle"></circle>
+        </svg>
+
+        <div id="timerNumber">0</div>
+
+      </div>
+
+      <!-- CONTENU QUIZ -->
+      <div id="questionBox" class="question-box"></div>
+
+      <div id="graphique-container"></div>
+
+      <div id="answerGrid"></div>
+
+      <div id="explanationBox" class="explication"></div>
+
+      <div id="scoreBox" class="score"></div>
+
+    </div>
+
+    <!-- SON VICTOIRE -->
+    <audio id="victorySound" src="../jingle.wav" preload="auto"></audio>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>window.NO_TIMER = true;</script>
+  <script src="questions.js" defer></script>
+  <script src="../../js/quiz.js" defer></script>
+
+  <!-- ENVOI DES RÉSULTATS -->
+  <script src="../../js/supabase.js"></script>
+  <script src="../../js/envoi.js" defer></script>
+
+</body>
+</html>
