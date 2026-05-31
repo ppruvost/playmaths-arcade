@@ -3,66 +3,79 @@
    ============================================================ */
 
 const questions = [
-  { 
-    question: "Un article coûte 80 €. Il subit une augmentation de 10 %. Quel est le nouveau prix ?",  
-    options: ["88 €", "90 €", "72 €", "8 €"], 
-    bonne_reponse: "88 €", 
-    explication: "10 % de 80 = 8, donc 80 + 8 = 88 €." 
-  },
-  { 
-    question: "Un produit coûte 50 €. Il est soldé à −20 %. Quel est le prix après réduction ?",  
-    options: ["40 €", "45 €", "30 €", "10 €"], 
-    bonne_reponse: "40 €", 
-    explication: "20 % de 50 = 10, donc 50 − 10 = 40 €." 
-  },
-  { 
-    question: "Dans une classe de 25 élèves, 40 % sont des filles. Combien y a-t-il de filles ?",  
-    options: ["10", "15", "5", "20"], 
-    bonne_reponse: "10", 
-    explication: "40 % de 25 = 0,4 × 25 = 10." 
-  },
-  { 
-    question: "Un salaire est de 1 500 €. Il augmente de 5 %. Quel est le montant de l’augmentation ?",  
-    options: ["75 €", "150 €", "50 €", "1 575 €"], 
-    bonne_reponse: "75 €", 
-    explication: "5 % de 1 500 = 0,05 × 1 500 = 75 €." 
-  },
-  { 
-    question: "Un article coûte 120 € TTC avec une TVA de 20 %. Quel est le montant de la TVA ?",  
-    options: ["20 €", "24 €", "96 €", "100 €"], 
-    bonne_reponse: "24 €", 
-    explication: "20 % de 120 = 24 €." 
-  },
-  { 
-    question: "Un prix passe de 200 € à 180 €. Quel est le pourcentage de réduction ?",  
-    options: ["10 %", "20 %", "5 %", "15 %"], 
-    bonne_reponse: "10 %", 
-    explication: "La baisse est de 20 €, et 20 ÷ 200 = 0,10 soit 10 %." 
-  },
-  { 
-    question: "Un téléphone coûte 300 €. Après une remise de 15 %, quel est son prix ?",  
-    options: ["255 €", "285 €", "45 €", "315 €"], 
-    bonne_reponse: "255 €", 
-    explication: "15 % de 300 = 45, donc 300 − 45 = 255 €." 
-  },
-  { 
-    question: "Dans un stock de 500 produits, 12 % sont défectueux. Combien y a-t-il de produits défectueux ?",  
-    options: ["60", "50", "12", "6"], 
-    bonne_reponse: "60", 
-    explication: "12 % de 500 = 0,12 × 500 = 60." 
-  },
-  { 
-    question: "Un prix HT est de 80 €. On applique une TVA de 20 %. Quel est le prix TTC ?",  
-    options: ["96 €", "100 €", "88 €", "16 €"], 
-    bonne_reponse: "96 €", 
-    explication: "20 % de 80 = 16, donc 80 + 16 = 96 €." 
-  },
-  { 
-    question: "Un effectif augmente de 10 %, puis encore de 10 %. L’augmentation totale est :",  
-    options: ["20 %", "21 %", "10 %", "19 %"], 
-    bonne_reponse: "21 %", 
-    explication: "Après deux augmentations successives de 10 %, on obtient 1,1 × 1,1 = 1,21 soit +21 %." 
-  }
+
+{
+question:"10² vaut :",
+options:["20","100","1000","10"],
+bonne_reponse:"100",
+explication:"10×10."
+},
+
+{
+question:"10⁻² vaut :",
+options:["0,1","0,01","0,001","100"],
+bonne_reponse:"0,01",
+explication:"1/100."
+},
+
+{
+question:"3×10³ =",
+options:["300","3000","30000","30"],
+bonne_reponse:"3000",
+explication:"Décalage de 3 rangs."
+},
+
+{
+question:"Vrai ou Faux : 10⁰ = 1",
+options:["Vrai","Faux"],
+bonne_reponse:"Vrai",
+explication:"Toute puissance 0 vaut 1."
+},
+
+{
+question:"10⁵ =",
+options:["10000","100000","1000000","50000"],
+bonne_reponse:"100000",
+explication:"5 zéros."
+},
+
+{
+question:"5×10⁻¹ =",
+options:["5","0,5","0,05","50"],
+bonne_reponse:"0,5",
+explication:"Décalage gauche."
+},
+
+{
+question:"Vrai ou Faux : multiplier par 10² revient à ×100.",
+options:["Vrai","Faux"],
+bonne_reponse:"Vrai",
+explication:"Définition."
+},
+
+{
+question:"0,003 =",
+options:["3×10⁻²","3×10⁻³","30×10⁻³","300×10⁻³"],
+bonne_reponse:"3×10⁻³",
+explication:"Trois millièmes."
+},
+
+{
+question:"Lire l’échelle scientifique.",
+graphique:"puissance10_1.png",
+options:["10²","10³","10⁴","10⁵"],
+bonne_reponse:"10³",
+explication:"Lecture puissance."
+},
+
+{
+question:"Observer le déplacement virgule.",
+graphique:"virgule1.png",
+options:["×10","×100","×1000","÷10"],
+bonne_reponse:"×100",
+explication:"2 rangs."
+}
+
 ];
 
 
