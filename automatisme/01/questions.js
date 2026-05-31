@@ -69,7 +69,7 @@ explication:"Le secteur représente environ 30 %."
 },
 
 {
-question:"Lire le graphique suivant.",
+question:"Lire le graphique suivant. Quel est le pourcentage de filles dans cette établissement ?",
 graphique:"effectifs_barres1.png",
 options:["10 %","15 %","20 %","40 %"],
 bonne_reponse:"20 %",
