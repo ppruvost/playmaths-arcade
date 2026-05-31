@@ -11,6 +11,21 @@ let startTime = 0;
 let playMathsPoints = 0;
 // <<< FIN BONUS >>>
 
+// vibration mobile/tablette
+function vibrateBonus() {
+
+    if ("vibrate" in navigator) {
+        navigator.vibrate([80,50,80]);
+    }
+
+    document.body.classList.add("bonus-shake");
+
+    setTimeout(() => {
+        document.body.classList.remove("bonus-shake");
+    }, 250);
+
+}
+
 // ==============================
 //      ÉLÉMENTS DOM
 // ==============================
@@ -160,6 +175,9 @@ function handleAnswer(option, selectedDiv) {
     bonus *= 10;
     playMathsPoints += bonus;
     showBonusAnimation(bonus, selectedDiv);
+    if (bonus > 0) {
+      vibrateBonus();
+    }
 
   } else {
     selectedDiv.classList.add("answer-wrong");
