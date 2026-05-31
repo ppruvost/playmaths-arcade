@@ -12,14 +12,14 @@ explication:"(10+12+14)/3 = 36/3."
 },
 
 {
-question:"Notes : 8 ; 9 ; 10 ; 13",
+question:"Notes : 8 ; 9 ; 10 ; 13. Donner la moyenne.",
 options:["9","10","11","12"],
 bonne_reponse:"10",
 explication:"40 ÷ 4."
 },
 
 {
-question:"Une équipe marque : 2, 4, 6 buts.",
+question:"Une équipe marque : 2, 4, 6 buts. Donner la moyenne.",
 options:["3","4","5","6"],
 bonne_reponse:"4",
 explication:"12/3."
@@ -33,14 +33,14 @@ explication:"La moyenne reste comprise entre min et max."
 },
 
 {
-question:"Moyenne de 5 ; 5 ; 5 ; 5 ?",
+question:"Donner la moyenne de 5 ; 5 ; 5 ; 5.",
 options:["4","5","6","10"],
 bonne_reponse:"5",
 explication:"Valeurs identiques."
 },
 
 {
-question:"Températures : 18 ; 20 ; 22 ; 24",
+question:"Températures : 18 ; 20 ; 22 ; 24. Donner la moyenne.",
 options:["20","21","22","23"],
 bonne_reponse:"21",
 explication:"84/4."
@@ -61,7 +61,7 @@ explication:"24/3."
 },
 
 {
-question:"Lire le diagramme.",
+question:"Lire le diagramme. Donner la moyenne.",
 graphique:"notes_histogramme1.png",
 options:["8","10","12","14"],
 bonne_reponse:"10",
@@ -69,7 +69,7 @@ explication:"Lecture puis moyenne."
 },
 
 {
-question:"Observer le tableau.",
+question:"Observer le tableau. Donner la moyenne.",
 graphique:"moyenne_tableau1.png",
 options:["11","12","13","14"],
 bonne_reponse:"12",
