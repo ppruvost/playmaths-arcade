@@ -69,10 +69,10 @@ explication:"Coefficient valide."
 },
 
 {
-question:"Lire la valeur. Donner son écriture scientifique",
+question:"Lire la valeur. Donner le décalage de la virgule en écriture scientifique.",
 graphique:"notation2.png",
-options:["10²","10³","10⁴","10⁵"],
-bonne_reponse:"10⁴",
+options:["10-²","10-³","10-⁴","10-⁵"],
+bonne_reponse:"10-⁴",
 explication:"Décalage."
 }
 
