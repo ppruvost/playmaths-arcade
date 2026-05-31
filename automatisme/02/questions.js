@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
 {
 question:"Un article coûte 80 €. Hausse de 10 % ?",
