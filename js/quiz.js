@@ -71,28 +71,35 @@ function showBonusAnimation(bonus, element) {
 //            DÉMARRAGE
 // ==============================
 startBtn.addEventListener("click", () => {
+
   const nom = nomInput.value.trim();
   const prenom = prenomInput.value.trim();
 
-  if (!nom) { nomInput.focus(); return; }
-  if (!prenom) { prenomInput.focus(); return; }
+  if (!nom) {
+    nomInput.focus();
+    return;
+  }
+
+  if (!prenom) {
+    prenomInput.focus();
+    return;
+  }
 
   score = 0;
   current = 0;
   playMathsPoints = 0;
 
-  if (!Array.isArray(questions) || questions.length === 0) {
-    alert("Erreur : questions introuvables. Vérifie questions.js");
+  console.log("questions détectées :", window.questions);
+
+  if (!window.questions || !Array.isArray(window.questions) || window.questions.length === 0) {
+
+    console.error("Questions non chargées !");
+    alert("Erreur : questions.js non chargé");
+
     return;
   }
 
-  shuffledQuestions = shuffleArray(window.questions || []);
-
-    if (!window.questions || window.questions.length === 0) {
-      console.error("Questions non chargées !");
-      alert("Erreur : questions.js non chargé");
-      return;
-    }
+  shuffledQuestions = shuffleArray(window.questions);
 
   if (bgMusic) {
     bgMusic.volume = 0.35;
@@ -100,7 +107,9 @@ startBtn.addEventListener("click", () => {
   }
 
   document.getElementById("userForm").style.display = "none";
+
   showQuestion();
+
 });
 
 // ==============================
