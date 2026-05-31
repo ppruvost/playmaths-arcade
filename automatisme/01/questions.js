@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
 {
 question:"Dans une classe de 25 élèves, 5 portent des lunettes. Quelle est la fréquence ?",
