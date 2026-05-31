@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
 {
 question:"Calculer la moyenne : 10 ; 12 ; 14",
