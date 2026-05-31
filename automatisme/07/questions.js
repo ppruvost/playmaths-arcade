@@ -61,7 +61,7 @@ explication:"0,9 >0,8."
 },
 
 {
-question:"Observer les portions.",
+question:"Quelle est la portion la plus grande avec A = 2/4 et B = 3/4 ?",
 graphique:"fractions_compare1.png",
 options:["A","B","Égales"],
 bonne_reponse:"B",
