@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
 {
 question:"Comparer 1/2 et 3/4",
