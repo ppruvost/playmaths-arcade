@@ -86,7 +86,13 @@ startBtn.addEventListener("click", () => {
     return;
   }
 
-  shuffledQuestions = shuffleArray(questions);
+  shuffledQuestions = shuffleArray(window.questions || []);
+
+    if (!window.questions || window.questions.length === 0) {
+      console.error("Questions non chargées !");
+      alert("Erreur : questions.js non chargé");
+      return;
+    }
 
   if (bgMusic) {
     bgMusic.volume = 0.35;
