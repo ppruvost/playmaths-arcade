@@ -61,7 +61,7 @@ explication:"6/24 = 0,25."
 },
 
 {
-question:"Observe le diagramme.",
+question:"Observe le diagramme. Quelle est la fréquence de la catégorie représentée en bleu foncé?",
 graphique:"frequence_camembert1.png",
 options:["20 %","30 %","40 %","50 %"],
 bonne_reponse:"30 %",
