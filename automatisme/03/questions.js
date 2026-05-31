@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
 {
 question:"0,25 correspond à :",
