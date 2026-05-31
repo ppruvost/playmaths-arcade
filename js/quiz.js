@@ -175,7 +175,7 @@ function handleAnswer(option, selectedDiv) {
     bonus *= 10;
     playMathsPoints += bonus;
     showBonusAnimation(bonus, selectedDiv);
-    if (bonus > 0) {
+    if (bonus === 50) {
       vibrateBonus();
     }
 
