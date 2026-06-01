@@ -5,75 +5,75 @@
 window.questions = [
 
 {
-question:"Dans une classe de 25 élèves, 5 portent des lunettes. Quelle est la fréquence ?",
-options:["20 %","25 %","5 %","30 %"],
-bonne_reponse:"20 %",
-explication:"5 ÷ 25 = 0,20 soit 20 %."
+question:"Développer : 3(x+2)",
+options:["3x+2","3x+6","6x+2","x+6"],
+bonne_reponse:"3x+6",
+explication:"Distribution."
 },
 
 {
-question:"Sur 40 personnes, 10 choisissent le train. Fréquence ?",
-options:["10 %","20 %","25 %","40 %"],
-bonne_reponse:"25 %",
-explication:"10/40 = 0,25 = 25 %."
+question:"Factoriser : 5x+10",
+options:["5(x+10)","5(x+2)","10(x+1)","x(5+10)"],
+bonne_reponse:"5(x+2)",
+explication:"Facteur commun."
 },
 
 {
-question:"Une série contient 8 filles sur 32 élèves.",
-options:["12,5 %","20 %","25 %","32 %"],
-bonne_reponse:"25 %",
-explication:"8 ÷ 32 = 0,25."
+question:"Développer : 2(a−4)",
+options:["2a−4","2a−8","8a","a−8"],
+bonne_reponse:"2a−8",
+explication:"Distribution."
 },
 
 {
-question:"Vrai ou Faux : une fréquence peut dépasser 100 %.",
+question:"Vrai ou Faux : 4(x+1)=4x+1",
 options:["Vrai","Faux"],
 bonne_reponse:"Faux",
-explication:"Une fréquence est comprise entre 0 % et 100 %."
+explication:"4×1=4."
 },
 
 {
-question:"18 objets défectueux sur 90 objets.",
-options:["10 %","20 %","18 %","25 %"],
-bonne_reponse:"20 %",
-explication:"18 ÷ 90 = 0,20."
+question:"Réduire : 2x+3x",
+options:["5","6x","5x","x²"],
+bonne_reponse:"5x",
+explication:"Termes semblables."
 },
 
 {
-question:"Fréquence de 15 réussites sur 60 essais ?",
-options:["15 %","20 %","25 %","30 %"],
-bonne_reponse:"25 %",
-explication:"15/60 = 0,25."
+question:"Factoriser : 7y−14",
+options:["7(y−2)","14(y−1)","7y(−2)","7(y−14)"],
+bonne_reponse:"7(y−2)",
+explication:"Facteur commun."
 },
 
 {
-question:"Vrai ou Faux : 50 sur 200 correspond à 25 %.",
+question:"Vrai ou Faux : x+x=2x",
 options:["Vrai","Faux"],
 bonne_reponse:"Vrai",
-explication:"50 ÷ 200 = 0,25."
+explication:"Addition de termes identiques."
 },
 
 {
-question:"Quel pourcentage représente 6 sur 24 ?",
-options:["10 %","15 %","25 %","30 %"],
-bonne_reponse:"25 %",
-explication:"6/24 = 0,25."
+question:"Développer : -2(x+5)",
+options:["-2x+5","-2x−10","2x−10","-10x"],
+bonne_reponse:"-2x−10",
+explication:"Attention au signe."
 },
 
 {
-question:"Observe le diagramme. Quelle est la fréquence de la catégorie représentée en bleu foncé?",
-graphique:"frequence_camembert1.png",
-options:["20 %","30 %","40 %","50 %"],
-bonne_reponse:"30 %",
-explication:"Le secteur représente environ 30 %."
+question:"Identifier l’expression développée.",
+graphique:"developpement1.png",
+options:["2x+8","2x+4","8x","4x"],
+bonne_reponse:"2x+8",
+explication:"Distribution graphique."
 },
 
 {
-question:"Lire le graphique suivant. Quel est le pourcentage de filles dans cette établissement ?",
-graphique:"effectifs_barres1.png",
-options:["10 %","15 %","20 %","40 %"],
-bonne_reponse:"20 %",
-explication:"20 élèves sur 100."
+question:"Observer les blocs.",
+graphique:"factorisation1.png",
+options:["3(x+2)","2(x+3)","6x","3x+2"],
+bonne_reponse:"3(x+2)",
+explication:"Mise en facteur."
 }
 
 ];
