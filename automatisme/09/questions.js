@@ -69,7 +69,7 @@ explication:"Distribution graphique."
 },
 
 {
-question:"Observer les blocs.",
+question:"Observer les blocs. Factoriser l'expression",
 graphique:"factorisation1.png",
 options:["3(x+2)","2(x+3)","6x","3x+2"],
 bonne_reponse:"3(x+2)",
