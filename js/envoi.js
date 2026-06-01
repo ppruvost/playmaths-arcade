@@ -115,6 +115,8 @@ async function sendResults(user = {}, score = 0, total = 0, note20 = 0, playMath
   // =============================
   // Paramètres EmailJS
   // =============================
+  const titreQuiz = document.title || "";
+  
   const emailParams = {
     nom: user?.nom || "",
     prenom: user?.prenom || "",
