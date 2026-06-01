@@ -61,7 +61,7 @@ explication:"6/12 simplifié."
 },
 
 {
-question:"Observer la représentation.",
+question:"Observer la représentation. Additionner les fractions.",
 graphique:"fraction_add1.png",
 options:["1/2","3/4","1","1/4"],
 bonne_reponse:"3/4",
@@ -69,7 +69,7 @@ explication:"Lecture visuelle."
 },
 
 {
-question:"Lire le produit illustré.",
+question:"Lire le produit illustré. Multiplier les fractions.",
 graphique:"fraction_mult1.png",
 options:["1/2","1/4","3/4","1"],
 bonne_reponse:"1/4",
