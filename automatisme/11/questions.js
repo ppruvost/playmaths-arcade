@@ -61,7 +61,7 @@ explication:"20−7."
 },
 
 {
-question:"Balance équilibrée.",
+question:"Balance équilibrée. Donner la valeur de x.",
 graphique:"equation_balance1.png",
 options:["2","3","4","5"],
 bonne_reponse:"3",
@@ -69,7 +69,7 @@ explication:"Lecture balance."
 },
 
 {
-question:"Lire le schéma.",
+question:"Lire le schéma. Donner la valeur de x.",
 graphique:"equation_blocs1.png",
 options:["5","6","7","8"],
 bonne_reponse:"6",
