@@ -6,7 +6,7 @@ window.questions = [
 
 {
 question:"1/2 + 1/2 =",
-options:["1","2","1/2","0"],
+options:["1","1/4","2/4","0"],
 bonne_reponse:"1",
 explication:"Même dénominateur."
 },
@@ -54,10 +54,10 @@ explication:"Souvent plus petit."
 },
 
 {
-question:"2/3 × 3/4 =",
+question:"Donner le résultat simplifié de 2/3 × 3/4 =",
 options:["1/2","6/12","2","1"],
 bonne_reponse:"1/2",
-explication:"6/12 simplifie."
+explication:"6/12 simplifié."
 },
 
 {
