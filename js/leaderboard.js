@@ -38,7 +38,7 @@ async function loadLeaderboard() {
 
     const res = await fetch(
 
-      `${SUPABASE_URL}/rest/v1/scores?select=prenom,score,date_score&order=score.desc&limit=10`,
+      `${SUPABASE_URL}/rest/v1/scores?select=prenom,score,date_score&order=score.desc,date_score.desc&limit=10`,
 
       {
         headers: {
