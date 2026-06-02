@@ -92,16 +92,17 @@ body{
 ========================= */
 
 .home-dashboard{
-
-  height:calc(100vh - 70px);
+  min-height:calc(100vh - 70px);
 
   display:flex;
-
   gap:25px;
 
-  padding:25px;  
+  padding:25px;
 
-  overflow:hidden;
+  align-items:stretch;
+
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
 /* colonnes */
