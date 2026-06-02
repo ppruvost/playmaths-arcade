@@ -209,6 +209,8 @@ body{
 
   width:100%;
 
+  min-height:calc(100vh - 70px);
+
   height:100%;
 
   border:none;
@@ -216,6 +218,8 @@ body{
   display:block;
 
   background:white;
+
+  overflow:auto;
 }
 
 /* =========================
