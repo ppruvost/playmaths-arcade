@@ -111,6 +111,21 @@ body {
   margin-top: 20px;
 }
 
+.citation-finale{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+
+  color:white;
+  font-size:14px;
+  text-align:center;
+
+  width:90%;
+  opacity:0.9;
+}
+
+
 /* =========================
    TABLETTE
 ========================= */
