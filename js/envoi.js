@@ -194,7 +194,15 @@ const savePromise = envoyerScore(
     if (emailRes.status === "fulfilled") {
       console.log("Email envoyé avec succès");
     } else {
-      console.error("Erreur EmailJS :", emailRes.reason);
+      console.error(
+
+  "Erreur EmailJS détaillée :",
+
+  emailRes.reason?.text ||
+
+  emailRes.reason
+
+);
     }
 
     if (saveRes.status === "fulfilled") {
