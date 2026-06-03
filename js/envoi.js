@@ -117,16 +117,17 @@ async function sendResults(user = {}, score = 0, total = 0, note20 = 0, playMath
   // =============================
   const titreQuiz = document.title || "";
   
-  const emailParams = {
-    nom: user?.nom || "",
-    prenom: user?.prenom || "",
-    score,
-    total,
-    note20,
-    points_play_maths: playMathsPoints,
-    details: recap,
-    email: "lyceepro.mermoz@gmail.com"
-  };
+const emailParams = {
+  nom: user?.nom || "",
+  prenom: user?.prenom || "",
+  activite: titreQuiz,
+  score,
+  total,
+  note20,
+  points_play_maths: playMathsPoints,
+  details: recap,
+  email: "lyceepro.mermoz@gmail.com"
+};
 
   // =============================
   // Promesse EmailJS
