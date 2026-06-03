@@ -120,26 +120,34 @@ h2{
    TABLEAU
 ========================= */
 
-.leaderboard{
-  overflow-x:auto;
+.leaderboard {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:500px;
+/* TABLE RESPONSIVE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  /* ❌ IMPORTANT : on enlève min-width fixe */
+  min-width: unset;
 }
 
 th,
-td{
-  padding:12px;
-  border-bottom:1px solid #333;
-  text-align:center;
-  font-size:clamp(.8rem,2vw,1rem);
+td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
+
+  /* permet de mieux casser les textes si écran petit */
+  word-break: break-word;
 }
 
-th{
-  color:#ffd700;
+th {
+  color: #ffd700;
 }
 
 /* =========================
@@ -243,4 +251,12 @@ th{
     padding:10px 6px;
   }
 
+  table {
+    font-size: 12px;
+  }
+
+  .leaderboard {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
