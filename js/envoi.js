@@ -2,13 +2,43 @@
 // Initialisation EmailJS
 // =============================
 (function () {
-  if (window.emailjs) {
-    try {
-      emailjs.init("TJHX0tkW1CCz7lv7a");
-    } catch (e) {
-      console.warn("EmailJS init failed :", e);
-    }
+
+  if (!window.emailjs) return;
+
+  try {
+
+    const path =
+      window.location.pathname
+      .toLowerCase();
+
+    const isAutomatisme =
+      path.includes("/automatisme/");
+
+    const PUBLIC_KEY =
+      isAutomatisme
+      ? "Jo1z5RV5-0IDQO8T7"
+      : "TJHX0tkW1CCz7lv7a";
+
+    emailjs.init(PUBLIC_KEY);
+
+    console.log(
+      "EmailJS initialisé :",
+      isAutomatisme
+        ? "clé Automatisme"
+        : "clé Standard"
+    );
+
   }
+
+  catch (e) {
+
+    console.warn(
+      "EmailJS init failed :",
+      e
+    );
+
+  }
+
 })();
 
 // =============================
