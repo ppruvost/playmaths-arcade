@@ -127,10 +127,45 @@ const emailParams = {
   // =============================
   // Promesse EmailJS
   // =============================
-  const emailPromise = emailjs.send(
-    "service_cgh817y",
-    "template_ly7s41e",
+const path =
+  window.location.pathname
+  .toLowerCase();
+
+const isAutomatisme =
+  path.includes("/automatisme/");
+
+const SERVICE_ID =
+  isAutomatisme
+    ? "service_he9gy99"
+    : "service_cgh817y";
+
+const TEMPLATE_ID =
+  isAutomatisme
+    ? "template_5vfgpmf"
+    : "template_ly7s41e";
+
+console.log({
+  type:
+    isAutomatisme
+      ? "AUTOMATISME"
+      : "STANDARD",
+
+  service:
+    SERVICE_ID,
+
+  template:
+    TEMPLATE_ID
+});
+
+const emailPromise =
+  emailjs.send(
+
+    SERVICE_ID,
+
+    TEMPLATE_ID,
+
     emailParams
+
   );
 
   // =============================
