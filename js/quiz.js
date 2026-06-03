@@ -185,7 +185,7 @@ function showQuestion() {
   }
 
   questionBox.textContent =
-      `${current + 1}. ${q.question}`;
+      q.question;
 
   explanationBox.style.display =
       "none";
