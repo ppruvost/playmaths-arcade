@@ -15,80 +15,45 @@
 // ENVOI SCORE SUPABASE
 // =============================
 async function envoyerScore(prenom, score){
-
 if (!SUPABASE_URL || !SUPABASE_KEY) {
-
 throw new Error(
 "Variables Supabase absentes"
 );
-
 }
-
 try{
-
 const res = await fetch(
-
 `${SUPABASE_URL}/rest/v1/scores`,
-
 {
-
 method:"POST",
-
 headers:{
-
 "Content-Type":"application/json",
-
 apikey: SUPABASE_KEY,
-
 Authorization:
 `Bearer ${SUPABASE_KEY}`
-
 },
-
 body: JSON.stringify({
-
 prenom: prenom,
-
 score: score
-
 })
-
 }
-
 );
-
 if(!res.ok){
-
 throw new Error(
-
 await res.text()
-
 );
-
 }
-
 console.log(
 "Score ajouté avec succès"
 );
-
 return true;
-
 }
-
 catch(err){
-
 console.error(
-
 "Erreur Supabase :",
-
 err
-
 );
-
 throw err;
-
 }
-
 }
 
 // =============================
