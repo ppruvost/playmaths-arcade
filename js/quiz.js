@@ -12,9 +12,9 @@ let playMathsPoints = 0;
 
 function calculPlayMathsPoints(timeTaken){
 
-    const maxPoints = 60;
+    const maxPoints = 90;
     const tempsReference = 1;
-    const demiSeconde = 0.5;
+    const demiSeconde = 0.25;
 
     const retard =
         Math.max(
