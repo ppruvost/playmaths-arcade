@@ -1,26 +1,63 @@
 // =============================
-// Moderation Automatisme
+// MODERATION AUTOMATISME
+// prénom + automatisme + cooldown
 // =============================
-const COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
+const COOLDOWN_MS = 10 * 60 * 1000; // 10 min
 
 function getKey(prenom, automatisme) {
-  return `${prenom}_${automatisme}`;
+  return `cooldown_${prenom.trim().toLowerCase()}_${automatisme.trim().toLowerCase()}`;
 }
 
 function canSendScore(prenom, automatisme) {
-  const key = getKey(prenom, automatisme);
-  const last = localStorage.getItem(key);
 
-  if (!last) return true;
+  if (!prenom || !automatisme) return false;
+
+  const key = getKey(prenom, automatisme);
+
+  const lastAttempt =
+    localStorage.getItem(key);
+
+  if (!lastAttempt) return true;
 
   const now = Date.now();
-  return (now - parseInt(last)) > COOLDOWN_MS;
+
+  return (
+    now - parseInt(lastAttempt)
+  ) > COOLDOWN_MS;
 }
 
 function updateLastScore(prenom, automatisme) {
-  const key = getKey(prenom, automatisme);
-  localStorage.setItem(key, Date.now());
+
+  const key =
+    getKey(prenom, automatisme);
+
+  localStorage.setItem(
+    key,
+    Date.now()
+  );
 }
+
+function remainingCooldown(prenom, automatisme){
+
+  const key =
+    getKey(prenom, automatisme);
+
+  const last =
+    localStorage.getItem(key);
+
+  if(!last) return 0;
+
+  const diff =
+    COOLDOWN_MS -
+    (Date.now() - parseInt(last));
+
+  return Math.max(
+    0,
+    Math.ceil(diff / 60000)
+  );
+}
+
+
 // =============================
 // Initialisation EmailJS
 // =============================
@@ -39,8 +76,8 @@ function updateLastScore(prenom, automatisme) {
 
     const PUBLIC_KEY =
       isAutomatisme
-      ? "Jo1z5RV5-0IDQO8T7"
-      : "TJHX0tkW1CCz7lv7a";
+        ? "Jo1z5RV5-0IDQO8T7"
+        : "TJHX0tkW1CCz7lv7a";
 
     emailjs.init(PUBLIC_KEY);
 
@@ -64,190 +101,321 @@ function updateLastScore(prenom, automatisme) {
 
 })();
 
+
 // =============================
 // ENVOI SCORE SUPABASE
 // =============================
 async function envoyerScore(prenom, score){
-if (!SUPABASE_URL || !SUPABASE_KEY) {
-throw new Error(
-"Variables Supabase absentes"
-);
-}
-try{
-const res = await fetch(
-`${SUPABASE_URL}/rest/v1/scores`,
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-apikey: SUPABASE_KEY,
-Authorization:
-`Bearer ${SUPABASE_KEY}`
-},
-body: JSON.stringify({
-prenom: prenom,
-score: score
-})
-}
-);
-if(!res.ok){
-throw new Error(
-await res.text()
-);
-}
-console.log(
-"Score ajouté avec succès"
-);
-return true;
-}
-catch(err){
-console.error(
-"Erreur Supabase :",
-err
-);
-throw err;
-}
+
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+
+    throw new Error(
+      "Variables Supabase absentes"
+    );
+
+  }
+
+  try {
+
+    const res =
+      await fetch(
+
+        `${SUPABASE_URL}/rest/v1/scores`,
+
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json",
+            apikey: SUPABASE_KEY,
+            Authorization:
+              `Bearer ${SUPABASE_KEY}`
+          },
+
+          body: JSON.stringify({
+            prenom,
+            score
+          })
+
+        }
+
+      );
+
+    if(!res.ok){
+
+      throw new Error(
+        await res.text()
+      );
+
+    }
+
+    console.log(
+      "Score ajouté avec succès"
+    );
+
+    return true;
+
+  }
+
+  catch(err){
+
+    console.error(
+      "Erreur Supabase :",
+      err
+    );
+
+    throw err;
+
+  }
+
 }
 
+
 // =============================
-// ENVOI DES RÉSULTATS
+// ENVOI RESULTATS
 // =============================
-async function sendResults(user = {}, score = 0, total = 0, note20 = 0, playMathsPoints = 0, questions = []) {
+async function sendResults(
+  user = {},
+  score = 0,
+  total = 0,
+  note20 = 0,
+  playMathsPoints = 0,
+  questions = []
+) {
 
   if (!window.emailjs) {
-    console.warn("EmailJS non chargé !");
+
+    console.warn(
+      "EmailJS non chargé !"
+    );
+
+    return;
+
+  }
+
+  const prenom =
+    user?.prenom || "";
+
+  const titreQuiz =
+    document.title || "";
+
+  // =============================
+  // CONTROLE COOLDOWN
+  // =============================
+  if (!canSendScore(
+    prenom,
+    titreQuiz
+  )) {
+
+    const minutes =
+      remainingCooldown(
+        prenom,
+        titreQuiz
+      );
+
+    alert(
+      `⏳ ${prenom}, attends encore ${minutes} min avant de renvoyer un score pour cet automatisme.`
+    );
+
     return;
   }
 
+
   // =============================
-  // Construction du récapitulatif sécurisé
+  // RECAP QUESTIONS
   // =============================
   let recap = "";
 
   (questions || []).forEach((q, i) => {
-    recap += `Q${i + 1}: ${q?.question || ""}\n`;
-    recap += `Réponse élève : ${q?.userAnswer || "Aucune"}\n`;
-    recap += `Bonne réponse : ${q?.bonne_reponse || ""}\n\n`;
+
+    recap +=
+      `Q${i + 1}: ${q?.question || ""}\n`;
+
+    recap +=
+      `Réponse élève : ${q?.userAnswer || "Aucune"}\n`;
+
+    recap +=
+      `Bonne réponse : ${q?.bonne_reponse || ""}\n\n`;
+
   });
 
-  // =============================
-  // Paramètres EmailJS
-  // =============================
-  const titreQuiz = document.title || "";
-  
-const emailParams = {
-  nom: user?.nom || "",
-  prenom: user?.prenom || "",
-  activite: titreQuiz,
-  score,
-  total,
-  note20,
-  points_play_maths: playMathsPoints,
-  details: recap,
-  email: "lyceepro.mermoz@gmail.com"
-};
 
   // =============================
-  // Promesse EmailJS
+  // PARAMS EMAILJS
   // =============================
-const path =
-  window.location.pathname
-  .toLowerCase();
+  const emailParams = {
 
-const isAutomatisme =
-  path.includes("/automatisme/");
+    nom:
+      user?.nom || "",
 
-const SERVICE_ID =
-  isAutomatisme
-    ? "service_he9gy99"
-    : "service_cgh817y";
+    prenom,
 
-const TEMPLATE_ID =
-  isAutomatisme
-    ? "template_5vfgpmf"
-    : "template_ly7s41e";
+    activite:
+      titreQuiz,
 
-console.log({
-  type:
+    score,
+
+    total,
+
+    note20,
+
+    points_play_maths:
+      playMathsPoints,
+
+    details:
+      recap,
+
+    email:
+      "lyceepro.mermoz@gmail.com"
+
+  };
+
+
+  const path =
+    window.location.pathname
+    .toLowerCase();
+
+  const isAutomatisme =
+    path.includes("/automatisme/");
+
+  const SERVICE_ID =
     isAutomatisme
-      ? "AUTOMATISME"
-      : "STANDARD",
+      ? "service_he9gy99"
+      : "service_cgh817y";
 
-  service:
-    SERVICE_ID,
+  const TEMPLATE_ID =
+    isAutomatisme
+      ? "template_5vfgpmf"
+      : "template_ly7s41e";
 
-  template:
-    TEMPLATE_ID
-});
 
-const emailPromise =
-  emailjs.send(
+  const emailPromise =
+    emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      emailParams
+    );
 
-    SERVICE_ID,
 
-    TEMPLATE_ID,
+  const savePromise =
+    envoyerScore(
+      prenom,
+      playMathsPoints
+    );
 
-    emailParams
 
-  );
-
-  // =============================
-  // Promesse sauvegarde score
-  // =============================
-const savePromise = envoyerScore(
-
-  user?.prenom || "",
-
-  playMathsPoints
-
-);
-
-  // =============================
-  // Exécution parallèle
-  // =============================
   try {
-    const [emailRes, saveRes] = await Promise.allSettled([
+
+    const [
+      emailRes,
+      saveRes
+    ] = await Promise.allSettled([
+
       emailPromise,
       savePromise
+
     ]);
 
-    // =============================
-    // Logs détaillés
-    // =============================
-    if (emailRes.status === "fulfilled") {
-      console.log("Email envoyé avec succès");
-    } else {
+
+    if (
+      saveRes.status === "fulfilled"
+    ) {
+
+      updateLastScore(
+        prenom,
+        titreQuiz
+      );
+
+      console.log(
+        "Cooldown mis à jour"
+      );
+
+    }
+
+
+    if (
+      emailRes.status === "fulfilled"
+    ) {
+
+      console.log(
+        "Email envoyé avec succès"
+      );
+
+    }
+
+    else {
+
       console.error(
+        "Erreur EmailJS :",
+        emailRes.reason
+      );
 
-  "Erreur EmailJS détaillée :",
-
-  emailRes.reason?.text ||
-
-  emailRes.reason
-
-);
     }
 
-    if (saveRes.status === "fulfilled") {
-      console.log("Score sauvegardé :", saveRes.value);
-    if (typeof loadLeaderboard === "function") {
-      loadLeaderboard();
-    }
-    } else {
-      console.error("Erreur sauvegarde :", saveRes.reason);
+
+    if (
+      saveRes.status === "fulfilled"
+    ) {
+
+      console.log(
+        "Score sauvegardé"
+      );
+
+      if (
+        typeof loadLeaderboard ===
+        "function"
+      ) {
+
+        loadLeaderboard();
+
+      }
+
     }
 
-    // =============================
-    // Résultat utilisateur
-    // =============================
-    if (emailRes.status === "fulfilled" && saveRes.status === "fulfilled") {
-      alert("✅ Résultats envoyés et classement mis à jour !");
-    } else {
-      alert("⚠️ Résultats partiellement envoyés (voir console).");
+    else {
+
+      console.error(
+        "Erreur sauvegarde :",
+        saveRes.reason
+      );
+
     }
 
-  } catch (err) {
-    console.error("Erreur globale :", err);
-    alert("❌ Erreur inattendue : " + (err?.message || String(err)));
+
+    if (
+      emailRes.status === "fulfilled"
+      &&
+      saveRes.status === "fulfilled"
+    ) {
+
+      alert(
+        "✅ Résultats envoyés et classement mis à jour !"
+      );
+
+    }
+
+    else {
+
+      alert(
+        "⚠️ Résultats partiellement envoyés."
+      );
+
+    }
+
   }
+
+  catch(err){
+
+    console.error(
+      "Erreur globale :",
+      err
+    );
+
+    alert(
+      "❌ " +
+      (err?.message || err)
+    );
+
+  }
+
 }
