@@ -1,4 +1,27 @@
 // =============================
+// Moderation Automatisme
+// =============================
+const COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
+
+function getKey(prenom, automatisme) {
+  return `${prenom}_${automatisme}`;
+}
+
+function canSendScore(prenom, automatisme) {
+  const key = getKey(prenom, automatisme);
+  const last = localStorage.getItem(key);
+
+  if (!last) return true;
+
+  const now = Date.now();
+  return (now - parseInt(last)) > COOLDOWN_MS;
+}
+
+function updateLastScore(prenom, automatisme) {
+  const key = getKey(prenom, automatisme);
+  localStorage.setItem(key, Date.now());
+}
+// =============================
 // Initialisation EmailJS
 // =============================
 (function () {
