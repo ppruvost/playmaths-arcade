@@ -113,7 +113,7 @@ answers:[
 "3 m/s"
 ],
 
-correct:2,
+correct:1,
 
 image:"img/q6.png",
 
@@ -160,7 +160,7 @@ correct:1,
 image:"img/q8.png",
 
 explanation:
-"Les matériaux absorbants limitent davantage la transmission."
+"Les matériaux absorbants, comme la mousse, limitent davantage la transmission."
 
 },
 
@@ -197,12 +197,12 @@ answers:[
 "Vide"
 ],
 
-correct:2,
+correct:1,
 
 image:"img/q10.png",
 
 explanation:
-"Le son se propage plus vite dans les solides."
+"Dans l'eau, le son se propage plus de 4 fois plus vite que dans l'air, c'est-à-dire à environ 1482 mètres par seconde."
 
 },
 
@@ -244,7 +244,7 @@ correct:1,
 image:"img/q12.png",
 
 explanation:
-"La résonance augmente fortement l'amplitude."
+"La résonance correspond à un maximum d'intensité, donc à une impédance minimale. L'intensité est donc maximale et a pour amplitude I max = U m R."
 
 },
 
