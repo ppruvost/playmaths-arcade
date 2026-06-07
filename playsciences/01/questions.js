@@ -113,7 +113,7 @@ answers:[
 "3 m/s"
 ],
 
-correct:1,
+correct:2,
 
 image:"img/q6.png",
 
