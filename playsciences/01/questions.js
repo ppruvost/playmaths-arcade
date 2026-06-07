@@ -197,12 +197,12 @@ answers:[
 "Vide"
 ],
 
-correct:1,
+correct:2,
 
 image:"img/q10.png",
 
 explanation:
-"Dans l'eau, le son se propage plus de 4 fois plus vite que dans l'air, c'est-à-dire à environ 1482 mètres par seconde."
+"Le son se propage plus vite dans un milieu solide."
 
 },
 
