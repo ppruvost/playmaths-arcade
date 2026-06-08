@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
   {
     question: "Dans un triangle rectangle, si les côtés de l’angle droit mesurent 3 cm et 4 cm, quelle est la longueur de l’hypoténuse ?",
     options: ["5 cm", "6 cm", "7 cm", "8 cm"],
