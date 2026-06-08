@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
   {
     question: "Un triangle a pour côtés 3 cm, 4 cm et 5 cm. Ce triangle est :",
     options: ["rectangle", "équilatéral", "isocèle", "quelconque"],
