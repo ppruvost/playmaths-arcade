@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
   {
     question: "Une fonction f(x) = -4x + 20 modélise une quantité de stock. Cette fonction est :",
     options: ["croissante", "constante", "décroissante", "linéaire"],
