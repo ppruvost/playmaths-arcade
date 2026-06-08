@@ -9,7 +9,7 @@ options:[
 "La lumière"
 ],
 bonne_reponse:"Un milieu matériel",
-image:"img/q1.png",
+graphique:"img/q1.png",
 explication:"Le son nécessite toujours un milieu matériel pour se propager."
 },
 
@@ -22,7 +22,7 @@ options:[
 "La durée"
 ],
 bonne_reponse:"La fréquence",
-image:"img/q2.png",
+graphique:"img/q2.png",
 explication:"La fréquence détermine si un son est grave ou aigu."
 },
 
@@ -35,7 +35,7 @@ options:[
 "Inaudible"
 ],
 bonne_reponse:"Grave",
-image:"img/q3.png",
+graphique:"img/q3.png",
 explication:"Les basses fréquences produisent des sons graves."
 },
 
@@ -48,7 +48,7 @@ options:[
 "Volt"
 ],
 bonne_reponse:"Décibel",
-image:"img/q4.png",
+graphique:"img/q4.png",
 explication:"Le décibel (dB) mesure les niveaux sonores."
 },
 
@@ -61,7 +61,7 @@ options:[
 "20 Hz"
 ],
 bonne_reponse:"3000 Hz",
-image:"img/q5.png",
+graphique:"img/q5.png",
 explication:"L'oreille humaine est particulièrement sensible autour de 3–4 kHz."
 },
 
@@ -74,7 +74,7 @@ options:[
 "3 m/s"
 ],
 bonne_reponse:"340 m/s",
-image:"img/q6.png",
+graphique:"img/q6.png",
 explication:"La vitesse moyenne du son dans l'air est proche de 340 m/s."
 },
 
@@ -87,7 +87,7 @@ options:[
 "Double"
 ],
 bonne_reponse:"Diminue",
-image:"img/q7.png",
+graphique:"img/q7.png",
 explication:"L'intensité diminue avec l'éloignement."
 },
 
@@ -100,7 +100,7 @@ options:[
 "Le verre mince"
 ],
 bonne_reponse:"La mousse",
-image:"img/q8.png",
+graphique:"img/q8.png",
 explication:"Les matériaux absorbants limitent davantage la transmission."
 },
 
@@ -113,7 +113,7 @@ options:[
 "La chaleur en vibration"
 ],
 bonne_reponse:"Une vibration en signal électrique",
-image:"img/q9.png",
+graphique:"img/q9.png",
 explication:"Le piézo produit une tension lorsqu'il est déformé."
 },
 
@@ -126,7 +126,7 @@ options:[
 "Vide"
 ],
 bonne_reponse:"Acier",
-image:"img/q10.png",
+graphique:"img/q10.png",
 explication:"Le son se propage plus vite dans les solides."
 },
 
@@ -139,7 +139,7 @@ options:[
 "10 dB"
 ],
 bonne_reponse:"80 dB",
-image:"img/q11.png",
+graphique:"img/q11.png",
 explication:"L'exposition prolongée au-delà de 80–85 dB peut être nocive."
 },
 
@@ -152,7 +152,7 @@ options:[
 "À la vitesse minimale"
 ],
 bonne_reponse:"À l'amplitude maximale",
-image:"img/q12.png",
+graphique:"img/q12.png",
 explication:"La résonance produit généralement une amplitude maximale."
 },
 
@@ -165,7 +165,7 @@ options:[
 "Le son est trop fort"
 ],
 bonne_reponse:"Deux fréquences proches se superposent",
-image:"img/q13.png",
+graphique:"img/q13.png",
 explication:"Les battements résultent de fréquences légèrement différentes."
 },
 
@@ -178,7 +178,7 @@ options:[
 "Une réflexion"
 ],
 bonne_reponse:"Une variation de fréquence perçue",
-image:"img/q14.png",
+graphique:"img/q14.png",
 explication:"La fréquence perçue varie selon le mouvement."
 },
 
@@ -191,7 +191,7 @@ options:[
 "100 Hz"
 ],
 bonne_reponse:">20000 Hz",
-image:"img/q15.png",
+graphique:"img/q15.png",
 explication:"Les ultrasons dépassent la plage audible."
 },
 
@@ -204,7 +204,7 @@ options:[
 "200 Hz"
 ],
 bonne_reponse:"<20 Hz",
-image:"img/q16.png",
+graphique:"img/q16.png",
 explication:"Les infrasons sont sous la limite basse de l'audition."
 },
 
@@ -217,7 +217,7 @@ options:[
 "Aucune durée"
 ],
 bonne_reponse:"Une répétition régulière",
-image:"img/q17.png",
+graphique:"img/q17.png",
 explication:"Un signal périodique se répète."
 },
 
@@ -230,7 +230,7 @@ options:[
 "Battement"
 ],
 bonne_reponse:"Presbyacousie",
-image:"img/q18.png",
+graphique:"img/q18.png",
 explication:"La presbyacousie réduit surtout les hautes fréquences."
 },
 
@@ -243,7 +243,7 @@ options:[
 "Son → lumière"
 ],
 bonne_reponse:"Son → signal électrique",
-image:"img/q19.png",
+graphique:"img/q19.png",
 explication:"Un microphone convertit les vibrations acoustiques."
 },
 
@@ -256,7 +256,7 @@ options:[
 "Seulement faible"
 ],
 bonne_reponse:"Non",
-image:"img/q20.png",
+graphique:"img/q20.png",
 explication:"Sans milieu matériel, le son ne se propage pas."
 }
 
