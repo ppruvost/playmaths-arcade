@@ -1,83 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz Play Sciences</title>
+  <meta charset="UTF-8" />
+  <title>PlaySciences</title>
 
-  <!-- CSS principal (inchangé) -->
-  <link rel="stylesheet" href="../style.css">
+  <!-- Police DYS-friendly -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
 
   <!-- Confettis -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 
 <body>
 
-<main class="page">
+  <div class="container" id="container">
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <h1>TP Acoustique— Quiz</h1>
+    <h1 data-title="Physique">TP Acoustique</h1>
 
-    <!-- FORMULAIRE UTILISATEUR -->
-    <div class="user-info" id="userForm">
-      <input id="nom" type="text" placeholder="Nom" />
-      <input id="prenom" type="text" placeholder="Prénom" />
-      <button id="startQuiz" class="start">🎮 Commencer le quiz</button>
-    </div>
-  </header>
+    <p class="intro">Testez vos connaissances avec le quiz interactif !</p>
 
-  <!-- ================= ZONE QUIZ ================= -->
-  <section class="kahoot-container">
+    <!-- FORMULAIRE -->
+    <div id="userForm">
+      <div>
+        <label for="nom">Prénom :</label>
+        <input type="text" id="nom" placeholder="Entrez votre Prénom" required>
+      </div>
 
-    <!-- TIMER -->
-    <div class="timer-and-count">
-      <svg width="80" height="80" viewBox="0 0 80 80" class="timer-svg">
-        <circle id="timer-circle" cx="40" cy="40" r="35"></circle>
-      </svg>
-      <div id="timerNumber" class="timer-number">30</div>
+      <div>
+        <label for="prenom">Nom :</label>
+        <input type="text" id="prenom" placeholder="Entrez votre Nom" required>
+      </div>
+
+      <button class="button start" id="startQuiz">🎮 Commencer le quiz</button>
     </div>
 
-    <!-- QUESTION -->
-    <div id="questionBox" class="question-box">
-      Appuyez sur « Commencer le quiz » pour lancer.
+    <!-- MUSIQUE -->
+    <audio id="bgMusic" src="../musique.mp3" loop></audio>
+
+    <!-- QUIZ -->
+    <div id="quiz" class="hidden">
+
+      <!-- TIMER INVISIBLE MAIS OBLIGATOIRE POUR quiz.js -->
+      <div style="
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+      ">
+
+        <svg width="90" height="90">
+          <circle id="timer-circle"></circle>
+        </svg>
+
+        <div id="timerNumber">0</div>
+
+      </div>
+
+      <!-- CONTENU QUIZ -->
+      <div id="questionBox" class="question-box"></div>
+
+      <div id="graphique-container"></div>
+
+      <div id="answerGrid"></div>
+
+      <div id="explanationBox" class="explication"></div>
+
+      <div id="scoreBox" class="score"></div>
+
     </div>
 
-    <!-- GRAPHIQUE -->
-    <div id="graphique-container" class="graphique-container"></div>
+    <!-- SON VICTOIRE -->
+    <audio id="victorySound" src="../jingle.wav" preload="auto"></audio>
 
-    <!-- RÉPONSES -->
-    <div id="answerGrid" class="answer-grid"></div>
+  </div>
 
-    <!-- EXPLICATION -->
-    <div id="explanationBox" class="explanation" style="display:none;"></div>
+  <!-- SCRIPTS -->
+  <script>window.NO_TIMER = true;</script>
+  <script src="questions.js" defer></script>
+  <script src="../../js/quiz.js" defer></script>
 
-    <!-- SCORE -->
-    <div id="scoreBox" class="score-box"></div>
-
-  </section>
-
-  <!-- ================= SONS ================= -->
-  <audio id="bgMusic" src="../musique.mp3" preload="auto" loop></audio>
-  <audio id="victorySound" src="../jingle.wav" preload="auto"></audio>
-
-</main>
-
-<!-- ================= SCRIPTS ================= -->
-
-<!-- QUESTIONS -->
-<script src="questions.js" defer></script>
-
-<!-- LOGIQUE DU QUIZ -->
-<script src="../../js/quiz.js" defer></script>
-
-<!-- ENVOI DES RÉSULTATS -->
-<script src="../../js/supabase.js"></script>
-<script src="../../js/envoi.js" defer></script>
+  <!-- ENVOI DES RÉSULTATS -->
+  <script src="../../js/supabase.js"></script>
+  <script src="../../js/envoi.js" defer></script>
 
 </body>
 </html>
