@@ -2,7 +2,7 @@
    ====================  LISTE DES QUESTIONS  ==================
    ============================================================ */
 
-const questions = [
+window.questions = [
 
   {
     question: "Quelle couleur obtient-on en synthèse additive avec Rouge + Vert ?",
