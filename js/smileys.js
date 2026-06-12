@@ -212,21 +212,45 @@ citations.json
 */
 
 async function chargerCitationAleatoire() {
+
   try {
-    const response = await fetch("../citations.json");
+
+    const response = await fetch("./citations.json");
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
     const citations = await response.json();
 
-    // choisir une citation aléatoire
+    if (!Array.isArray(citations) || citations.length === 0) {
+      throw new Error("Aucune citation trouvée");
+    }
+
     const citationRandom =
       citations[Math.floor(Math.random() * citations.length)];
 
-    // injection dans le h2
-    document.getElementById("citationFinale").innerHTML =
-      `"${citationRandom.citation}"<br><small>— ${citationRandom.auteur}</small>`;
+    const zoneCitation =
+      document.getElementById("citationFinale");
+
+    if (zoneCitation) {
+      zoneCitation.innerHTML =
+        `"${citationRandom.citation}"<br>
+         <small>— ${citationRandom.auteur}</small>`;
+    }
+
   } catch (error) {
+
     console.error("Erreur chargement citations :", error);
-    document.getElementById("citationFinale").textContent =
-      "Pense à commencer les Playmaths !";
+
+    const zoneCitation =
+      document.getElementById("citationFinale");
+
+    if (zoneCitation) {
+      zoneCitation.innerHTML =
+        `"Le plaisir d'apprendre se partage."<br>
+         <small>— Daniel Pennac</small>`;
+    }
   }
 }
 
