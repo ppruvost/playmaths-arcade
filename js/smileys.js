@@ -213,7 +213,7 @@ citations.json
 
 async function chargerCitationAleatoire() {
   try {
-    const response = await fetch("citations.json");
+    const response = await fetch("../citations.json");
     const citations = await response.json();
 
     // choisir une citation aléatoire
