@@ -5,58 +5,29 @@ const itemsContainer = document.getElementById("items");
 const track = document.getElementById("track");
 const gameOver = document.getElementById("gameOver");
 
-let smileyX = 30;
+let smileyX = 40;
 let running = false;
 let currentTarget = 0;
-let items = []; // cache DOM
-
-/*
-SCÉNARIO
-*/
+let items = [];
 
 const sequence = [
-  "🍌",
-  "🍆",
-  "🍐",
-  "🥬",
-  "🍎",
-  "🍄",
-  "🧅",
-  "🥕",
-  "💩"
+  "🍌","🍆","🍐","🥬","🍎","🍄","🧅","🥕","💩"
 ];
 
-/*
-NOUVEAU :
-gestion aller-retour à mi-chemin
-*/
+let didHalfTurn = false;
+let isReturning = false;
+let halfPoint = 0;
 
-let didHalfTurn = false;   // évite de refaire plusieurs fois l'aller-retour
-let isReturning = false;   // phase retour vers la gauche
-let halfPoint = 0;         // position du demi-tour
-
-/*
-START
-*/
-
+/* START */
 function startGame() {
   if (running) return;
-
   running = true;
 
-  if (bgMusic) {
-    bgMusic.play().catch(() => {});
-  }
-
-  if (clickBox) {
-    clickBox.style.display = "none";
-  }
+  bgMusic?.play().catch(() => {});
+  clickBox.style.display = "none";
 }
 
-/*
-CRÉATION DES ITEMS
-*/
-
+/* CREATE ITEMS */
 function createItems() {
   itemsContainer.innerHTML = "";
 
@@ -67,39 +38,31 @@ function createItems() {
     item.className = "item";
     item.innerText = emoji;
     item.style.left = `${140 + index * spacing}px`;
-
     itemsContainer.appendChild(item);
   });
 
-  items = Array.from(document.querySelectorAll(".item"));
+  items = [...document.querySelectorAll(".item")];
+
+  // RESET position au resize
+  smileyX = 40;
+  smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
 }
 
-/*
-SMILEY STATE
-*/
-
-function updateSmiley(item) {
+/* SMILEY STATE */
+function updateSmiley(emoji) {
   smiley.classList.add("eating");
 
   setTimeout(() => {
     smiley.classList.remove("eating");
   }, 180);
 
-  if (item === "🍌" || item === "🍎" || item === "🍐") {
-    smiley.innerText = "😍";
-  } else if (item === "🥬" || item === "🥕") {
-    smiley.innerText = "😐";
-  } else if (item === "🧅" || item === "🍆") {
-    smiley.innerText = "😣";
-  } else if (item === "🍄" || item === "💩") {
-    smiley.innerText = "😵";
-  }
+  if (["🍌","🍎","🍐"].includes(emoji)) smiley.innerText = "😍";
+  else if (["🥬","🥕"].includes(emoji)) smiley.innerText = "😐";
+  else if (["🧅","🍆"].includes(emoji)) smiley.innerText = "😣";
+  else smiley.innerText = "😵";
 }
 
-/*
-MOUVEMENT FLUIDE + ALLER/RETOUR À MI-CHEMIN
-*/
-
+/* MOVEMENT */
 function moveSmiley() {
   if (!running) return;
   if (currentTarget >= items.length) return;
@@ -109,19 +72,9 @@ function moveSmiley() {
 
   const finalTargetX = target.offsetLeft;
 
-  /*
-  ----------------------------------
-  DEMI-TOUR À MI-CHEMIN (une seule fois)
-  ----------------------------------
-  Exemple :
-  avance → demi-chemin → recule un peu → repart à droite
-  */
-
-  // déclenchement uniquement sur le 1er item
   if (!didHalfTurn && currentTarget === 0) {
     halfPoint = (smileyX + finalTargetX) / 2;
 
-    // quand on atteint la moitié → commencer retour
     if (smileyX >= halfPoint) {
       isReturning = true;
       didHalfTurn = true;
@@ -131,34 +84,26 @@ function moveSmiley() {
   let targetX;
 
   if (isReturning) {
-    // recule de 80px avant de repartir
     targetX = halfPoint - 80;
 
-    // quand retour terminé → repartir vers la droite
     if (Math.abs(smileyX - targetX) < 10) {
       isReturning = false;
     }
   } else {
-    // trajet normal vers la cible
     targetX = finalTargetX;
   }
 
   const dx = targetX - smileyX;
-
-  /*
-  interpolation fluide
-  */
-
   const easing = 0.08;
   const noise = (Math.random() - 0.5) * 0.6;
 
   smileyX += dx * easing + noise;
 
-  /*
-  collision uniquement si on est sur la vraie cible
-  */
+  const maxX = track.offsetWidth - 80;
+  smileyX = Math.max(20, Math.min(smileyX, maxX));
 
-  if (!isReturning && Math.abs(finalTargetX - smileyX) < 18) {
+  /* COLLISION FIX */
+  if (!isReturning && Math.abs(finalTargetX - smileyX) < 28) {
     const emoji = target.innerText;
 
     updateSmiley(emoji);
@@ -166,7 +111,7 @@ function moveSmiley() {
     target.remove();
     currentTarget++;
 
-    if (emoji === "💩" && currentTarget >= sequence.length) {
+    if (emoji === "💩" && currentTarget === sequence.length) {
       setTimeout(() => {
         running = false;
         gameOver.style.display = "flex";
@@ -174,85 +119,36 @@ function moveSmiley() {
     }
   }
 
-  /*
-  limites
-  */
-
-  const maxX = track.offsetWidth - 80;
-  smileyX = Math.max(20, Math.min(smileyX, maxX));
-
-  /*
-  rendu GPU
-  */
-
   smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
 }
 
-/*
-LOOP
-*/
-
+/* LOOP */
 function loop() {
   moveSmiley();
   requestAnimationFrame(loop);
 }
 
-/*
-INIT
-*/
-
+/* INIT */
 clickBox.addEventListener("click", startGame);
 window.addEventListener("resize", createItems);
 
 createItems();
 loop();
 
-/*
-citations.json
-*/
-
+/* CITATIONS */
 async function chargerCitationAleatoire() {
-
   try {
-
     const response = await fetch("./citations.json");
-
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP ${response.status}`);
-    }
-
     const citations = await response.json();
 
-    if (!Array.isArray(citations) || citations.length === 0) {
-      throw new Error("Aucune citation trouvée");
-    }
+    const c = citations[Math.floor(Math.random() * citations.length)];
+    document.getElementById("citationFinale").innerHTML =
+      `"${c.citation}"<br><small>— ${c.auteur}</small>`;
 
-    const citationRandom =
-      citations[Math.floor(Math.random() * citations.length)];
-
-    const zoneCitation =
-      document.getElementById("citationFinale");
-
-    if (zoneCitation) {
-      zoneCitation.innerHTML =
-        `"${citationRandom.citation}"<br>
-         <small>— ${citationRandom.auteur}</small>`;
-    }
-
-  } catch (error) {
-
-    console.error("Erreur chargement citations :", error);
-
-    const zoneCitation =
-      document.getElementById("citationFinale");
-
-    if (zoneCitation) {
-      zoneCitation.innerHTML =
-        `"Le plaisir d'apprendre se partage."<br>
-         <small>— Daniel Pennac</small>`;
-    }
+  } catch (e) {
+    document.getElementById("citationFinale").innerHTML =
+      `"Le plaisir d'apprendre se partage."<br><small>— Daniel Pennac</small>`;
   }
 }
 
-// lancer au chargement
 chargerCitationAleatoire();
