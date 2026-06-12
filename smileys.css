@@ -10,8 +10,8 @@ body {
 
 .track {
   position: relative;
-  width: min(100%, 900px);
-  height: 220px;
+  width: min(100%, 1200px);
+  height: 240px;
   background: #111;
   border: 2px solid #333;
   border-radius: 12px;
@@ -34,7 +34,7 @@ body {
 
 .items {
   position: absolute;
-  width: 100%;
+  width: 1400px;
   height: 100%;
 }
 
