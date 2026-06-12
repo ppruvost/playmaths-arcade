@@ -14,9 +14,13 @@ const sequence = [
   "🍌","🍆","🍐","🥬","🍎","🍄","🧅","🥕","💩"
 ];
 
+/* gestion aller-retour */
 let didHalfTurn = false;
 let isReturning = false;
 let halfPoint = 0;
+
+/* offset visuel du smiley (centrage) */
+const SMILEY_OFFSET = 30;
 
 /* START */
 function startGame() {
@@ -43,9 +47,14 @@ function createItems() {
 
   items = [...document.querySelectorAll(".item")];
 
-  // RESET position au resize
+  /* reset position */
   smileyX = 40;
-  smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
+  currentTarget = 0;
+  didHalfTurn = false;
+  isReturning = false;
+
+  smiley.style.transform =
+    `translate3d(${smileyX - SMILEY_OFFSET}px, -50%, 0)`;
 }
 
 /* SMILEY STATE */
@@ -62,7 +71,7 @@ function updateSmiley(emoji) {
   else smiley.innerText = "😵";
 }
 
-/* MOVEMENT */
+/* MOVE */
 function moveSmiley() {
   if (!running) return;
   if (currentTarget >= items.length) return;
@@ -70,8 +79,11 @@ function moveSmiley() {
   const target = items[currentTarget];
   if (!target) return;
 
-  const finalTargetX = target.offsetLeft;
+  /* centre réel de l’item */
+  const finalTargetX =
+    target.offsetLeft + target.offsetWidth / 2;
 
+  /* demi-tour UNE SEULE FOIS */
   if (!didHalfTurn && currentTarget === 0) {
     halfPoint = (smileyX + finalTargetX) / 2;
 
@@ -94,32 +106,42 @@ function moveSmiley() {
   }
 
   const dx = targetX - smileyX;
+
   const easing = 0.08;
-  const noise = (Math.random() - 0.5) * 0.6;
+  const noise = (Math.random() - 0.5) * 0.4;
 
   smileyX += dx * easing + noise;
 
-  const maxX = track.offsetWidth - 80;
-  smileyX = Math.max(20, Math.min(smileyX, maxX));
+  /* soft limit (IMPORTANT: évite blocage fin niveau) */
+  if (smileyX < 10) smileyX = 10;
+  const maxX = track.offsetWidth - 40;
+  if (smileyX > maxX) smileyX = maxX;
 
-  /* COLLISION FIX */
-  if (!isReturning && Math.abs(finalTargetX - smileyX) < 28) {
-    const emoji = target.innerText;
+  /* collision fiable */
+  if (!isReturning) {
+    const distance = Math.abs(finalTargetX - smileyX);
 
-    updateSmiley(emoji);
+    if (distance < 35) {
+      const emoji = target.innerText;
 
-    target.remove();
-    currentTarget++;
+      updateSmiley(emoji);
 
-    if (emoji === "💩" && currentTarget === sequence.length) {
-      setTimeout(() => {
-        running = false;
-        gameOver.style.display = "flex";
-      }, 1200);
+      target.remove();
+      currentTarget++;
+
+      /* fin jeu */
+      if (emoji === "💩" && currentTarget >= sequence.length) {
+        setTimeout(() => {
+          running = false;
+          gameOver.style.display = "flex";
+        }, 1200);
+      }
     }
   }
 
-  smiley.style.transform = `translate3d(${smileyX}px, -50%, 0)`;
+  /* rendu */
+  smiley.style.transform =
+    `translate3d(${smileyX - SMILEY_OFFSET}px, -50%, 0)`;
 }
 
 /* LOOP */
@@ -134,21 +156,3 @@ window.addEventListener("resize", createItems);
 
 createItems();
 loop();
-
-/* CITATIONS */
-async function chargerCitationAleatoire() {
-  try {
-    const response = await fetch("./citations.json");
-    const citations = await response.json();
-
-    const c = citations[Math.floor(Math.random() * citations.length)];
-    document.getElementById("citationFinale").innerHTML =
-      `"${c.citation}"<br><small>— ${c.auteur}</small>`;
-
-  } catch (e) {
-    document.getElementById("citationFinale").innerHTML =
-      `"Le plaisir d'apprendre se partage."<br><small>— Daniel Pennac</small>`;
-  }
-}
-
-chargerCitationAleatoire();
